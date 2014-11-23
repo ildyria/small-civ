@@ -7,7 +7,8 @@ namespace SmallWorld
 {
     public class GameManager : SmallWorld.IGameManager
     {
-        private int _turn;
+        private int _turnCurrent;
+        private int _turnNumber;
         private int _playerTurn;
         private Player _player1;
         private Player _player2;
@@ -18,7 +19,8 @@ namespace SmallWorld
             _player1 = p1;
             _player2 = p2;
             _map = map;
-            _turn = turn;
+            _turnCurrent = turn;
+            _turnNumber = nbTurns;
             _playerTurn = playerTurn;
         }
 
@@ -30,9 +32,14 @@ namespace SmallWorld
         {
             _map = map;
         }
-        public int getTurn()
+
+        public int getTurnNumber()
         {
-            return _turn;
+            return _turnNumber;
+        }
+        public int getTurnCurrent()
+        {
+            return _turnCurrent;
         }
         public int getPlayerTurn()
         {
@@ -57,7 +64,7 @@ namespace SmallWorld
 
         public bool gameEnd()
         {
-            if (_turn < 0 || _player1.getUnits().Count == 0 || _player2.getUnits().Count == 0)
+            if (_turnCurrent > _turnNumber || _player1.getUnits().Count == 0 || _player2.getUnits().Count == 0)
             {
                 return true;
             }
@@ -69,9 +76,11 @@ namespace SmallWorld
             throw new System.NotImplementedException();
         }
 
-        public void getUnits()
+        public List<Unit> getUnits()
         {
-            throw new System.NotImplementedException();
+            List<Unit> allUnits = new List<Unit>();
+            allUnits.Concat(_player1.getUnits()).Concat(_player2.getUnits());
+            return allUnits;
         }
 
         public void computeFinalScore()

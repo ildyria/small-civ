@@ -40,7 +40,11 @@ namespace SmallWorld
 
         public override List<Unit> createUnits(int numPlayer)
         {
+            //List<Unit> lu =  sm.getUnitsData(numPlayer);
+            // Should be like this
+            //List<Unit> lu = sm.getUnits(numPlayer);
             throw new System.NotImplementedException();
+            //return lu;
         }
     }
 }

@@ -81,5 +81,32 @@ namespace TestsJeu
             //if we have no luck, the test fail ...
             Assert.AreEqual(0, dw.getLife());
         }
+        [TestMethod]
+        public void TestBasicMove()
+        {
+            //all test above concerning move should be also there ...
+            Assert.Fail();
+        }
+
+        [TestMethod]
+        public void TestMountainTeleportDwarfs()
+        {
+            DwarfFactory df = new DwarfFactory();
+            Unit dw1 = df.makeUnit();  // he should be on a mountain
+            Unit dw2 = df.makeUnit();  // he sould be on a plain
+            Mountain m = new Mountain();
+            Plain p = new Plain();
+
+            Assert.AreEqual(Unit.IMPOSSIBLE_MOVE, dw1.moveCost(6, 6, p));
+            Assert.AreEqual(Unit.DEFAULT_MOVE_COST, dw1.moveCost(6, 6, m));
+            Assert.AreEqual(Unit.IMPOSSIBLE_MOVE, dw2.moveCost(6, 6, p));
+            Assert.AreEqual(Unit.IMPOSSIBLE_MOVE, dw2.moveCost(6, 6, m));
+
+            // this need another test, when there is an enemy on the mountain
+        }
+        public void TestSurroundedDyingElf()
+        {
+            Assert.Fail();
+        }
     }
 }

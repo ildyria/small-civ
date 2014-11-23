@@ -18,24 +18,22 @@ namespace SmallWorld
         }
         public Dwarf(int posX, int posY, int movesLeft, int armour, int life, int attack, string name, int value) : base(posX, posY, movesLeft, armour, life, attack, name, value) { }
 
-        /*public override bool movePossible(int x, int y, Tile t)
+        public override int moveCost(int x, int y, Tile t)
         {
-            // faire attention : case montagne a coté avec adv = droit de se déplacer
-            string type = t.getType();
-            if (type == "Plain")
+            int res = base.moveCost(x, y, t);
+            if (res != IMPOSSIBLE_MOVE)
             {
-                return _movesLeft >= 2 && base.movePossible(x, y, t);
+                return res;
             }
-            else if (type == "Mountain")
+            else if (t.getType() == TerrainType.MOUNTAIN) // need to check that you are on a mountain and that no enemy is there
             {
-                // ne doit pas être permis si il y a une unité adverse
-                return true;
+                return Dwarf.DEFAULT_MOVE_COST;
             }
             else 
             {
-                return base.movePossible(x, y, t);
+                return 0;
             }
-        }*/
+        }
 
     }
 }

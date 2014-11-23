@@ -9,8 +9,9 @@ namespace SmallWorld
     public abstract class Unit : SmallWorld.IUnit
     {
         protected static readonly Dictionary<TerrainType, Tuple<int, int>> terrainData = new Dictionary<TerrainType, Tuple<int, int>>();
-        static int DEFAULT_MOVE_COST = 2;
-        static int DEFAULT_POINT = 1;
+        public static readonly int DEFAULT_MOVE_COST = 2;
+        public static readonly int DEFAULT_POINT = 1;
+        public static readonly int IMPOSSIBLE_MOVE = -1;
 
         protected int _posX;
         protected int _posY;

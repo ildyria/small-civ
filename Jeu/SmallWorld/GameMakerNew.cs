@@ -8,7 +8,6 @@ namespace SmallWorld
     public class GameMakerNew : GameMaker, SmallWorld.IGameMakerNew
     {
         private MapAlgoritms _mapGen;
-        //NOPE
         private UnitType[] _tribes;
         private string[] _names;
 
@@ -25,7 +24,7 @@ namespace SmallWorld
 
         public override Player makePlayer(int numPlayer)
         {
-            Player p = new Player(_names[numPlayer], tribeName(_tribes[numPlayer]), 0);
+            Player p = new Player(_names[numPlayer-1], tribeName(_tribes[numPlayer-1]), 0);
             
             p.setUnits(createUnits(numPlayer));
             return p;
@@ -45,7 +44,7 @@ namespace SmallWorld
             //get position of player 1
             int x = 0, y = 0;
             List<Unit> ul = new List<Unit>();
-            UnitFactory uf = tribeFactory(_tribes[numPlayer]);
+            UnitFactory uf = tribeFactory(_tribes[numPlayer-1]);
             for (int i = 0; i < _mapGen.nbUnits(); i++)
             {
                 Unit u = uf.makeUnit();
@@ -66,6 +65,7 @@ namespace SmallWorld
                     return "Orc";
                 default:
                     return "Unknown";
+                    //Or null. Dunno. I like unknown.
             }
         }
         public UnitFactory tribeFactory(UnitType t)

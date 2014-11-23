@@ -17,10 +17,11 @@ namespace TestsJeu
             gmk.setTribes(tribes);
             gmk.setNames(names);
             GameManager gmg = gmk.makeGame();
-            Unit u = gmg.getPlayer1().unitsAt(0, 0)[0];
             Assert.IsNotNull(gmg);
-            Assert.AreEqual(10, gmg.getTurn());
+            Assert.AreEqual(0, gmg.getTurnCurrent());
+            Assert.AreEqual(10, gmg.getTurnNumber());
             Assert.AreEqual(0, gmg.getPlayerTurn());
+            Unit u = gmg.getPlayer1().unitsAt(0, 0)[0];
             Assert.IsInstanceOfType(u, typeof(Dwarf));
         }
     }

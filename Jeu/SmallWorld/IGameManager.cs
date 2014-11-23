@@ -10,8 +10,9 @@ namespace SmallWorld
         Player getPlayer1();
         Player getPlayer2();
         int getPlayerTurn();
-        int getTurn();
-        void getUnits();
+        int getTurnNumber();
+        int getTurnCurrent();
+        System.Collections.Generic.List<Unit> getUnits();
         void moveUnit();
         void setMap(GameMap map);
         void setPlayer1(Player p);

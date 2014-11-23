@@ -23,8 +23,15 @@ namespace SmallWorld
             int randNumber = rand.Next(0,101);
             if (randNumber > 50)
             {
-                _life++;
+                //Should try to move
+                bool canMove = true;
+                if (canMove)
+                {
+                    _life++;
+                    //setPosition(x, y);
+                }
             }
+            
         }
     }
 }

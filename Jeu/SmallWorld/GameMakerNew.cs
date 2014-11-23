@@ -13,6 +13,7 @@ namespace SmallWorld
 
         public GameMakerNew()
         {
+            // We need to be able to choose
             _mapGen = new DemoMap();
         }
         public override GameMap makeMap()

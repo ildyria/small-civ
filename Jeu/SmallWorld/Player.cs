@@ -31,12 +31,8 @@ namespace SmallWorld
         {
             if (_unitList.Contains(u))
             {
-                // GameNamager call, should be static
-                GameManager gm = null;
-                gm.moveUnit(u, x, y);
-                //Something like this.
-                bool end = gm.gameEnd();
-                //move(u, x, y);
+                GameManager.Instance().moveUnit(u, x, y);
+                bool end = GameManager.Instance().gameEnd();
             }
         }
 

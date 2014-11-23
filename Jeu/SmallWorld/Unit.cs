@@ -34,9 +34,9 @@ namespace SmallWorld
         }
         public virtual void move(int x, int y, Tile t, IEnumerable<Unit> advList)
         {
-            // Le diagramme prévois un movepossible, mais on le fait ici à la main pour ne pas calculer le cout de fois.
+            // Diagram says movepossible, but that way movecost is used only once
             int cost = moveCost(x, y, t);
-            if (cost != 0) {
+            if (cost != IMPOSSIBLE_MOVE) {
                 _movesLeft -= cost;
 
                 //recherche de l'unité la plus forte
@@ -98,6 +98,8 @@ namespace SmallWorld
         {
             return Unit.terrainData;
         }
+
+        //could use GameManager.Instance()
         public virtual int scorePoints(Tile t)
         {
             Tuple<int, int> val;

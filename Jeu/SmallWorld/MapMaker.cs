@@ -35,9 +35,13 @@ namespace SmallWorld
                     case TerrainType.PLAIN:
                         t = new Plain();
                         break;
+                    default :
+                        t = null;
+                        break;
                 }
-                // exception it t = null ?
-                _tiles.Add(type, t);
+                if (t != null){ //Exception, maybe ?
+                    _tiles.Add(type, t);
+                }
                 return t;
             }
         }

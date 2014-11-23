@@ -7,6 +7,9 @@ namespace SmallWorld
 {
     public class GameManager : SmallWorld.IGameManager
     {
+        //Could also have been an argument of every function. Which is better ? 
+        //A good way to decide would be to do that Rutger Hauer style. I don't want to declaim poetry on a rainy night on a rooftop with only underwear on.
+        //Sorry if that seems a bit egoistic.
         private static GameManager _instance;
 
         private int _turnCurrent;

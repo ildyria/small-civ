@@ -5,6 +5,7 @@
 #include <time.h>
 #include <vector>
 #include <algorithm>
+#include <list>
 
 #define FIRST_ASCII_LETTER 'A'
 
@@ -27,6 +28,7 @@ class DLL GenMap
 private:
 	int _sizeX;
 	int _sizeY;
+	int* _mapCreated; // we keep it, so we are able to use it without having to pass it as parameter;
 	inline char toCharacter(int i);
 public:
 	GenMap();
@@ -35,7 +37,7 @@ public:
 	int getX();
 	int getY();
 	int* generate(int nbElementDiff);
-	std::pair<std::pair<int, int>, std::pair<int, int>> placePlayer();
+	std::pair<std::pair<int, int>, std::pair<int, int>> placePlayer(std::list<int> unwanted);
 	std::vector<std::pair<int, int>> possibleMoves(int posX, int posY, int nbMoves, std::vector<std::pair<int, int>> costMatrix, int** map);
 
 

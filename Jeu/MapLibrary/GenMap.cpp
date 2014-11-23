@@ -50,15 +50,19 @@ int* GenMap::generate(int nbElementDiff) {
 //interdire l'eau sur les cases du diamètre ? ou deplacement si impossible ?
 std::pair<std::pair<int, int>, std::pair<int, int>> GenMap::placePlayer(std::list<int> unwanted) {
 	std::pair<int, int> j1, j2;
-	for (int i = 0; i < _sizeX * _sizeX; i++) {
+	bool j1Found = false, j2Found = false;
+	for (int i = 0; i < _sizeX * _sizeX && !j1Found && !j2Found; i++) {
 		int id = 1;
 		std::list<int>::iterator tileJ1 = std::find(unwanted.begin(), unwanted.end(), _mapCreated[id]);
 		std::list<int>::iterator tileJ2 = std::find(unwanted.begin(), unwanted.end(), _mapCreated[_sizeX * _sizeX - 1 - id]);
-		if (tileJ1 != unwanted.end() && tileJ2 != unwanted.end()) {
-			//Use of var ? NO http://weknowgifs.com/wp-content/uploads/2013/04/fuck-this-thing-cat.gif
+		if (tileJ1 == unwanted.end()) {
 			j1 = std::make_pair(id / _sizeX, id % _sizeX);
+			j1Found = true;
+		}
+		if (tileJ2 == unwanted.end()){
+			//Use of var ? NO http://weknowgifs.com/wp-content/uploads/2013/04/fuck-this-thing-cat.gif
 			j2 = std::make_pair((_sizeX * _sizeX - 1 - id) / _sizeX, (_sizeX * _sizeX - 1 - id) % _sizeX);
-			break;
+			j2Found = true;
 		}
 	}
 	std::pair<std::pair<int, int>, std::pair<int, int>> res(j1, j2);

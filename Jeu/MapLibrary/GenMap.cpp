@@ -47,21 +47,20 @@ int* GenMap::generate(int nbElementDiff) {
 	return result;
 }
 
-//interdire l'eau sur les cases du diamètre ? ou deplacement si impossible ?
+// Is not actually the farthest.
 std::pair<std::pair<int, int>, std::pair<int, int>> GenMap::placePlayer(std::list<int> unwanted) {
 	std::pair<int, int> j1, j2;
 	bool j1Found = false, j2Found = false;
 	for (int i = 0; i < _sizeX * _sizeX && !j1Found && !j2Found; i++) {
-		int id = 1;
-		std::list<int>::iterator tileJ1 = std::find(unwanted.begin(), unwanted.end(), _mapCreated[id]);
-		std::list<int>::iterator tileJ2 = std::find(unwanted.begin(), unwanted.end(), _mapCreated[_sizeX * _sizeX - 1 - id]);
+		std::list<int>::iterator tileJ1 = std::find(unwanted.begin(), unwanted.end(), _mapCreated[i]);
+		std::list<int>::iterator tileJ2 = std::find(unwanted.begin(), unwanted.end(), _mapCreated[_sizeX * _sizeX - 1 - i]);
 		if (tileJ1 == unwanted.end()) {
-			j1 = std::make_pair(id / _sizeX, id % _sizeX);
+			j1 = std::make_pair(i / _sizeX, i % _sizeX);
 			j1Found = true;
 		}
 		if (tileJ2 == unwanted.end()){
 			//Use of var ? NO http://weknowgifs.com/wp-content/uploads/2013/04/fuck-this-thing-cat.gif
-			j2 = std::make_pair((_sizeX * _sizeX - 1 - id) / _sizeX, (_sizeX * _sizeX - 1 - id) % _sizeX);
+			j2 = std::make_pair((_sizeX * _sizeX - 1 - i) / _sizeX, (_sizeX * _sizeX - 1 - i) % _sizeX);
 			j2Found = true;
 		}
 	}
@@ -97,6 +96,7 @@ GenMap* GenMap_new() { return new GenMap(); }
 GenMap* GenMap_new(int sizeX, int sizeY) { return new GenMap(sizeX, sizeY); }
 void GenMap_delete(GenMap* genmap) { delete genmap; }
 int* GenMap_generate(GenMap* genmap, int nbElementDiff) { return genmap->generate(nbElementDiff); }
+std::pair<std::pair<int, int>, std::pair<int, int>> GenMap_placePlayer(GenMap* genmap, std::list<int> unwanted) { return genmap->placePlayer(unwanted); }
 
 
 /*int main() {

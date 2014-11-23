@@ -91,6 +91,7 @@ namespace TestsJeu
         [TestMethod]
         public void TestMountainTeleportDwarfs()
         {
+            //it fail cuz no ameManager is instanciated
             DwarfFactory df = new DwarfFactory();
             Unit dw1 = df.makeUnit();  // he should be on a mountain
             Unit dw2 = df.makeUnit();  // he sould be on a plain

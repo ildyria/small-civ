@@ -7,6 +7,7 @@
 //#pragma comment(lib, "../Debug/MapLibrary.lib")
 #pragma comment(lib, "MapLibrary.lib")
 #include <msclr/marshal.h>
+#include <cliext\list>
 using namespace System;
 using namespace System::Collections::Generic;
 
@@ -30,6 +31,15 @@ namespace Wrapper {
 				}
 				delete[] cases;
 				return lCases;
+			}
+			// I expect to go to hell for this <3
+			KeyValuePair<KeyValuePair<int, int>, KeyValuePair<int, int>>^ placePlayer(List<int>^ unwanted) {
+				//cliext::list<int>^ unwantedStdList = gcnew cliext::list<int>(unwanted);
+				std::list<int> unwantedStdList;
+				for each(int i in unwanted) { unwantedStdList.push_back(i); }
+				std::pair<std::pair<int, int>, std::pair<int, int>> result = GenMap_placePlayer(_genMap, unwantedStdList);
+				KeyValuePair<int, int> p1(result.first.first, result.first.second), p2(result.second.first, result.second.second);
+				return gcnew KeyValuePair<KeyValuePair<int, int>, KeyValuePair<int, int>>(p1, p2);
 			}
 		protected:
 			!WrapperGenMap(){ GenMap_delete(_genMap); }

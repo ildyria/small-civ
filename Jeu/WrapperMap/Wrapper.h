@@ -33,13 +33,13 @@ namespace Wrapper {
 				return lCases;
 			}
 			// I expect to go to hell for this <3
-			KeyValuePair<KeyValuePair<int, int>, KeyValuePair<int, int>>^ placePlayer(List<int>^ unwanted) {
-				//cliext::list<int>^ unwantedStdList = gcnew cliext::list<int>(unwanted);
+			Tuple<Tuple<int, int>^, Tuple<int, int>^>^ placePlayer(List<int>^ unwanted) {
 				std::list<int> unwantedStdList;
 				for each(int i in unwanted) { unwantedStdList.push_back(i); }
 				std::pair<std::pair<int, int>, std::pair<int, int>> result = GenMap_placePlayer(_genMap, unwantedStdList);
-				KeyValuePair<int, int> p1(result.first.first, result.first.second), p2(result.second.first, result.second.second);
-				return gcnew KeyValuePair<KeyValuePair<int, int>, KeyValuePair<int, int>>(p1, p2);
+				Tuple<int, int>^ p1 = gcnew Tuple<int, int>(result.first.first, result.first.second);
+				Tuple<int, int>^ p2 = gcnew Tuple<int, int>(result.second.first, result.second.second);
+				return gcnew Tuple<Tuple<int, int>^, Tuple<int, int>^>(p1, p2);
 			}
 		protected:
 			!WrapperGenMap(){ GenMap_delete(_genMap); }

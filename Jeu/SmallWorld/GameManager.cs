@@ -12,16 +12,14 @@ namespace SmallWorld
         private int _turnCurrent;
         private int _turnNumber;
         private int _playerTurn;
-        private Player _player1;
-        private Player _player2;
+        private Player[] _players;
         private GameMap _map;
 
         private GameManager() { }
         public static void  init(Player p1, Player p2, GameMap map, int nbTurns, int turn, int playerTurn)
         {
             _instance = new GameManager();
-            _instance._player1 = p1;
-            _instance._player2 = p2;
+            _instance._players = new Player[2] {p1, p2};
             _instance._map = map;
             _instance._turnCurrent = turn;
             _instance._turnNumber = nbTurns;
@@ -58,26 +56,34 @@ namespace SmallWorld
         {
             return _playerTurn;
         }
+        public void setPlayer(int numPlayer, Player p)
+        {
+            _players[(numPlayer + 1) % 2] = p;
+        }
+        public Player getPlayer(int numPlayer)
+        {
+            return _players[(numPlayer + 1) % 2];
+        }
         public void setPlayer1(Player p)
         {
-            _player1 = p;
+            _players[0] = p;
         }
         public Player getPlayer1()
         {
-            return _player1;
+            return _players[0];
         }
         public void setPlayer2(Player p)
         {
-            _player2 = p;
+            _players[1] = p;
         }
         public Player getPlayer2()
         {
-            return _player2;
+            return _players[1];
         }
 
         public bool gameEnd()
         {
-            if (_turnCurrent > _turnNumber || _player1.getUnits().Count == 0 || _player2.getUnits().Count == 0)
+            if (_turnCurrent > _turnNumber || _players[0].getUnits().Count == 0 || _players[1].getUnits().Count == 0)
             {
                 return true;
             }
@@ -92,7 +98,7 @@ namespace SmallWorld
         public List<Unit> getUnits()
         {
             List<Unit> allUnits = new List<Unit>();
-            allUnits.Concat(_player1.getUnits()).Concat(_player2.getUnits());
+            allUnits.Concat(_players[0].getUnits()).Concat(_players[1].getUnits());
             return allUnits;
         }
 
@@ -105,18 +111,9 @@ namespace SmallWorld
         {
             Tile start = _map.getTile(u.getX(), u.getY());
             Tile end = _map.getTile(x, y);
-            List<Unit> opponents = null;
-            Player adv = null;
-            if (_playerTurn == 1) // Should be changed, array would be better
-            {
-                opponents = _player2.unitsAt(x, y);
-                adv = _player2;
-            }
-            else
-            {
-                opponents = _player1.unitsAt(x, y);
-                adv = _player1;
-            }
+            List<Unit> opponents = _players[(_playerTurn + 1) % 2].unitsAt(x, y);
+            Player adv = _players[(_playerTurn + 1) % 2];
+       
             u.move(x, y, end, opponents);
 
             if (u.getLife() == 0)
@@ -129,6 +126,10 @@ namespace SmallWorld
             {
                 adv.deleteUnit(op);
             }
+        }
+        public Player opponent()
+        {
+            return getPlayer((_playerTurn + 1) % 2);
         }
     }
 }

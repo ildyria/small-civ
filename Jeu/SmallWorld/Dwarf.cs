@@ -25,7 +25,7 @@ namespace SmallWorld
             {
                 return res;
             }
-            else if (t.getType() == TerrainType.MOUNTAIN) // need to check that you are on a mountain and that no enemy is there
+            else if (t.getType() == TerrainType.MOUNTAIN && whereAmI().getType() == TerrainType.MOUNTAIN && GameManager.Instance().opponent().unitsAt(x, y).Count == 0) // Teleport !
             {
                 return Dwarf.DEFAULT_MOVE_COST;
             }

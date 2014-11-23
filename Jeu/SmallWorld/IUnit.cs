@@ -21,5 +21,6 @@ namespace SmallWorld
         int scorePoints(Tile t);
         void setPosition(int x, int y);
         void startTurn();
+        Tile whereAmI();
     }
 }

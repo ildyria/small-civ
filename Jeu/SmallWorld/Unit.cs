@@ -194,5 +194,9 @@ namespace SmallWorld
         {
             return _value;
         }
+        public Tile whereAmI()
+        {
+            return GameManager.Instance().getMap().getTile(_posX, _posY);
+        }
     }
 }

@@ -104,6 +104,7 @@ namespace TestsJeu
 
             // this need another test, when there is an enemy on the mountain
         }
+        [TestMethod]
         public void TestSurroundedDyingElf()
         {
             Assert.Fail();

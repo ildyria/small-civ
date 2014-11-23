@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" dslVersion="1.0.0.0" Id="e95539f7-d38d-47b5-b87d-f426227339b2" name="Gestion des sauvegardes" linkedPackageId="335aa469-1bd4-4afe-adb5-8b7339ee4457" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <appliedStereotypesInternal>
+    <stereotypeInstance Id="888e0f45-13be-40a0-9d3e-04cabcf4db4c" name="namespace" profile="CSharpProfile">
+      <elementDefinition Id="bd688508-61e7-409e-a9b5-baa3c8754aa9" />
+      <propertyInstances>
+        <stereotypeInstanceHasPropertyInstances Id="875e0d67-f819-4d7e-beba-46e55cab7e12">
+          <propertyInstance Id="2c8ee9b0-287c-42dd-836c-c2aac604b70e" name="BaseName">
+            <elementDefinition Id="7f189729-7184-4091-bd1f-4f2309900647" />
+          </propertyInstance>
+          <elementDefinition Id="6baf16e3-fbfc-4f96-94f8-bf3af6cffc50" />
+        </stereotypeInstanceHasPropertyInstances>
+        <stereotypeInstanceHasPropertyInstances Id="389b1db8-5fdc-4ad5-a094-75846cab2bec">
+          <propertyInstance Id="45a14744-11cd-414b-847d-c50c8a14196e" name="ClrAttributes">
+            <elementDefinition Id="dec6d417-9b4b-4b00-8600-7fa45f1e0cba" />
+          </propertyInstance>
+          <elementDefinition Id="6f638dd3-7df0-4426-90c1-7d8e42d636de" />
+        </stereotypeInstanceHasPropertyInstances>
+        <stereotypeInstanceHasPropertyInstances Id="b7de00d5-be2b-4020-a25a-a8167845ca15">
+          <propertyInstance Id="121c5243-648e-43fa-bd76-082e1d0c5074" name="Usings">
+            <elementDefinition Id="83e696d9-9c58-4f2c-bb4b-fda506b2bcdb" />
+          </propertyInstance>
+          <elementDefinition Id="f3c4f46e-d247-4aaa-b088-4f7962553ca5" />
+        </stereotypeInstanceHasPropertyInstances>
+      </propertyInstances>
+    </stereotypeInstance>
+    <stereotypeInstance Id="4a2df7ac-a20b-4c38-9168-60450231a1b8" name="TextTemplateBindings" profile="TextTemplateBindings">
+      <elementDefinition Id="b7153a80-b749-4bc1-8f97-173a7f8c011e" />
+      <propertyInstances>
+        <stereotypeInstanceHasPropertyInstances Id="2d8ebbb2-d173-42a4-8d7b-917ad252456a">
+          <propertyInstance Id="0b8cd4fc-fbae-4f1a-b2b6-fcbce5d3ff4c" name="Alias" value="ClassTemplate|EnumTemplate|InterfaceTemplate|StructTemplate">
+            <elementDefinition Id="49717de4-52a8-4f67-9aad-9692e3723b04" />
+          </propertyInstance>
+          <elementDefinition Id="a1cb2439-ca8a-4447-a5bf-025362353be9" />
+        </stereotypeInstanceHasPropertyInstances>
+        <stereotypeInstanceHasPropertyInstances Id="df928c34-d050-437a-a892-2df7d58b0a82">
+          <propertyInstance Id="57fa11da-5a07-4d60-a7ec-e8f0ee05ecec" name="TemplateFilePath" value="ClassTemplate=C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\ClassTemplate.t4|EnumTemplate=C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\EnumTemplate.t4|InterfaceTemplate=C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\InterfaceTemplate.t4|StructTemplate=C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\StructTemplate.t4">
+            <elementDefinition Id="5e2157e3-9bbb-4917-9f1e-91cd762fb6b2" />
+          </propertyInstance>
+          <elementDefinition Id="c7eb7815-4d8f-498b-a6d8-6fbb6406974c" />
+        </stereotypeInstanceHasPropertyInstances>
+        <stereotypeInstanceHasPropertyInstances Id="d74416b9-b0e5-4f3f-afc4-466a3198562e">
+          <propertyInstance Id="8a87be11-39e9-4fec-8751-b63e31c880f3" name="ProjectPath" value="ClassTemplate=..\SmallWorld.csproj|EnumTemplate=..\SmallWorld.csproj|InterfaceTemplate=..\SmallWorld.csproj|StructTemplate=..\SmallWorld.csproj">
+            <elementDefinition Id="9eb4a07b-ae6f-4d73-ab1e-2a294f30696a" />
+          </propertyInstance>
+          <elementDefinition Id="5d7c1e11-298a-4a6f-8106-53b775f5d1f9" />
+        </stereotypeInstanceHasPropertyInstances>
+        <stereotypeInstanceHasPropertyInstances Id="26eab95a-a22e-4d0e-b2f5-dac72d1415e7">
+          <propertyInstance Id="dd48991d-b865-49fd-9477-cf8abec15538" name="TargetDirectory" value="ClassTemplate=GeneratedCode\{PackageStructure}|EnumTemplate=GeneratedCode\{PackageStructure}|InterfaceTemplate=GeneratedCode\{PackageStructure}|StructTemplate=GeneratedCode\{PackageStructure}">
+            <elementDefinition Id="ec04dd08-7d6a-4e75-8863-70c13c3057f4" />
+          </propertyInstance>
+          <elementDefinition Id="00c4c907-65d9-4d9b-bd8d-20084c5161c5" />
+        </stereotypeInstanceHasPropertyInstances>
+        <stereotypeInstanceHasPropertyInstances Id="feff6206-3b58-4120-b019-9c20ea276c1c">
+          <propertyInstance Id="9d8f3aed-2847-4b53-b6d2-a917dbd21303" name="TargetName" value="ClassTemplate={Name}|EnumTemplate={Name}|InterfaceTemplate={Name}|StructTemplate={Name}">
+            <elementDefinition Id="4dd6d85d-3e45-48db-8439-cf607f5219f7" />
+          </propertyInstance>
+          <elementDefinition Id="04a3765b-fb63-41c2-8ba5-c55d2b2e8750" />
+        </stereotypeInstanceHasPropertyInstances>
+        <stereotypeInstanceHasPropertyInstances Id="2fff32a3-84ed-4201-9539-1013b903442f">
+          <propertyInstance Id="12bd644a-ba30-4454-bb6e-4b98816261ea" name="Overwrite" value="ClassTemplate=True|EnumTemplate=True|InterfaceTemplate=True|StructTemplate=True">
+            <elementDefinition Id="6d4652ab-bcbd-4376-9b39-dfc40a12335d" />
+          </propertyInstance>
+          <elementDefinition Id="bd9cc2a2-6d3f-4827-870b-14adba8e8093" />
+        </stereotypeInstanceHasPropertyInstances>
+        <stereotypeInstanceHasPropertyInstances Id="99b9522b-afbe-4347-a03b-4aa914b6a867">
+          <propertyInstance Id="b90edc54-88bf-42d0-99c6-adf4b1d4083c" name="Parameters">
+            <elementDefinition Id="e9e60347-1b2b-473a-a8e8-e8b5504153c9" />
+          </propertyInstance>
+          <elementDefinition Id="eea0db5c-d663-43f9-8aff-f9d606a4bb2e" />
+        </stereotypeInstanceHasPropertyInstances>
+      </propertyInstances>
+    </stereotypeInstance>
+  </appliedStereotypesInternal>
+  <profileInstances>
+    <packageHasProfileInstances Id="ac6ee63f-7e9f-445f-b8a1-590efa575623">
+      <profileInstance Id="ddf45ec2-33b3-4ec4-afc1-bdb3e2b8d38f" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="588ff09f-9e94-401a-ae7a-9be2a74e8325">
+      <profileInstance Id="4c87ff10-f416-49b6-a620-4e47d716ebb2" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="d65f8c3a-a45e-460d-bc5c-803f0f5ba4d9">
+      <profileInstance Id="893810f3-7d44-44ec-93fc-9d519a5580fb" name="CSharpProfile">
+        <elementDefinition Id="0e0dcb61-3de6-4ea5-8188-bab5af2553ac" />
+      </profileInstance>
+      <elementDefinition Id="023962ec-3ed2-4561-b616-1a2dd9ca93a5" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="31a1ea96-7a15-42a5-84e5-ed34b66262e7">
+      <profileInstance Id="a27ae19e-0ccb-48bc-8ddf-2dae667fc9f6" name="TextTemplateBindings">
+        <elementDefinition Id="f687c6c9-608b-4343-a4de-08eae0750594" />
+      </profileInstance>
+      <elementDefinition Id="07e983cb-8b36-466a-98a6-9900df1ed792" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="b801e0e9-c951-4cfb-9e2d-340eaf7c70b6" name="Player" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="8d177ca4-7f35-478b-8d37-b11004775393" />
+        <targetEnds>
+          <association Id="347ae20a-671f-4278-aac8-3de8bbf7984f" isDerived="false" sourceEndRoleName="Player" targetEndRoleName="Charger" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="f8672d9c-742d-485c-9aab-ce508fc0df41" LastKnownName="Charger" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b6ccb9bf-30b9-486f-97a7-39160e7da2ed" name="Player" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="5e9ceff3-dda4-43a0-9f15-e11c2e399994" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="68b2461f-8439-45f2-a157-f64120680b97" name="Charger" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="adc7e711-9126-4d7a-87e7-27e18ac0046d" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="02ccac25-7f49-49ec-bac7-c5fcba2af95a" />
+          </association>
+          <association Id="754e5f90-b1a8-4d9d-9c9e-9a57d3238e20" isDerived="false" sourceEndRoleName="Player" targetEndRoleName="Sauvegarder" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="ea12488a-5a18-48ca-ba11-3bc7e424348f" LastKnownName="Sauvegarder" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="4cd4a748-fb12-42ed-a446-2867a45c2d1b" name="Player" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="16ab3305-070e-4d79-aa9b-1fca6673c851" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="31e634d2-873c-4681-aea2-202e8d24fbdc" name="Sauvegarder" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="3db74f45-6651-4c58-b085-1c9488720455" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="398fa3ff-2db4-4f33-847e-5aeb601fc62d" />
+          </association>
+          <association Id="33ae38c5-70fd-40da-ac96-77d5362b9c2a" isDerived="false" sourceEndRoleName="Player" targetEndRoleName="Supprimer une sauvegarde" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="fd0feed5-4060-4b42-a4df-cb415630fa64" LastKnownName="Supprimer une sauvegarde" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="eb27ce29-fd35-461f-9295-267716cab0bd" name="Player" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="bd38f448-5968-452b-b0b2-ed5e4829772f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="963f13ce-6ae5-45e0-a05d-1efa0b49c5fd" name="Supprimer une sauvegarde" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="87ec71ce-0e09-46a7-ab9f-002adc56a290" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="c47fc91c-5dd3-48ca-835d-490d087bce39" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="ea12488a-5a18-48ca-ba11-3bc7e424348f" name="Sauvegarder" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="d60aeca5-b81c-4955-af13-d69891c76175" />
+        <additions>
+          <include Id="8fdd4206-8a1e-4311-896e-ca8d81986d80">
+            <useCaseMoniker Id="71a8b2b1-b69b-4637-896d-dcbf76eb5b59" LastKnownName="Sélectionner une sauvegarde" />
+            <elementDefinition Id="e3cbe627-80ad-4f7b-aea8-c76cd2847960" />
+          </include>
+          <include Id="ba3aa544-e951-49c0-8b14-49f8508d5f31">
+            <useCaseMoniker Id="b6df5558-c73a-4ce3-a0b7-a95382917155" LastKnownName="Entrer un nom de sauvegarde" />
+            <elementDefinition Id="6570785e-a9b3-49ef-b5ff-747a269f112c" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="54bca6cc-4d3f-4cf4-b47f-ad878025443b" LastKnownName="Gestion de sauvegardes" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="f8672d9c-742d-485c-9aab-ce508fc0df41" name="Charger" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="26e802f6-6466-42f1-8fa1-c7aa9f2dbccb" />
+        <additions>
+          <include Id="ba3f23df-ae0a-4b4b-addb-1c5609a084ee">
+            <useCaseMoniker Id="71a8b2b1-b69b-4637-896d-dcbf76eb5b59" LastKnownName="Sélectionner une sauvegarde" />
+            <elementDefinition Id="6f66436d-3eaf-487c-8980-f1731353e4af" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="54bca6cc-4d3f-4cf4-b47f-ad878025443b" LastKnownName="Gestion de sauvegardes" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="fd0feed5-4060-4b42-a4df-cb415630fa64" name="Supprimer une sauvegarde" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="54e53211-3275-42ed-aa87-2986fab41070" />
+        <additions>
+          <include Id="34ea5b40-ef5f-4a5d-9660-6536d9deb268">
+            <useCaseMoniker Id="71a8b2b1-b69b-4637-896d-dcbf76eb5b59" LastKnownName="Sélectionner une sauvegarde" />
+            <elementDefinition Id="8154e58b-6c10-449c-90ed-31dd5ba39bc5" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="54bca6cc-4d3f-4cf4-b47f-ad878025443b" LastKnownName="Gestion de sauvegardes" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="71a8b2b1-b69b-4637-896d-dcbf76eb5b59" name="Sélectionner une sauvegarde" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b78362fa-83ad-48a8-a5d2-508784e40b8a" />
+        <subjects>
+          <subsystemMoniker Id="54bca6cc-4d3f-4cf4-b47f-ad878025443b" LastKnownName="Gestion de sauvegardes" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="b6df5558-c73a-4ce3-a0b7-a95382917155" name="Entrer un nom de sauvegarde" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="8f23c348-83f9-4ca1-a059-780ca2b99b8f" />
+        <subjects>
+          <subsystemMoniker Id="54bca6cc-4d3f-4cf4-b47f-ad878025443b" LastKnownName="Gestion de sauvegardes" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="54bca6cc-4d3f-4cf4-b47f-ad878025443b" name="Gestion de sauvegardes" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <ownedCommentsInternal>
+          <comment Id="a0427d14-615d-4d52-b9ae-9eb0f1b9c9cf">
+            <elementDefinition Id="4ae4368b-a894-4abe-87ac-30d826dc36d9" />
+            <body>Cette fonctionnalité n'est disponible qu'au cours d'une partie</body>
+            <annotatedElements>
+              <useCaseMoniker Id="ea12488a-5a18-48ca-ba11-3bc7e424348f" LastKnownName="Sauvegarder" />
+            </annotatedElements>
+          </comment>
+          <comment Id="d4fbcad8-7718-4743-b663-efc1906c22c6">
+            <elementDefinition Id="9ee8b129-203b-4eb9-b25d-bd47f76bbb3d" />
+            <body>L'un ou l'autre sera utilisé, suivant si l'utilisateur crée une nouvelle sauvegarde, ou écrase une sauvegarde existante</body>
+            <annotatedElements>
+              <useCaseMoniker Id="b6df5558-c73a-4ce3-a0b7-a95382917155" LastKnownName="Entrer un nom de sauvegarde" />
+              <useCaseMoniker Id="71a8b2b1-b69b-4637-896d-dcbf76eb5b59" LastKnownName="Sélectionner une sauvegarde" />
+            </annotatedElements>
+          </comment>
+          <comment Id="dca10670-671c-4db6-9e02-e638f607ebc3">
+            <elementDefinition Id="f84c1f51-1d04-4e97-842a-ae35a6168d30" />
+            <body>Possible uniquement si une sauvegarde existe</body>
+            <annotatedElements>
+              <useCaseMoniker Id="71a8b2b1-b69b-4637-896d-dcbf76eb5b59" LastKnownName="Sélectionner une sauvegarde" />
+            </annotatedElements>
+          </comment>
+        </ownedCommentsInternal>
+        <elementDefinition Id="3e657b5a-dd6a-445a-8ea4-920abe8f5765" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+  </packagedElements>
+  <package Id="335aa469-1bd4-4afe-adb5-8b7339ee4457" name="Modelisation">
+    <elementDefinition Id="ef8a7d42-5b63-4eba-9a09-14f3dc9fdf78" />
+  </package>
+</useCaseModelRoot>

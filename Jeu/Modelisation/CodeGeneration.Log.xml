@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="file:///C:/PROGRAM FILES (X86)/MICROSOFT VISUAL STUDIO 12.0/COMMON7/IDE/EXTENSIONS/MICROSOFT/ARCHITECTURE TOOLS/EXTENSIBILITY/Logging/CodeGenLog.xslt"?>
+<Log xmlns="http://schemas.microsoft.com/VisualStudio/2010/CodeGen.RE.Log" Label="Génération de code/Journal de transformation de texte">
+  <MessageClass Name="Message" Label="Message" Option="Afficher les messages d'information" />
+  <MessageClass Name="Warning" Label="Avertissement" Option="Afficher les avertissements" />
+  <MessageClass Name="Error" Label="Erreur" Option="Afficher les erreurs" />
+  <MessageClass Name="Property" Label="Propriété" Option="Afficher les métadonnées" />
+  <MessageClass Name="Diagnostic" Label="Message" Option="Afficher les messages de diagnostic" />
+  <Message Timestamp="2014-09-24T11:39:35" Importance="High" Text="Génération du code ou transformation du texte démarrées." />
+  <Message Timestamp="2014-09-24T11:39:35" Importance="Diagnostic" Text="Nom = ClassTemplate" />
+  <Message Timestamp="2014-09-24T11:39:35" Importance="Diagnostic" Text="Remplacer = True" />
+  <Message Timestamp="2014-09-24T11:39:35" Importance="Diagnostic" Text="ProjectPath = ..\SmallWorld.csproj" />
+  <Message Timestamp="2014-09-24T11:39:35" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
+  <Message Timestamp="2014-09-24T11:39:35" Importance="Diagnostic" Text="TargetName = {Name}" />
+  <Message Timestamp="2014-09-24T11:39:35" Importance="Diagnostic" Text="TemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\ClassTemplate.t4" />
+  <Message Timestamp="2014-09-24T11:39:35" Importance="Diagnostic" Text="ResolvedTemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\ClassTemplate.t4" />
+  <Message Timestamp="2014-09-24T11:39:35" Importance="Medium" Text="La liaison de modèle de texte 'ClassTemplate' de Modelisation appliquera ClassTemplate.t4 à 'Modelisation::Plain' -  (Class), 'Modelisation::Mountain' -  (Class), 'Modelisation::Forest' -  (Class), 'Modelisation::Water' -  (Class), 'Modelisation::Desert' -  (Class), 'Modelisation::Board' -  (Class), 'Modelisation::Case' -  (Class), 'Modelisation::Game' -  (Class), 'Modelisation::Race' -  (Class), 'Modelisation::Player' -  (Class), 'Modelisation::Unit' -  (Class) " />
+  <Error Timestamp="2014-09-24T11:39:38" Importance="High" Text="Impossible de créer le projet suivant, car un autre projet existe peut-être au même emplacement ou la solution contient un projet portant le même nom : H:\4A\CPOO\Jeu\SmallWorld.csproj" />
+  <Message Timestamp="2014-09-24T11:39:38" Importance="Diagnostic" Text="'Modelisation::Plain' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'ClassTemplate.t4' a été évaluée comme false." />
+  <Error Timestamp="2014-09-24T11:39:38" Importance="High" Text="Impossible de créer le projet suivant, car un autre projet existe peut-être au même emplacement ou la solution contient un projet portant le même nom : H:\4A\CPOO\Jeu\SmallWorld.csproj" />
+  <Message Timestamp="2014-09-24T11:39:38" Importance="Diagnostic" Text="'Modelisation::Mountain' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'ClassTemplate.t4' a été évaluée comme false." />
+  <Error Timestamp="2014-09-24T11:39:38" Importance="High" Text="Impossible de créer le projet suivant, car un autre projet existe peut-être au même emplacement ou la solution contient un projet portant le même nom : H:\4A\CPOO\Jeu\SmallWorld.csproj" />
+  <Message Timestamp="2014-09-24T11:39:38" Importance="Diagnostic" Text="'Modelisation::Forest' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'ClassTemplate.t4' a été évaluée comme false." />
+  <Error Timestamp="2014-09-24T11:39:38" Importance="High" Text="Impossible de créer le projet suivant, car un autre projet existe peut-être au même emplacement ou la solution contient un projet portant le même nom : H:\4A\CPOO\Jeu\SmallWorld.csproj" />
+  <Message Timestamp="2014-09-24T11:39:38" Importance="Diagnostic" Text="'Modelisation::Water' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'ClassTemplate.t4' a été évaluée comme false." />
+  <Error Timestamp="2014-09-24T11:39:39" Importance="High" Text="Impossible de créer le projet suivant, car un autre projet existe peut-être au même emplacement ou la solution contient un projet portant le même nom : H:\4A\CPOO\Jeu\SmallWorld.csproj" />
+  <Message Timestamp="2014-09-24T11:39:39" Importance="Diagnostic" Text="'Modelisation::Desert' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'ClassTemplate.t4' a été évaluée comme false." />
+  <Error Timestamp="2014-09-24T11:39:39" Importance="High" Text="Impossible de créer le projet suivant, car un autre projet existe peut-être au même emplacement ou la solution contient un projet portant le même nom : H:\4A\CPOO\Jeu\SmallWorld.csproj" />
+  <Message Timestamp="2014-09-24T11:39:39" Importance="Diagnostic" Text="'Modelisation::Board' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'ClassTemplate.t4' a été évaluée comme false." />
+  <Error Timestamp="2014-09-24T11:39:39" Importance="High" Text="Impossible de créer le projet suivant, car un autre projet existe peut-être au même emplacement ou la solution contient un projet portant le même nom : H:\4A\CPOO\Jeu\SmallWorld.csproj" />
+  <Message Timestamp="2014-09-24T11:39:39" Importance="Diagnostic" Text="'Modelisation::Case' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'ClassTemplate.t4' a été évaluée comme false." />
+  <Error Timestamp="2014-09-24T11:39:39" Importance="High" Text="Impossible de créer le projet suivant, car un autre projet existe peut-être au même emplacement ou la solution contient un projet portant le même nom : H:\4A\CPOO\Jeu\SmallWorld.csproj" />
+  <Message Timestamp="2014-09-24T11:39:39" Importance="Diagnostic" Text="'Modelisation::Game' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'ClassTemplate.t4' a été évaluée comme false." />
+  <Error Timestamp="2014-09-24T11:39:39" Importance="High" Text="Impossible de créer le projet suivant, car un autre projet existe peut-être au même emplacement ou la solution contient un projet portant le même nom : H:\4A\CPOO\Jeu\SmallWorld.csproj" />
+  <Message Timestamp="2014-09-24T11:39:39" Importance="Diagnostic" Text="'Modelisation::Race' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'ClassTemplate.t4' a été évaluée comme false." />
+  <Error Timestamp="2014-09-24T11:39:39" Importance="High" Text="Impossible de créer le projet suivant, car un autre projet existe peut-être au même emplacement ou la solution contient un projet portant le même nom : H:\4A\CPOO\Jeu\SmallWorld.csproj" />
+  <Message Timestamp="2014-09-24T11:39:39" Importance="Diagnostic" Text="'Modelisation::Player' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'ClassTemplate.t4' a été évaluée comme false." />
+  <Error Timestamp="2014-09-24T11:39:39" Importance="High" Text="Impossible de créer le projet suivant, car un autre projet existe peut-être au même emplacement ou la solution contient un projet portant le même nom : H:\4A\CPOO\Jeu\SmallWorld.csproj" />
+  <Message Timestamp="2014-09-24T11:39:39" Importance="Diagnostic" Text="'Modelisation::Unit' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'ClassTemplate.t4' a été évaluée comme false." />
+  <Message Timestamp="2014-09-24T11:39:39" Importance="Diagnostic" Text="Nom = StructTemplate" />
+  <Message Timestamp="2014-09-24T11:39:39" Importance="Diagnostic" Text="Remplacer = True" />
+  <Message Timestamp="2014-09-24T11:39:39" Importance="Diagnostic" Text="ProjectPath = ..\SmallWorld.csproj" />
+  <Message Timestamp="2014-09-24T11:39:39" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
+  <Message Timestamp="2014-09-24T11:39:39" Importance="Diagnostic" Text="TargetName = {Name}" />
+  <Message Timestamp="2014-09-24T11:39:39" Importance="Diagnostic" Text="TemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\StructTemplate.t4" />
+  <Message Timestamp="2014-09-24T11:39:39" Importance="Diagnostic" Text="ResolvedTemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\StructTemplate.t4" />
+  <Message Timestamp="2014-09-24T11:39:39" Importance="Medium" Text="La liaison de modèle de texte 'StructTemplate' de Modelisation appliquera StructTemplate.t4 à 'Modelisation::Plain' -  (Class), 'Modelisation::Mountain' -  (Class), 'Modelisation::Forest' -  (Class), 'Modelisation::Water' -  (Class), 'Modelisation::Desert' -  (Class), 'Modelisation::Board' -  (Class), 'Modelisation::Case' -  (Class), 'Modelisation::Game' -  (Class), 'Modelisation::Race' -  (Class), 'Modelisation::Player' -  (Class), 'Modelisation::Unit' -  (Class) " />
+  <Message Timestamp="2014-09-24T11:39:40" Importance="Diagnostic" Text="'Modelisation::Plain' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'StructTemplate.t4' a été évaluée comme false." />
+  <Message Timestamp="2014-09-24T11:39:40" Importance="Diagnostic" Text="'Modelisation::Mountain' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'StructTemplate.t4' a été évaluée comme false." />
+  <Message Timestamp="2014-09-24T11:39:40" Importance="Diagnostic" Text="'Modelisation::Forest' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'StructTemplate.t4' a été évaluée comme false." />
+  <Message Timestamp="2014-09-24T11:39:40" Importance="Diagnostic" Text="'Modelisation::Water' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'StructTemplate.t4' a été évaluée comme false." />
+  <Message Timestamp="2014-09-24T11:39:40" Importance="Diagnostic" Text="'Modelisation::Desert' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'StructTemplate.t4' a été évaluée comme false." />
+  <Message Timestamp="2014-09-24T11:39:40" Importance="Diagnostic" Text="'Modelisation::Board' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'StructTemplate.t4' a été évaluée comme false." />
+  <Message Timestamp="2014-09-24T11:39:40" Importance="Diagnostic" Text="'Modelisation::Case' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'StructTemplate.t4' a été évaluée comme false." />
+  <Message Timestamp="2014-09-24T11:39:40" Importance="Diagnostic" Text="'Modelisation::Game' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'StructTemplate.t4' a été évaluée comme false." />
+  <Message Timestamp="2014-09-24T11:39:40" Importance="Diagnostic" Text="'Modelisation::Race' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'StructTemplate.t4' a été évaluée comme false." />
+  <Message Timestamp="2014-09-24T11:39:40" Importance="Diagnostic" Text="'Modelisation::Player' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'StructTemplate.t4' a été évaluée comme false." />
+  <Message Timestamp="2014-09-24T11:39:40" Importance="Diagnostic" Text="'Modelisation::Unit' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'StructTemplate.t4' a été évaluée comme false." />
+  <Message Timestamp="2014-09-24T11:39:40" Importance="Diagnostic" Text="La sélection comprenait 9 éléments qui n'étaient pas liés à un modèle." />
+  <Message Timestamp="2014-09-24T11:39:40" Importance="Diagnostic" Text="'Modelisation::' -  (Association) : aucun modèle lié." />
+  <Message Timestamp="2014-09-24T11:39:40" Importance="Diagnostic" Text="'89770a94-b9d8-4f94-a342-b931477dd3e4' -  (Generalization) : aucun modèle lié." />
+  <Message Timestamp="2014-09-24T11:39:40" Importance="Diagnostic" Text="'b994c088-a303-40a6-91b2-f8c685745b0c' -  (Generalization) : aucun modèle lié." />
+  <Message Timestamp="2014-09-24T11:39:40" Importance="Diagnostic" Text="'b018443f-6e62-493d-bef8-6526fb404b4d' -  (Generalization) : aucun modèle lié." />
+  <Message Timestamp="2014-09-24T11:39:40" Importance="Diagnostic" Text="'6f6c2960-c4e3-445d-a298-23c370269d7a' -  (Generalization) : aucun modèle lié." />
+  <Message Timestamp="2014-09-24T11:39:40" Importance="Diagnostic" Text="'d8c6efd2-a606-4696-8a8b-69c47a86165b' -  (Generalization) : aucun modèle lié." />
+  <Message Timestamp="2014-09-24T11:39:40" Importance="Diagnostic" Text="'Modelisation::' -  (Association) : aucun modèle lié." />
+  <Message Timestamp="2014-09-24T11:39:40" Importance="Diagnostic" Text="'Modelisation::' -  (Association) : aucun modèle lié." />
+  <Message Timestamp="2014-09-24T11:39:40" Importance="Diagnostic" Text="'Modelisation::' -  (Association) : aucun modèle lié." />
+  <Message Timestamp="2014-09-24T11:39:40" Importance="High" Text="Génération du code terminée. Erreurs : 11. Avertissements : 0." />
+</Log>

@@ -17,7 +17,7 @@ namespace SmallWorld
             throw new System.NotImplementedException();
         }
 
-        public override IEnumerable<UnitData> getUnitsData(int numPlayer)
+        public override List<Unit> getUnits(int numPlayer)
         {
             throw new System.NotImplementedException();
         }

@@ -14,7 +14,7 @@ namespace SmallWorld
         protected abstract void savePlayer();
         protected abstract void saveUnit();
         protected abstract void saveMap();
-        public abstract IEnumerable<UnitData> getUnitsData(int numPlayer);
+        public abstract List<Unit> getUnits(int numPlayer);
 
         public abstract Tuple<int, int, int>  getGameState();
     }

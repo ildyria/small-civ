@@ -33,8 +33,8 @@ namespace SmallWorld
         public override GameManager makeGameManager(Player p1, Player p2, GameMap map)
         {
             // nbTurns = 10 ?
-            GameManager gm = new GameManager(p1, p2, map, 10, 0, 0);
-            return gm;
+            GameManager.init(p1, p2, map, 10, 0, 0);
+            return GameManager.Instance();
         }
 
         public override void init() {}

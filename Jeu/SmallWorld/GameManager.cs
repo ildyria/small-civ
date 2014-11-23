@@ -7,6 +7,8 @@ namespace SmallWorld
 {
     public class GameManager : SmallWorld.IGameManager
     {
+        private static GameManager _instance;
+
         private int _turnCurrent;
         private int _turnNumber;
         private int _playerTurn;
@@ -14,16 +16,27 @@ namespace SmallWorld
         private Player _player2;
         private GameMap _map;
 
-        public GameManager(Player p1, Player p2, GameMap map, int nbTurns, int turn, int playerTurn)
+        private GameManager() { }
+        public static void  init(Player p1, Player p2, GameMap map, int nbTurns, int turn, int playerTurn)
         {
-            _player1 = p1;
-            _player2 = p2;
-            _map = map;
-            _turnCurrent = turn;
-            _turnNumber = nbTurns;
-            _playerTurn = playerTurn;
+            _instance = new GameManager();
+            _instance._player1 = p1;
+            _instance._player2 = p2;
+            _instance._map = map;
+            _instance._turnCurrent = turn;
+            _instance._turnNumber = nbTurns;
+            _instance._playerTurn = playerTurn;
         }
 
+        public static GameManager Instance() {
+            if (_instance == null)
+            {
+                _instance = new GameManager();
+            }
+            return _instance;
+        }
+
+        //The following is not static. It should. But i have no chocolate, so i can't change that.
         public GameMap getMap()
         {
             return _map;

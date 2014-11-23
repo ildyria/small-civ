@@ -30,7 +30,8 @@ namespace SmallWorld
         public override GameManager makeGameManager(Player p1, Player p2, GameMap map)
         {
             Tuple<int, int, int> state =  sm.getGameState();
-            return new GameManager(p1, p2, map, state.Item1, state.Item2, state.Item3);
+            GameManager.init(p1, p2, map, state.Item1, state.Item2, state.Item3);
+            return GameManager.Instance();
         }
 
         public override void init()

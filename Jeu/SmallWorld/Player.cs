@@ -31,7 +31,11 @@ namespace SmallWorld
         {
             if (_unitList.Contains(u))
             {
-                // appel sur le gamemanager
+                // GameNamager call, should be static
+                GameManager gm = null;
+                gm.moveUnit(u, x, y);
+                //Something like this.
+                bool end = gm.gameEnd();
                 //move(u, x, y);
             }
         }
@@ -59,7 +63,7 @@ namespace SmallWorld
             _unitList = unitList;
         }
 
-        public List<Unit> unitsAt(uint x, uint y)
+        public List<Unit> unitsAt(int x, int y)
         {
             List<Unit> units = new List<Unit>();
             foreach (Unit u in _unitList) {

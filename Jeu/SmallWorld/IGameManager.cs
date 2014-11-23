@@ -13,7 +13,7 @@ namespace SmallWorld
         int getTurnNumber();
         int getTurnCurrent();
         System.Collections.Generic.List<Unit> getUnits();
-        void moveUnit();
+        void moveUnit(Unit u, int x, int y);
         void setMap(GameMap map);
         void setPlayer1(Player p);
         void setPlayer2(Player p);

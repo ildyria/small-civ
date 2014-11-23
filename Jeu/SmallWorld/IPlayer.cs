@@ -12,6 +12,6 @@ namespace SmallWorld
         void play();
         void scorePoints(Tile t);
         void setUnits(System.Collections.Generic.List<Unit> unitList);
-        System.Collections.Generic.List<Unit> unitsAt(uint x, uint y);
+        System.Collections.Generic.List<Unit> unitsAt(int x, int y);
     }
 }

@@ -88,9 +88,34 @@ namespace SmallWorld
             throw new System.NotImplementedException();
         }
 
-        public void moveUnit()
+        public void moveUnit(Unit u, int x, int y)
         {
-            throw new System.NotImplementedException();
+            Tile start = _map.getTile(u.getX(), u.getY());
+            Tile end = _map.getTile(x, y);
+            List<Unit> opponents = null;
+            Player adv = null;
+            if (_playerTurn == 1) // Should be changed, array would be better
+            {
+                opponents = _player2.unitsAt(x, y);
+                adv = _player2;
+            }
+            else
+            {
+                opponents = _player1.unitsAt(x, y);
+                adv = _player1;
+            }
+            u.move(x, y, end, opponents);
+
+            if (u.getLife() == 0)
+            {
+
+            }
+            //another if, and not else if for compat with future updates.
+            Unit op = opponents.Find(z => z.getLife() == 0);
+            if (op != null) // does this work ?
+            {
+                adv.deleteUnit(op);
+            }
         }
     }
 }

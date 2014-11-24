@@ -67,42 +67,42 @@ std::pair<std::pair<int, int>, std::pair<int, int>> GenMap::placePlayer(std::lis
 	std::pair<std::pair<int, int>, std::pair<int, int>> res(j1, j2);
 	return res;
 }
-/*
-std::list<std::pair<int, int>> GenMap::bestMoves(int nbMovesWanted, UnitData u, std::list<std::pair<int, int>> movesPossibles, std::map<int, std::pair<int, int>> terrainData, std::list<UnitData> opponents) {
-	int LOW_LIFE = 1, BLOODSHED_POINTS = 2, DANGEROUS = 2, ENEMY = 1;
-	std::map<std::pair<int, int>, int> possibilities;
 
-	for each (std::pair<int, int> move in movesPossibles)
+std::list<int> GenMap::bestMoves(int nbMovesWanted, std::tuple<int, int, int> u, std::list<int> movesPossibles, std::map<int, std::pair<int, int>> terrainData, std::list<std::tuple<int, int, int>> opponents) {
+	int LOW_LIFE = 1, BLOODSHED_POINTS = 2, DANGEROUS = 2, ENEMY = 1;
+	std::map<int, int> possibilities;
+
+	for each (int move in movesPossibles)
 	{
-		possibilities[move] = terrainData[_mapCreated[_sizeX * move.first + move.second]].second;
+		possibilities[move] = terrainData[_mapCreated[move]].second;
 	}
 
 	//delete moves where opponent has more life than me => probability that i will die
 	//Could be enhance to delete move that are to close
 	//find low life opponent
-	for each (object adv in opponents)
+	for each (std::tuple<int, int, int> adv in opponents)
 	{
-		std::pair<int, int> pos(adv.x, adv.y);
-		if (adv.life() > u.life()) {
+		int pos = std::get<0>(adv) * _sizeX + std::get<1>(adv);
+		if (std::get<2>(adv) > std::get<2>(u)) {
 			possibilities[pos] -= DANGEROUS;
 		}
-		else if (adv.life() == LOW_LIFE) {
+		else if (std::get<2>(adv) == LOW_LIFE) {
 			possibilities[pos] += BLOODSHED_POINTS;
 		}
 		else {
 			possibilities[pos] -= ENEMY;
 		}
 	}
-	std::list<std::pair<int, int>> result;
+	std::list<int> result;
 	for (int i = 0 ; i < nbMovesWanted ; i++)
 	{
-		std::map<std::pair<int, int>, int>::iterator it = std::max_element(possibilities.begin(), possibilities.end());
+		std::map<int, int>::iterator it = std::max_element(possibilities.begin(), possibilities.end());
 		result.push_back((*it).first);
 		possibilities.erase(it);
 	}
 	return result;
 }
-*/
+
 char GenMap::toCharacter(int i) {
 	return FIRST_ASCII_LETTER + i;
 }
@@ -132,7 +132,9 @@ GenMap* GenMap_new(int sizeX, int sizeY) { return new GenMap(sizeX, sizeY); }
 void GenMap_delete(GenMap* genmap) { delete genmap; }
 int* GenMap_generate(GenMap* genmap, int nbElementDiff) { return genmap->generate(nbElementDiff); }
 std::pair<std::pair<int, int>, std::pair<int, int>> GenMap_placePlayer(GenMap* genmap, std::list<int> unwanted) { return genmap->placePlayer(unwanted); }
-
+std::list<int> GenMap_bestMoves(GenMap* genmap, int nbMovesWanted, std::tuple<int, int, int> u, std::list<int> movesPossibles, std::map<int, std::pair<int, int>> terrainData, std::list<std::tuple<int, int, int>> opponents) {
+	return genmap->bestMoves(nbMovesWanted, u, movesPossibles, terrainData, opponents);
+}
 
 /*int main() {
 	GenMap g(5, 5);

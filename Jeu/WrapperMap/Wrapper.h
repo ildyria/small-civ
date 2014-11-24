@@ -8,6 +8,7 @@
 #pragma comment(lib, "MapLibrary.lib")
 #include <msclr/marshal.h>
 #include <cliext\list>
+#include <tuple>
 using namespace System;
 using namespace System::Collections::Generic;
 
@@ -41,6 +42,37 @@ namespace Wrapper {
 				Tuple<int, int>^ p2 = gcnew Tuple<int, int>(result.second.first, result.second.second);
 				return gcnew Tuple<Tuple<int, int>^, Tuple<int, int>^>(p1, p2);
 			}
+
+			List<int>^ bestMoves(int nbMovesWanted, Tuple<int, int, int> u, List<int> movesPossibles, Dictionary<int, Tuple<int, int>^>^ terrainData, List<Tuple<int, int, int>^>^ opponents) {
+				List<int>^ result = gcnew List<int>();
+				std::tuple<int, int, int> uConv(u.Item1, u.Item2, u.Item3);
+				std::list<int> movesPossiblesConv;
+				for each (int move in movesPossibles)
+				{
+					movesPossiblesConv.push_back(move);
+				}
+				std::list<std::tuple<int, int, int>> opponentsConv;
+				for each (Tuple<int, int, int>^ adv in opponents)
+				{
+					opponentsConv.push_back(std::tuple<int, int, int>(adv->Item1, adv->Item2, adv->Item3));
+				}
+				std::map<int, std::pair<int, int>> terrainDataConv;
+				for each (KeyValuePair<int, Tuple<int, int>^> ind in terrainData)
+				{
+					terrainDataConv[ind.Key] = std::make_pair<int, int>(ind.Value->Item1, ind.Value->Item2);
+				}
+
+				std::list<int> stdRes = GenMap_bestMoves(_genMap, nbMovesWanted, uConv, movesPossiblesConv, terrainDataConv, opponentsConv);
+				for each (int pos in stdRes)
+				{
+					result->Add(pos);
+				}
+				return result;
+			}
+			
+
+
+
 		protected:
 			!WrapperGenMap(){ GenMap_delete(_genMap); }
 		};

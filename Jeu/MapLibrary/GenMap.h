@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <list>
 #include <map>
+#include <tuple>
 
 #define FIRST_ASCII_LETTER 'A'
 
@@ -40,6 +41,8 @@ public:
 	int* generate(int nbElementDiff);
 	std::pair<std::pair<int, int>, std::pair<int, int>> placePlayer(std::list<int> unwanted);
 	std::vector<std::pair<int, int>> possibleMoves(int posX, int posY, int nbMoves, std::vector<std::pair<int, int>> costMatrix, int** map);
+	std::list<int> bestMoves(int nbMovesWanted, std::tuple<int, int, int> u, std::list<int> movesPossibles, std::map<int, std::pair<int, int>> terrainData, std::list<std::tuple<int, int, int>> opponents);
+
 
 
 };
@@ -49,3 +52,4 @@ EXTERNC DLL GenMap* GenMap_new(int sizeX, int sizeY);
 EXTERNC DLL void GenMap_delete(GenMap* genmap);
 EXTERNC DLL int* GenMap_generate(GenMap* genmap, int nbElementDiff);
 EXTERNC DLL std::pair<std::pair<int, int>, std::pair<int, int>> GenMap_placePlayer(GenMap* genmap, std::list<int> unwanted);
+EXTERNC DLL std::list<int> GenMap_bestMoves(GenMap* genmap, int nbMovesWanted, std::tuple<int, int, int> u, std::list<int> movesPossibles, std::map<int, std::pair<int, int>> terrainData, std::list<std::tuple<int, int, int>> opponents);

@@ -6,6 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include <list>
+#include <map>
 
 #define FIRST_ASCII_LETTER 'A'
 

@@ -74,7 +74,7 @@
     <Compile Include="TestsWrapperLibCpp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestUnite.cs" />
-    <Compile Include="TestGameMakerNew.cs" />
+    <Compile Include="TestGameMaker.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

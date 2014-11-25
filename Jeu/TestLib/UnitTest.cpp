@@ -54,7 +54,7 @@ namespace TestLib
 		#pragma endregion 
 
 		[TestMethod]
-		void TestGenerateMap()
+		void CPP_generateMap()
 		{
 			//Assert::AreEqual('D', FIRST_ASCII_LETTER + 3));
 			/*GenMap g(5, 5);
@@ -68,18 +68,19 @@ namespace TestLib
 			}
 			Assert::AreEqual(25, i);
 			Assert::IsTrue(bornes);*/
+			Assert::Fail();
 		};
 
 		[TestMethod]
-		void TestPlacePlayer()
+		void CPP_placePlayers()
 		{
-	
+			Assert::Fail();
 		};
 
 		[TestMethod]
-		void TestPossibleMoves()
+		void CPP_bestMoves()
 		{
-
+			Assert::Fail();
 		};
 	};
 	

@@ -8,7 +8,7 @@ namespace TestsJeu
     public class TestUnite
     {
         [TestMethod]
-        public void TestUnitAndFactoryDwarf()
+        public void UnitAndFactoryDwarf()
         {
             DwarfFactory df = new DwarfFactory();
             Unit d = df.makeUnit();
@@ -22,7 +22,7 @@ namespace TestsJeu
         }
 
         [TestMethod]
-        public void TestUnitAndFactoryElf()
+        public void UnitAndFactoryElf()
         {
             ElfFactory df = new ElfFactory();
             Unit d = df.makeUnit();
@@ -37,7 +37,7 @@ namespace TestsJeu
         }
 
         [TestMethod]
-        public void TestUnitAndFactoryOrc()
+        public void UnitAndFactoryOrc()
         {
             OrcFactory df = new OrcFactory();
             Unit d = df.makeUnit();
@@ -51,7 +51,7 @@ namespace TestsJeu
             Assert.AreEqual(0, d.scorePoints(f));
         }
         [TestMethod]
-        public void TestCombatRound()
+        public void CombatRound()
         {
             OrcFactory of = new OrcFactory();
             DwarfFactory df = new DwarfFactory();
@@ -64,8 +64,10 @@ namespace TestsJeu
         }
         
         [TestMethod]
-        public void TestCombatKill()
+        public void CombatKill()
         {
+            GameMakerNew gmn = new GameMakerNew();
+            gmn.makeGame();
             OrcFactory of = new OrcFactory();
             DwarfFactory df = new DwarfFactory();
             Unit orc = of.makeUnit();
@@ -82,14 +84,14 @@ namespace TestsJeu
             Assert.AreEqual(0, dw.getLife());
         }
         [TestMethod]
-        public void TestBasicMove()
+        public void BasicMove()
         {
             //all test above concerning move should be also there ...
             Assert.Fail();
         }
 
         [TestMethod]
-        public void TestMountainTeleportDwarfs()
+        public void MountainTeleportDwarfs()
         {
             //it fail cuz no ameManager is instanciated
             DwarfFactory df = new DwarfFactory();
@@ -106,7 +108,7 @@ namespace TestsJeu
             // this need another test, when there is an enemy on the mountain
         }
         [TestMethod]
-        public void TestSurroundedDyingElf()
+        public void SurroundedDyingElf()
         {
             Assert.Fail();
         }

@@ -8,7 +8,7 @@ namespace TestsJeu
     public class TestMap
     {
         [TestMethod]
-        public void TestMapCreate()
+        public void MapCreate()
         {
             MapAlgoritms dmap = new DemoMap();
             //MapAlgoritms smap = new SmallMap();

@@ -9,12 +9,23 @@ namespace TestsJeu
     public class TestsWrapperLibCpp
     {
         [TestMethod]
-        unsafe public void TestGeneration()
+        public void WrapperGeneration_NotNull_SizeOk()
         {
             WrapperGenMap genmap = new WrapperGenMap(5, 5);
-
             List<int> ca = genmap.generateMap(5);
-            //Assert.IsTrue(60 < ca[0] && ca[0] < 80);
+
+            // Test not null
+            Assert.IsNotNull(ca);
+
+            //test size
+            Assert.AreEqual(25, ca.Count);
+        }
+        public void WrapperGeneration_CountainAll_Only()
+        {
+            WrapperGenMap genmap = new WrapperGenMap(5, 5);
+            List<int> ca = genmap.generateMap(5);
+
+            //test values
             int i;
             bool bornes = true;
             for (i = 0; ca[i] != '\0'; i++)
@@ -24,16 +35,27 @@ namespace TestsJeu
                     bornes = false;
                 }
             }
-            //test valeurs
             Assert.IsTrue(bornes);
-            //test taille
-            Assert.AreEqual(25, ca.Count);
-            //Test tout les types
+
+            //Test all types
             Assert.IsTrue(ca.Contains(0));
             Assert.IsTrue(ca.Contains(1));
             Assert.IsTrue(ca.Contains(2));
             Assert.IsTrue(ca.Contains(3));
             Assert.IsTrue(ca.Contains(4));
+        }
+
+
+        [TestMethod]
+        public void WrapperSuggestion()
+        {
+            Assert.Fail();
+            /*WrapperGenMap genmap = new WrapperGenMap(5, 5);
+            List<int> ca = genmap.generateMap(5);
+            List<int> opponents = new List<int>();
+            List<int> movesPossibles = new List<int>();
+            List<int> prop = genmap.bestMoves();
+            Assert.AreEqual(6, prop.Count);*/
         }
     }
 }

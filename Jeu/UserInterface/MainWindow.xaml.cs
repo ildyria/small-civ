@@ -24,5 +24,10 @@ namespace UserInterface
         {
             InitializeComponent();
         }
+
+        private void loadGame_button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

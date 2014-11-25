@@ -1,8 +1,22 @@
 ﻿<Window x:Class="UserInterface.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
+        Title="MainWindow" Height="531.682" Width="765.315">
+    <StackPanel x:Name="MainMenu">
+        <StackPanel.Background>
+            <ImageBrush ImageSource="ressources/Smallworld_bg.jpg"/>
+        </StackPanel.Background>
+        <!--Main menu, graphical improvement need to be done-->
+        <StackPanel x:Name="mainMenu" HorizontalAlignment="Left" Height="272" Margin="182,75,0,0" VerticalAlignment="Top" Width="428" Visibility="Visible">
+            <Button x:Name="newGame_button" Content="Nouvelle partie"/>
+            <Button x:Name="loadGame_button" Content="Charger partie" Click="loadGame_button_Click"/>
+            <Button x:Name="help_button" Content="Comment jouer ?"/>
+            <Button x:Name="leave_button" Content="Quitter"/>
+        </StackPanel>
+        <ScrollViewer Height="100" Visibility="Hidden"/>
         
-    </Grid>
+    </StackPanel>
+    
+    
+
 </Window>

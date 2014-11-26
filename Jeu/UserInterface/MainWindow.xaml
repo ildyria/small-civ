@@ -6,17 +6,19 @@
         <StackPanel.Background>
             <ImageBrush ImageSource="ressources/Smallworld_bg.jpg"/>
         </StackPanel.Background>
+
         <!--Main menu, graphical improvement need to be done-->
         <StackPanel x:Name="mainMenu" HorizontalAlignment="Left" Height="272" Margin="182,75,0,0" VerticalAlignment="Top" Width="428" Visibility="Visible">
-            <Button x:Name="newGame_button" Content="Nouvelle partie"/>
-            <Button x:Name="loadGame_button" Content="Charger partie" Click="loadGame_button_Click"/>
-            <Button x:Name="help_button" Content="Comment jouer ?"/>
-            <Button x:Name="leave_button" Content="Quitter"/>
+            <TextBox Height="23" TextWrapping="Wrap" Text="SmallWorld !"/>
+            <Button x:Name="newGame_button" Content="Nouvelle partie" Click="newGame_clicked"/>
+            <Button x:Name="loadGame_button" Content="Charger partie" Click="loadGame_clicked"/>
+            <Button x:Name="help_button" Content="Comment jouer ?" Click="help_clicked"/>
+            <Button x:Name="leave_button" Content="Quitter" Click="quit_clicked" />
         </StackPanel>
         <ScrollViewer Height="100" Visibility="Hidden"/>
-        
+
     </StackPanel>
-    
-    
+
+
 
 </Window>

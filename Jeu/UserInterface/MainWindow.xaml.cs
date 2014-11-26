@@ -25,9 +25,25 @@ namespace UserInterface
             InitializeComponent();
         }
 
-        private void loadGame_button_Click(object sender, RoutedEventArgs e)
+        private void newGame_clicked(object sender, RoutedEventArgs e)
         {
 
+        }
+        private void loadGame_clicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void help_clicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void quit_clicked(object sender, RoutedEventArgs e)
+        {
+            //MessageBoxImage.Warning is ugly ?
+            if (MessageBox.Show("Êtes vous sur de vouloir quitter ?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                Close();
+            } 
         }
     }
 }

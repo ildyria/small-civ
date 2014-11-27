@@ -69,7 +69,6 @@ std::pair<std::pair<int, int>, std::pair<int, int>> GenMap::placePlayer(std::lis
 }
 
 std::list<int> GenMap::bestMoves(int nbMovesWanted, std::tuple<int, int, int> u, std::list<int> movesPossibles, std::map<int, std::pair<int, int>> terrainData, std::list<std::tuple<int, int, int>> opponents) {
-	int LOW_LIFE = 1, BLOODSHED_POINTS = 2, DANGEROUS = 2, ENEMY = 1;
 	std::map<int, int> possibilities;
 
 	for each (int move in movesPossibles)

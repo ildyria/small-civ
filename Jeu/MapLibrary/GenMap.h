@@ -9,7 +9,7 @@
 #include <map>
 #include <tuple>
 
-#define FIRST_ASCII_LETTER 'A'
+
 
 #ifdef WANTDLLEXP
 	#define DLL _declspec(dllexport)
@@ -18,6 +18,13 @@
 	#define DLL
 	#define EXTERNC
 #endif
+
+#define FIRST_ASCII_LETTER 'A'
+#define LOW_LIFE 1
+#define BLOODSHED_POINTS 2 
+#define DANGEROUS 2 
+#define ENEMY 1
+
 
 class DLL GenMap
 {

@@ -45,5 +45,10 @@ namespace UserInterface
                 Close();
             } 
         }
+
+        private void startNewGame_clicked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

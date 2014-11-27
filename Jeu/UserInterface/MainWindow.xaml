@@ -8,14 +8,44 @@
         </StackPanel.Background>
 
         <!--Main menu, graphical improvement need to be done-->
+        <StackPanel Height="413" Visibility="Collapsed">
+            <TextBox x:Name="p1Name" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="Nom" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="p2Name" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="Nom" VerticalAlignment="Top" Width="120"/>
+            <GroupBox Header="Peuple du joueur 1 :">
+                <StackPanel>
+                    <RadioButton GroupName="tribeJ1" Content="Dwarf"/>
+                    <RadioButton GroupName="tribeJ1" Content="Elf"/>
+                    <RadioButton GroupName="tribeJ1" Content="Orc"/>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Peuple du joueur 2 :">
+                <StackPanel>
+                    <RadioButton GroupName="tribeJ2" Content="Dwarf"/>
+                    <RadioButton GroupName="tribeJ2" Content="Elf"/>
+                    <RadioButton GroupName="tribeJ2" Content="Orc"/>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Taille de la carte :">
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton GroupName="mapSize" Content="Demo"/>
+                    <RadioButton GroupName="mapSize" Content="Small"/>
+                    <RadioButton GroupName="mapSize" Content="Classic"/>
+                </StackPanel>
+            </GroupBox>
+            <Button x:Name="startNewGame_button" Content="Lancer la partie" Click="startNewGame_clicked"/>
+        </StackPanel>
+
+        <!--Main menu, graphical improvement need to be done-->
         <StackPanel x:Name="mainMenu" HorizontalAlignment="Left" Height="272" Margin="182,75,0,0" VerticalAlignment="Top" Width="428" Visibility="Visible">
             <TextBox Height="23" TextWrapping="Wrap" Text="SmallWorld !"/>
             <Button x:Name="newGame_button" Content="Nouvelle partie" Click="newGame_clicked"/>
             <Button x:Name="loadGame_button" Content="Charger partie" Click="loadGame_clicked"/>
             <Button x:Name="help_button" Content="Comment jouer ?" Click="help_clicked"/>
             <Button x:Name="leave_button" Content="Quitter" Click="quit_clicked" />
+            <CheckBox Content="CheckBox" HorizontalAlignment="Left" Height="100" Width="0"/>
         </StackPanel>
-        <ScrollViewer Height="100" Visibility="Hidden"/>
 
     </StackPanel>
 

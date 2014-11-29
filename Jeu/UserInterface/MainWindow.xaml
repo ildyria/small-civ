@@ -84,9 +84,9 @@
 
             <GroupBox Header="Taille de la carte :">
                 <StackPanel Orientation="Horizontal">
-                    <RadioButton GroupName="mapSize" Content="Demo" IsChecked="True"/>
-                    <RadioButton GroupName="mapSize" Content="Small"/>
-                    <RadioButton GroupName="mapSize" Content="Classic"/>
+                    <RadioButton x:Name="mapSize_demo" GroupName="mapSize" Content="Demo" IsChecked="True"/>
+                    <RadioButton x:Name="mapSize_small" GroupName="mapSize" Content="Small"/>
+                    <RadioButton x:Name="mapSize_classic" GroupName="mapSize" Content="Classic"/>
                 </StackPanel>
             </GroupBox>
             <Button x:Name="startNewGame_button" Content="Lancer la partie" Click="startNewGame_clicked"/>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Drawing;
 
 namespace UserInterface
 {
@@ -20,6 +21,8 @@ namespace UserInterface
     /// </summary>
     public partial class MainWindow : Window
     {
+        SmallWorld.GameManager _gManager;
+        static int TILESIZE = 32;
         public MainWindow()
         {
             InitializeComponent();
@@ -35,7 +38,8 @@ namespace UserInterface
         }
         private void startLoadGame_clicked(object sender, RoutedEventArgs e)
         {
-
+            SmallWorld.GameMakerLoad gmn = new SmallWorld.GameMakerLoad();
+            _gManager = gmn.makeGame();
         }
         private void startNewGame_clicked(object sender, RoutedEventArgs e)
         {
@@ -97,7 +101,7 @@ namespace UserInterface
             gmn.setNames(new string[2] {p1Name.Text, p2Name.Text });
             gmn.setTribes(listTribes);
             gmn.setMapSize(mapSize);
-            gmn.makeGame();
+            _gManager = gmn.makeGame();
 
             // RENDER
         }

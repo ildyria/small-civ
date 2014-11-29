@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 
 namespace SmallWorld
 {
     public abstract class Tile : SmallWorld.ITile
     {
-        private int _image;
+        private Bitmap _image;
 
         private TerrainType _type;
 
-        public Tile(int img, TerrainType type) 
+        public Tile(Bitmap img, TerrainType type) 
         {
             _image = img;
             _type = type;
@@ -21,16 +22,14 @@ namespace SmallWorld
             return _type;
         }
 
-        public void getImage()
+        public Bitmap getImage()
         {
-            //return _image;
-            throw new System.NotImplementedException();
+            return _image;
         }
 
-        public void setImage()
+        public void setImage(Bitmap image)
         {
-            //_image = image
-            throw new System.NotImplementedException();
+            _image = image;
         }
     }
 }

@@ -13,8 +13,7 @@ namespace SmallWorld
 
         public GameMakerNew()
         {
-            // We need to be able to choose
-            _mapGen = new DemoMap();
+            
         }
         public override GameMap makeMap()
         {
@@ -92,6 +91,24 @@ namespace SmallWorld
         public void setNames(string[] t)
         {
             _names = t;
+        }
+        public void setMapSize(MapSize size)
+        {
+            switch (size)
+            {
+                case MapSize.DEMO:
+                    _mapGen = new DemoMap();
+                    break;
+                case MapSize.SMALL:
+                    _mapGen = new SmallMap();
+                    break;
+                case MapSize.CLASSIC:
+                    _mapGen = new ClassicMap();
+                    break;
+                default:
+                    _mapGen = new DemoMap();
+                    break;
+            } 
         }
     }
 }

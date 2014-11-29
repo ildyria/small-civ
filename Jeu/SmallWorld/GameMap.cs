@@ -25,7 +25,7 @@ namespace SmallWorld
         }
         public Tile getTile(int x, int y)
         {
-            return mapMaker.getTile((TerrainType)_tilesList[x *_sizeX + y]);   
+            return mapMaker.getTile( (TerrainType) _tilesList[x *_sizeX + y]);   
         }
 
         public Tuple<int, int> getSize()

@@ -7,6 +7,7 @@ namespace SmallWorld
 {
     // Should not be here
     public enum UnitType { DWARF, ELF, ORC};
+    public enum MapSize { DEMO, SMALL, CLASSIC};
     public abstract class GameMaker : SmallWorld.IGameMaker
     {
         public GameManager makeGame() {

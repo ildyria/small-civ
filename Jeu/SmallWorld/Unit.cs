@@ -39,8 +39,8 @@ namespace SmallWorld
             if (cost != IMPOSSIBLE_MOVE) {
                 _movesLeft -= cost;
 
-                //recherche de l'unité la plus forte
-                //Ce n'es pas un hasard ... ordre random ?
+                //Search strongest unit
+                //We could make a new list with the strongest and rand on it ... is it worth it performance wise ?
                 int max = 0;
                 Unit adv = null;
                 foreach (Unit unit in advList ){
@@ -146,7 +146,7 @@ namespace SmallWorld
             }
             else
             {
-                return -1;
+                return IMPOSSIBLE_MOVE;
             }    
         }
 

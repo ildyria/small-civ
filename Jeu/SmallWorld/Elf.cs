@@ -28,7 +28,19 @@ namespace SmallWorld
                 if (canMove)
                 {
                     _life++;
-                    //setPosition(x, y);
+
+                    //perhaps prioritize forest and a tile with dist 2 ?
+                    for (int i = -1; i <= 1; i++)
+                    {
+                        for (int j = -1; j <= 1; j++)
+                        {
+                            if (GameManager.Instance().opponent().unitsAt(_posX + i, _posY + j).Count == 0)
+                            {
+                                setPosition(_posX + i, _posY + j);
+                                break;
+                            }
+                        }
+                    }
                 }
             }
             

@@ -2,53 +2,157 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="531.682" Width="765.315">
-    <StackPanel x:Name="MainMenu">
-        <StackPanel.Background>
-            <ImageBrush ImageSource="ressources/Smallworld_bg.jpg"/>
-        </StackPanel.Background>
-
+    <Window.Resources>
+        
+    </Window.Resources>
+    <StackPanel x:Name="screen" >
+        <!--Background="{StaticResource background}"-->
         <!--Main menu, graphical improvement need to be done-->
-        <StackPanel Height="413" Visibility="Collapsed">
+        <StackPanel x:Name="mainMenu" HorizontalAlignment="Left" Height="272" Margin="182,75,0,0" VerticalAlignment="Top" Width="428" Visibility="Visible">
+            <Label Content="SmallWorld !"/>
+            <Button x:Name="newGame_button" Content="Nouvelle partie" >
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="mainMenu"  Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+                                </ObjectAnimationUsingKeyFrames>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="createGameMenu"  Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+            <Button x:Name="loadGame_button" Content="Charger partie">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="mainMenu"  Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+                                </ObjectAnimationUsingKeyFrames>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="loadMenu"  Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+            <Button x:Name="help_button" Content="Comment jouer ?">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="mainMenu"  Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+                                </ObjectAnimationUsingKeyFrames>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="helpPage"  Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+            <Button x:Name="leave_button" Content="Quitter" Click="quit_clicked" />
+        </StackPanel>
+
+        
+        
+        <StackPanel x:Name="createGameMenu" Height="413" Visibility="Collapsed">
             <TextBox x:Name="p1Name" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="Nom" VerticalAlignment="Top" Width="120"/>
             <TextBox x:Name="p2Name" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="Nom" VerticalAlignment="Top" Width="120"/>
             <GroupBox Header="Peuple du joueur 1 :">
                 <StackPanel>
-                    <RadioButton GroupName="tribeJ1" Content="Dwarf"/>
-                    <RadioButton GroupName="tribeJ1" Content="Elf"/>
-                    <RadioButton GroupName="tribeJ1" Content="Orc"/>
+                    <RadioButton x:Name="tribeJ1_dwarf" GroupName="tribeJ1" Content="{StaticResource dwarf_icon}" IsEnabled="{Binding ElementName=tribeJ2_dwarf, Path=IsChecked}" IsChecked="True"/>
+                    <RadioButton x:Name="tribeJ1_elf" GroupName="tribeJ1" Content="{StaticResource elf_icon}" IsEnabled="{Binding ElementName=tribeJ2_elf, Path=IsChecked}"/>
+                    <RadioButton x:Name="tribeJ1_orc" GroupName="tribeJ1" Content="{StaticResource orc_icon}" IsEnabled="{Binding ElementName=tribeJ2_orc, Path=IsChecked}"/>
                 </StackPanel>
             </GroupBox>
 
             <GroupBox Header="Peuple du joueur 2 :">
                 <StackPanel>
-                    <RadioButton GroupName="tribeJ2" Content="Dwarf"/>
-                    <RadioButton GroupName="tribeJ2" Content="Elf"/>
-                    <RadioButton GroupName="tribeJ2" Content="Orc"/>
+                    <RadioButton x:Name="tribeJ2_dwarf" GroupName="tribeJ2" Content="{StaticResource dwarf_icon}" IsEnabled="{Binding ElementName=tribeJ1_dwarf, Path=IsChecked}"/>
+                    <RadioButton x:Name="tribeJ2_elf" GroupName="tribeJ2" Content="{StaticResource elf_icon}" IsEnabled="{Binding ElementName=tribeJ1_elf, Path=IsChecked}"/>
+                    <RadioButton x:Name="tribeJ2_orc" GroupName="tribeJ2" Content="{StaticResource orc_icon}" IsEnabled="{Binding ElementName=tribeJ1_orc, Path=IsChecked}" IsChecked="True"/>
                 </StackPanel>
             </GroupBox>
 
             <GroupBox Header="Taille de la carte :">
                 <StackPanel Orientation="Horizontal">
-                    <RadioButton GroupName="mapSize" Content="Demo"/>
+                    <RadioButton GroupName="mapSize" Content="Demo" IsChecked="True"/>
                     <RadioButton GroupName="mapSize" Content="Small"/>
                     <RadioButton GroupName="mapSize" Content="Classic"/>
                 </StackPanel>
             </GroupBox>
             <Button x:Name="startNewGame_button" Content="Lancer la partie" Click="startNewGame_clicked"/>
+            <Button x:Name="cancelNew_button" Content="Annuler" >
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="createGameMenu"  Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+                                </ObjectAnimationUsingKeyFrames>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="mainMenu"  Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
         </StackPanel>
-
-        <!--Main menu, graphical improvement need to be done-->
-        <StackPanel x:Name="mainMenu" HorizontalAlignment="Left" Height="272" Margin="182,75,0,0" VerticalAlignment="Top" Width="428" Visibility="Visible">
-            <TextBox Height="23" TextWrapping="Wrap" Text="SmallWorld !"/>
-            <Button x:Name="newGame_button" Content="Nouvelle partie" Click="newGame_clicked"/>
-            <Button x:Name="loadGame_button" Content="Charger partie" Click="loadGame_clicked"/>
-            <Button x:Name="help_button" Content="Comment jouer ?" Click="help_clicked"/>
-            <Button x:Name="leave_button" Content="Quitter" Click="quit_clicked" />
-            <CheckBox Content="CheckBox" HorizontalAlignment="Left" Height="100" Width="0"/>
+          
+        <StackPanel x:Name="loadMenu" Visibility="Collapsed">
+            <Button Content="Charger" Click="startLoadGame_clicked"/>
+            <Button Content="Supprimer"/>
+            <Button Content="Annuler">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="loadMenu"  Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+                                </ObjectAnimationUsingKeyFrames>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="mainMenu"  Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
         </StackPanel>
+            
+        <StackPanel x:Name="helpPage" Visibility="Collapsed">
+            <Label Content="Rêgles du jeu"/>
+            <Label Content="Parfois on perd, parfois on gagne"/>
+            <Label Content="Tu veux des infos ? Lis la documentation utilisateurs pardi !"/>
+            <!-- Maybe implement a page system if there is a lot to say ... The text could be copy-pasted from the user documentation -->
+            <Button Content="Compris chef !">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="helpPage"  Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+                                </ObjectAnimationUsingKeyFrames>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="mainMenu"  Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+        </StackPanel>
+            
 
+            
     </StackPanel>
-
-
-
 </Window>

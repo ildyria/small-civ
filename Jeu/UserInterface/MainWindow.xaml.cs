@@ -25,18 +25,6 @@ namespace UserInterface
             InitializeComponent();
         }
 
-        private void newGame_clicked(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void loadGame_clicked(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void help_clicked(object sender, RoutedEventArgs e)
-        {
-
-        }
         private void quit_clicked(object sender, RoutedEventArgs e)
         {
             //MessageBoxImage.Warning is ugly ?
@@ -45,7 +33,10 @@ namespace UserInterface
                 Close();
             } 
         }
+        private void startLoadGame_clicked(object sender, RoutedEventArgs e)
+        {
 
+        }
         private void startNewGame_clicked(object sender, RoutedEventArgs e)
         {
 

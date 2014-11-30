@@ -22,7 +22,7 @@ namespace UserInterface
     public partial class MainWindow : Window
     {
         SmallWorld.GameManager _gManager;
-        static int TILESIZE = 32;
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -104,6 +104,9 @@ namespace UserInterface
             _gManager = gmn.makeGame();
 
             // RENDER
+            createGameMenu.Visibility = Visibility.Collapsed;
+            gameView.Visibility = Visibility.Visible;
+           
         }
     }
 }

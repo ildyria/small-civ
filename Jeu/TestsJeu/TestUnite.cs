@@ -86,6 +86,8 @@ namespace TestsJeu
         [TestMethod]
         public void BasicMove()
         {
+            GameMakerNew gmn = new GameMakerNew();
+            gmn.makeGame();
             //all test above concerning move should be also there ...
             Assert.Fail();
         }
@@ -93,6 +95,8 @@ namespace TestsJeu
         [TestMethod]
         public void MountainTeleportDwarfs()
         {
+            GameMakerNew gmn = new GameMakerNew();
+            gmn.makeGame();
             //it fail cuz no ameManager is instanciated
             DwarfFactory df = new DwarfFactory();
             Unit dw1 = df.makeUnit();  // he should be on a mountain

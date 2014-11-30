@@ -14,18 +14,20 @@ namespace SmallWorld
         private int _sizeX;
         private int _sizeY;
         private List<int> _tilesList;
-        private MapMaker mapMaker;
+        private MapMaker _mapMaker;
 
         public GameMap(int sizeX, int sizeY, List<int> tiles)
         {
             _sizeX = sizeX;
             _sizeY = sizeY;
             _tilesList = tiles;
+            _mapMaker = new MapMaker();
+
 
         }
         public Tile getTile(int x, int y)
         {
-            return mapMaker.getTile( (TerrainType) _tilesList[x *_sizeX + y]);   
+            return _mapMaker.getTile( (TerrainType) _tilesList[x *_sizeX + y]);   
         }
 
         public Tuple<int, int> getSize()

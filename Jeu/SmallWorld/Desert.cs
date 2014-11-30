@@ -8,6 +8,6 @@ namespace SmallWorld
 {
     public class Desert : Tile, SmallWorld.IDesert
     {
-        public Desert() : base(new Bitmap("../textures/tile_desert.png"), TerrainType.DESERT) { }
+        public Desert() : base(new Bitmap("textures/tile_desert.png"), TerrainType.DESERT) { }
     }
 }

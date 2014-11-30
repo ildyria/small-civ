@@ -6,10 +6,9 @@
     <Window.Resources>
         
     </Window.Resources>
-    <StackPanel x:Name="screen" >
-        <!--Background="{StaticResource background}"-->
+    <StackPanel x:Name="screen" Background="{StaticResource background}" >
         <!--Main menu, graphical improvement need to be done-->
-        <StackPanel x:Name="mainMenu" HorizontalAlignment="Left" Height="272" Margin="182,75,0,0" VerticalAlignment="Top" Width="428" Visibility="Visible">
+        <StackPanel x:Name="mainMenu" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Visible">
             <Label Content="SmallWorld !"/>
             <Button x:Name="newGame_button" Content="Nouvelle partie" >
                 <Button.Triggers>
@@ -155,9 +154,7 @@
         
         <StackPanel x:Name="gameView" Orientation="Horizontal" Visibility="Collapsed">
             <ScrollViewer x:Name="mapView">
-                <local:GameView x:Name="mapCanvas">
-                    
-                </local:GameView>
+                <local:BoardView x:Name="mapCanvas" />
             </ScrollViewer>
             <StackPanel>
                 <Button Content="Sauvegarder/Changer"/>

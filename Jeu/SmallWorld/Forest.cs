@@ -8,6 +8,6 @@ namespace SmallWorld
 {
     public class Forest : Tile, SmallWorld.IForest
     {
-        public Forest() : base(new Bitmap("../textures/tile_forest.png"), TerrainType.FOREST) { }
+        public Forest() : base(new Bitmap("textures/tile_forest.png"), TerrainType.FOREST) { }
     }
 }

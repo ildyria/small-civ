@@ -81,7 +81,7 @@
       <Compartment Name="Properties" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAAAAAAAAgAAAAiAAAAAAAAAgAAAAMAAAA=</HashCode>
+      <HashCode>AAAAAAIAAIAAAAAAAAgAAAACAAAAAAAAAgAAAAMAAAA=</HashCode>
       <FileName>GameMap.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />

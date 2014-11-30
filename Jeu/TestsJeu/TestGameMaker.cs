@@ -12,11 +12,11 @@ namespace TestsJeu
         {
             //Need to change to GameMaker
             GameMakerNew gmk = new GameMakerNew();
-            string[] names = new string[2] { "J1", "J2" };
-            UnitType[] tribes = new UnitType[2] { UnitType.DWARF, UnitType.ORC };
-            gmk.setTribes(tribes);
-            gmk.setNames(names);
+            gmk.setTribes(new UnitType[2] { UnitType.DWARF, UnitType.ORC });
+            gmk.setNames(new string[2] { "J1", "J2" });
+            gmk.setMapSize(MapSize.DEMO);
             GameManager gmg = gmk.makeGame();
+
             Assert.IsNotNull(gmg);
             Assert.AreEqual(0, gmg.getTurnCurrent());
             Assert.AreEqual(10, gmg.getTurnNumber());
@@ -30,6 +30,7 @@ namespace TestsJeu
         {
             //Need to change to GameMaker
             GameMakerLoad gmk = new GameMakerLoad();
+            //gmk.setSaveFile();
             GameManager gmg = gmk.makeGame();
             Assert.IsNotNull(gmg);
             Assert.AreEqual(0, gmg.getTurnCurrent());

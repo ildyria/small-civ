@@ -8,6 +8,6 @@ namespace SmallWorld
 {
     public class Mountain : Tile, SmallWorld.IMountain
     {
-        public Mountain() : base(new Bitmap("../textures/tile_mountain.png"), TerrainType.MOUNTAIN) { }
+        public Mountain() : base(new Bitmap("textures/tile_mountain.png"), TerrainType.MOUNTAIN) { }
     }
 }

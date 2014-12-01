@@ -23,10 +23,14 @@ namespace UserInterface
     public partial class MainWindow : Window
     {
         SmallWorld.GameManager _gManager;
+        private Polygon _playerCursor;
+        private int _i;
+        private int _j;
         
         public MainWindow()
         {
             InitializeComponent();
+            _playerCursor = (Polygon)this.Resources["cursorHex"];
         }
 
         private void quit_clicked(object sender, RoutedEventArgs e)
@@ -108,6 +112,29 @@ namespace UserInterface
             //gameView.Visibility = Visibility.Visible;
             //createGameMenu.Visibility = Visibility.Collapsed;
             
+        }
+        private void mouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (mapView.IsMouseOver)
+            {
+                double ch = 2 * BoardView.TILESIZE / (Math.Sqrt(7) + 1);
+                double a = (BoardView.TILESIZE - ch) / 2;
+                System.Windows.Point p = e.GetPosition(this);
+                double x = p.X;
+                double y = p.Y;
+
+                _j = (int) (y / (BoardView.TILESIZE - a));
+                //_j = (int)((BoardView.TILESIZE - a) / y);
+                double xOffset = (_j % 2 == 1) ? BoardView.TILESIZE / 2 : 0;
+                //_i = (int)((x - xOffset) / BoardView.TILESIZE);
+                _i = (int) ((x - xOffset) / BoardView.TILESIZE);
+
+                double xR = xOffset + _i * BoardView.TILESIZE;
+                double yR = _j * (BoardView.TILESIZE - a);
+                //playerCursor.Visibility = Visibility.Visible;
+                Canvas.SetLeft(playerCursor, xR);
+                Canvas.SetTop(playerCursor, yR);
+            }
         }
     }
 }

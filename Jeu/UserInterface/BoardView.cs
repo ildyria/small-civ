@@ -18,15 +18,15 @@ namespace UserInterface
 {
     class BoardView : Canvas
     {
-        static int TILESIZE = 60;
-        private ContentControl _playerCursor;
-        private int _i;
-        private int _j;
+        public static int TILESIZE = 60;
 
 
         public BoardView() : base()
         {
-            //_playerCursor = (ContentControl) this.Children[0];
+           // _playerCursor = new ContentControl();
+           // _playerCursor.Style = "{StaticResource cursorHex}";
+  
+            //_playerCursor = 
             //Test Code
             /*GameMakerNew gmn = new GameMakerNew();
             gmn.setTribes(new UnitType[2] { UnitType.DWARF, UnitType.ORC });
@@ -35,26 +35,7 @@ namespace UserInterface
             gmn.makeGame();*/
             //GameManager.Instance().setMap(new GameMap(5, 5, new List<int> { 1, 2, 3, 0, 1, 1, 1, 1, 2, 3, 0, 1, 1, 1, 3, 3, 3, 2, 2, 2, 3, 3, 3, 2, 2 }));
         }
-        private void mouseDown(object sender, MouseButtonEventArgs e)
-        {
-            double ch = 2 * TILESIZE / (Math.Sqrt(7) + 1);
-            double a = (TILESIZE - ch) / 2;
-
-            Point p = e.GetPosition(this);
-            double x = p.X;
-            double y = p.Y;
-
-            _i = (int) ((TILESIZE - a) / y); ;
-            double xOffset = (_i % 2 == 1) ? TILESIZE / 2 : 0;
-            _j = (int) ((x - xOffset) / TILESIZE);
-
-            double xR = xOffset + _j * TILESIZE;
-            double yR = _i * (TILESIZE - a);
-            //Canvas.SetLeft(_playerCursor, xR);
-            //Canvas.SetTop(_playerCursor, yR);
-        }
         
-
         protected override void OnRender(DrawingContext dc)
         {
             double ch = 2 * TILESIZE / (Math.Sqrt(7) + 1);
@@ -66,12 +47,11 @@ namespace UserInterface
             {
                 for (int i = 0; i < map.getSize().Item1; i++)
                 {
-
-                    xOffset = (i % 2 == 1) ? TILESIZE / 2 : 0;
                     for (int j = 0; j < map.getSize().Item2; j++)
                     {
-                        x = xOffset + j * TILESIZE;
-                        y = i * (TILESIZE - a);
+                        xOffset = (j % 2 == 1) ? TILESIZE / 2 : 0;
+                        x = xOffset + i * TILESIZE;
+                        y = j * (TILESIZE - a);
 
                         IntPtr btptr = map.getTile(i, j).getImage().GetHbitmap();
                         ImageSource im = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(btptr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());

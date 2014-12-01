@@ -4,15 +4,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="SmallWorld" Height="531.682" Width="765.315">
     <Window.Resources>
-        
     </Window.Resources>
     <StackPanel x:Name="screen" Background="{StaticResource background}" >
         <!--Main menu, graphical improvement need to be done-->
         <StackPanel x:Name="mainMenu" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Visible">
-            <Label Content="SmallWorld !"/>
+            <StackPanel.Resources>
+                <Style BasedOn="{StaticResource mainMenuButtonStyle}" TargetType="{x:Type Button}" />
+            </StackPanel.Resources>
+            <Label Content="SmallWorld !" Style="{StaticResource ResourceKey=mainMenuTitleStyle}"/>
             <Button x:Name="newGame_button" Content="Nouvelle partie" >
                 <Button.Triggers>
-                    <EventTrigger RoutedEvent="Button.Click">
+                    <EventTrigger RoutedEvent="ButtonBase.Click">
                         <BeginStoryboard>
                             <Storyboard>
                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="mainMenu"  Storyboard.TargetProperty="Visibility">
@@ -28,7 +30,7 @@
             </Button>
             <Button x:Name="loadGame_button" Content="Charger partie">
                 <Button.Triggers>
-                    <EventTrigger RoutedEvent="Button.Click">
+                    <EventTrigger RoutedEvent="ButtonBase.Click">
                         <BeginStoryboard>
                             <Storyboard>
                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="mainMenu"  Storyboard.TargetProperty="Visibility">
@@ -44,7 +46,7 @@
             </Button>
             <Button x:Name="help_button" Content="Comment jouer ?">
                 <Button.Triggers>
-                    <EventTrigger RoutedEvent="Button.Click">
+                    <EventTrigger RoutedEvent="ButtonBase.Click">
                         <BeginStoryboard>
                             <Storyboard>
                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="mainMenu"  Storyboard.TargetProperty="Visibility">
@@ -61,32 +63,36 @@
             <Button x:Name="leave_button" Content="Quitter" Click="quit_clicked" />
         </StackPanel>
 
-        
-        
-        <StackPanel x:Name="createGameMenu" Height="413" Visibility="Collapsed">
-            <TextBox x:Name="p1Name" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="Nom" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="p2Name" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="Nom" VerticalAlignment="Top" Width="120"/>
-            <GroupBox Header="Peuple du joueur 1 :">
-                <StackPanel>
-                    <RadioButton x:Name="tribeJ1_dwarf" GroupName="tribeJ1" Content="{StaticResource dwarf_icon}" IsEnabled="{Binding ElementName=tribeJ2_dwarf, Path=IsChecked}" IsChecked="True"/>
-                    <RadioButton x:Name="tribeJ1_elf" GroupName="tribeJ1" Content="{StaticResource elf_icon}" IsEnabled="{Binding ElementName=tribeJ2_elf, Path=IsChecked}"/>
-                    <RadioButton x:Name="tribeJ1_orc" GroupName="tribeJ1" Content="{StaticResource orc_icon}" IsEnabled="{Binding ElementName=tribeJ2_orc, Path=IsChecked}"/>
-                </StackPanel>
-            </GroupBox>
 
-            <GroupBox Header="Peuple du joueur 2 :">
-                <StackPanel>
-                    <RadioButton x:Name="tribeJ2_dwarf" GroupName="tribeJ2" Content="{StaticResource dwarf_icon}" IsEnabled="{Binding ElementName=tribeJ1_dwarf, Path=IsChecked}"/>
-                    <RadioButton x:Name="tribeJ2_elf" GroupName="tribeJ2" Content="{StaticResource elf_icon}" IsEnabled="{Binding ElementName=tribeJ1_elf, Path=IsChecked}"/>
-                    <RadioButton x:Name="tribeJ2_orc" GroupName="tribeJ2" Content="{StaticResource orc_icon}" IsEnabled="{Binding ElementName=tribeJ1_orc, Path=IsChecked}" IsChecked="True"/>
-                </StackPanel>
-            </GroupBox>
 
+        <StackPanel x:Name="createGameMenu" Visibility="Collapsed">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel>
+                    <TextBox x:Name="p1Name" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="Nom" VerticalAlignment="Top" Width="120"/>
+                    <GroupBox Header="Peuple du joueur 1 :">
+                        <StackPanel>
+                            <RadioButton x:Name="tribeJ1_dwarf" GroupName="tribeJ1" Style="{StaticResource dwarf_icon}" IsEnabled="{Binding ElementName=tribeJ2_dwarf, Path=IsChecked, Converter={StaticResource invertBoolConverter}}" IsChecked="True"/>
+                            <RadioButton x:Name="tribeJ1_elf" GroupName="tribeJ1" Style="{StaticResource elf_icon}" IsEnabled="{Binding ElementName=tribeJ2_elf, Path=IsChecked, Converter={StaticResource invertBoolConverter}}"/>
+                            <RadioButton x:Name="tribeJ1_orc" GroupName="tribeJ1" Style="{StaticResource orc_icon}" IsEnabled="{Binding ElementName=tribeJ2_orc, Path=IsChecked, Converter={StaticResource invertBoolConverter}}"/>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+                <StackPanel>
+                    <TextBox x:Name="p2Name" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="Nom" VerticalAlignment="Top" Width="120"/>
+                    <GroupBox Header="Peuple du joueur 2 :">
+                        <StackPanel>
+                            <RadioButton x:Name="tribeJ2_dwarf" GroupName="tribeJ2" Style="{StaticResource dwarf_icon}" IsEnabled="{Binding ElementName=tribeJ1_dwarf, Path=IsChecked, Converter={StaticResource invertBoolConverter}}"/>
+                            <RadioButton x:Name="tribeJ2_elf" GroupName="tribeJ2" Style="{StaticResource elf_icon}" IsEnabled="{Binding ElementName=tribeJ1_elf, Path=IsChecked, Converter={StaticResource invertBoolConverter}}"/>
+                            <RadioButton x:Name="tribeJ2_orc" GroupName="tribeJ2" Style="{StaticResource orc_icon}" IsEnabled="{Binding ElementName=tribeJ1_orc, Path=IsChecked, Converter={StaticResource invertBoolConverter}}" IsChecked="True"/>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </StackPanel>
             <GroupBox Header="Taille de la carte :">
                 <StackPanel Orientation="Horizontal">
-                    <RadioButton x:Name="mapSize_demo" GroupName="mapSize" Content="Demo" IsChecked="True"/>
-                    <RadioButton x:Name="mapSize_small" GroupName="mapSize" Content="Small"/>
-                    <RadioButton x:Name="mapSize_classic" GroupName="mapSize" Content="Classic"/>
+                    <RadioButton x:Name="mapSize_demo" GroupName="mapSize" Content="Demo" Style="{StaticResource radioNoDot}" IsChecked="True"/>
+                    <RadioButton x:Name="mapSize_small" GroupName="mapSize" Content="Small" Style="{StaticResource radioNoDot}"/>
+                    <RadioButton x:Name="mapSize_classic" GroupName="mapSize" Content="Classic" Style="{StaticResource radioNoDot}"/>
                 </StackPanel>
             </GroupBox>
             <Button x:Name="startNewGame_button" Content="Lancer la partie" Click="startNewGame_clicked"/>
@@ -107,7 +113,7 @@
                 </Button.Triggers>
             </Button>
         </StackPanel>
-          
+
         <StackPanel x:Name="loadMenu" Visibility="Collapsed">
             <Button Content="Charger" Click="startLoadGame_clicked"/>
             <Button Content="Supprimer"/>
@@ -128,7 +134,7 @@
                 </Button.Triggers>
             </Button>
         </StackPanel>
-            
+
         <StackPanel x:Name="helpPage" Visibility="Collapsed">
             <Label Content="Rêgles du jeu"/>
             <Label Content="Parfois on perd, parfois on gagne"/>
@@ -151,19 +157,45 @@
                 </Button.Triggers>
             </Button>
         </StackPanel>
-        
+
         <StackPanel x:Name="gameView" Orientation="Horizontal" Visibility="Collapsed">
             <ScrollViewer x:Name="mapView">
                 <local:BoardView x:Name="mapCanvas" />
             </ScrollViewer>
             <StackPanel>
+                <!-- TODO -->
+                <Grid x:Name="unitDetails">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <Label Content="Nom :" Grid.Column="0" Grid.Row="0"/>
+                    <Label Content="Vie :" Grid.Column="0" Grid.Row="1"/>
+                    <Label Content="Mouvement restants :" Grid.Column="0" Grid.Row="2"/>
+                    <Label Content="Tour :" Grid.Column="0" Grid.Row="3" />
+                    <Label Content="Tour de " Grid.Column="0" Grid.Row="4"/>
+
+                    <Label x:Name="name" Grid.Column="1" Grid.Row="0"/>
+                    <Label x:Name="life" Grid.Column="1" Grid.Row="1"/>
+                    <Label x:Name="movesLeft" Grid.Column="1" Grid.Row="2" />
+                    <Label x:Name="turn"  Grid.Column="1" Grid.Row="3"/>
+                    <Label x:Name="playerTurn" Grid.Column="1" Grid.Row="4" />
+                </Grid>
+
                 <Button Content="Sauvegarder/Changer"/>
                 <Button Content="Find de tour"/>
                 <Button Content="Abandonner"/>
             </StackPanel>
         </StackPanel>
-            
 
-            
+
+
     </StackPanel>
 </Window>

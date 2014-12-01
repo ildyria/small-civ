@@ -1,15 +1,40 @@
 ﻿<Application x:Class="UserInterface.App"
+             xmlns:local="clr-namespace:UserInterface"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <!--They sucks (google img), and they are not cc; we need to find cc license art-->
+        <local:InvertBoolConverter x:Key="invertBoolConverter"/>
+
+        <!--They sucks (google img), and they are not cc; we need to find cc licensed art-->
         <ImageBrush  ImageSource="/UserInterface;component/ressources/smallworld_bg.jpg" x:Key="background"/>
+        <!--
         <Image Source="/UserInterface;component/ressources/dwarf_icon.jpg" x:Key="dwarf_icon" Width="32" Height="32"/>
         <Image Source="/UserInterface;component/ressources/orc_icon.gif" x:Key="orc_icon" Width="32" Height="32"/>
         <Image Source="/UserInterface;component/ressources/elf_icon.png" x:Key="elf_icon" Width="32" Height="32"/>
-
-        <Style TargetType="{x:Type RadioButton}">
+        -->
+        
+        <Style x:Key="mainMenuTitleStyle" TargetType="Label">
+            <Setter Property="Height" Value="50" />
+            <Setter Property="Width" Value="250" />
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="30" />
+        </Style>        
+        <Style x:Key="mainMenuButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="50" />
+            <Setter Property="Width" Value="250" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="15" />
+            <!-- 
+            <Setter Property="Template">
+                <Setter.Value>
+                    
+                </Setter.Value>
+            </Setter>  
+            -->
+        </Style>
+        
+        <Style TargetType="{x:Type RadioButton}" x:Key="radioNoDot">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type RadioButton}">
@@ -31,6 +56,34 @@
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="dwarf_icon" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource radioNoDot}">
+            <Setter Property="ContentTemplate" >
+                <Setter.Value>
+                    <DataTemplate>
+                        <Image Source="/UserInterface;component/ressources/dwarf_icon.jpg" Width="32" Height="32"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="elf_icon" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource radioNoDot}">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Image Source="/UserInterface;component/ressources/elf_icon.png" Width="32" Height="32"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="orc_icon" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource radioNoDot}">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Image Source="/UserInterface;component/ressources/orc_icon.gif" Width="32" Height="32"/>
+                    </DataTemplate>
                 </Setter.Value>
             </Setter>
         </Style>

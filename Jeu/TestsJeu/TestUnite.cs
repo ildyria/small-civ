@@ -66,7 +66,11 @@ namespace TestsJeu
         [TestMethod]
         public void CombatKill()
         {
+            // Should use a loaded game
             GameMakerNew gmn = new GameMakerNew();
+            gmn.setTribes(new UnitType[2] { UnitType.DWARF, UnitType.ORC });
+            gmn.setNames(new string[2] { "J1", "J2" });
+            gmn.setMapSize(MapSize.DEMO);
             gmn.makeGame();
             OrcFactory of = new OrcFactory();
             DwarfFactory df = new DwarfFactory();
@@ -86,7 +90,11 @@ namespace TestsJeu
         [TestMethod]
         public void BasicMove()
         {
+            // Should use a loaded game
             GameMakerNew gmn = new GameMakerNew();
+            gmn.setTribes(new UnitType[2] { UnitType.DWARF, UnitType.ORC });
+            gmn.setNames(new string[2] { "J1", "J2" });
+            gmn.setMapSize(MapSize.DEMO);
             gmn.makeGame();
             //all test above concerning move should be also there ...
             Assert.Fail();
@@ -95,7 +103,11 @@ namespace TestsJeu
         [TestMethod]
         public void MountainTeleportDwarfs()
         {
+            // Should use a loaded game
             GameMakerNew gmn = new GameMakerNew();
+            gmn.setTribes(new UnitType[2] { UnitType.DWARF, UnitType.ORC });
+            gmn.setNames(new string[2] { "J1", "J2" });
+            gmn.setMapSize(MapSize.DEMO);
             gmn.makeGame();
             //it fail cuz no ameManager is instanciated
             DwarfFactory df = new DwarfFactory();

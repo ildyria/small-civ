@@ -95,7 +95,22 @@
                     <RadioButton x:Name="mapSize_classic" GroupName="mapSize" Content="Classic" Style="{StaticResource radioNoDot}"/>
                 </StackPanel>
             </GroupBox>
-            <Button x:Name="startNewGame_button" Content="Lancer la partie" Click="startNewGame_clicked"/>
+            <Button x:Name="startNewGame_button" Content="Lancer la partie" Click="startNewGame_clicked">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="createGameMenu"  Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+                                </ObjectAnimationUsingKeyFrames>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gameView"  Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
             <Button x:Name="cancelNew_button" Content="Annuler" >
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="Button.Click">
@@ -158,11 +173,17 @@
             </Button>
         </StackPanel>
 
-        <StackPanel x:Name="gameView" Orientation="Horizontal" Visibility="Collapsed">
-            <ScrollViewer x:Name="mapView">
-                <local:BoardView x:Name="mapCanvas" />
+        <Grid x:Name="gameView" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <ScrollViewer x:Name="mapView" Height="502" Width="556" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Column="0" Grid.Row="0">
+                <local:BoardView x:Name="mapCanvas">
+                    <ContentControl x:Name="playerCursor" Content="{StaticResource cursorHex}" Canvas.Top="0" Canvas.Left="0" Visibility="Collapsed"/>
+                </local:BoardView>
             </ScrollViewer>
-            <StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="0">
                 <!-- TODO -->
                 <Grid x:Name="unitDetails">
                     <Grid.ColumnDefinitions>
@@ -193,7 +214,7 @@
                 <Button Content="Find de tour"/>
                 <Button Content="Abandonner"/>
             </StackPanel>
-        </StackPanel>
+        </Grid>
 
 
 

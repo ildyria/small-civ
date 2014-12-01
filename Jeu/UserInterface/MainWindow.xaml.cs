@@ -105,9 +105,9 @@ namespace UserInterface
             _gManager = gmn.makeGame();
 
             // RENDER
-            createGameMenu.Visibility = Visibility.Collapsed;
-            gameView.Visibility = Visibility.Visible;
-           
+            //gameView.Visibility = Visibility.Visible;
+            //createGameMenu.Visibility = Visibility.Collapsed;
+            
         }
     }
 }

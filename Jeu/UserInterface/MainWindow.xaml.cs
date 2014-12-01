@@ -122,19 +122,42 @@ namespace UserInterface
                 System.Windows.Point p = e.GetPosition(this);
                 double x = p.X;
                 double y = p.Y;
+                int i, j;
 
-                _j = (int) (y / (BoardView.TILESIZE - a));
-                //_j = (int)((BoardView.TILESIZE - a) / y);
-                double xOffset = (_j % 2 == 1) ? BoardView.TILESIZE / 2 : 0;
-                //_i = (int)((x - xOffset) / BoardView.TILESIZE);
-                _i = (int) ((x - xOffset) / BoardView.TILESIZE);
+                j = (int) (y / (BoardView.TILESIZE - a));
+                double xOffset = (j % 2 == 1) ? BoardView.TILESIZE / 2 : 0;
+                i = (int) ((x - xOffset) / BoardView.TILESIZE);
 
-                double xR = xOffset + _i * BoardView.TILESIZE;
-                double yR = _j * (BoardView.TILESIZE - a);
-                //playerCursor.Visibility = Visibility.Visible;
-                Canvas.SetLeft(playerCursor, xR);
-                Canvas.SetTop(playerCursor, yR);
+                // no move if not on grid
+                if (i < _gManager.getMap().getSize().Item1 && j < _gManager.getMap().getSize().Item2)
+                {
+                    _i = i;
+                    _j = j;
+                    double xR = xOffset + _i * BoardView.TILESIZE;
+                    double yR = _j * (BoardView.TILESIZE - a);
+                    // if it is not on the map, maybe make the cursor invisible ?
+                    //playerCursor.Visibility = Visibility.Visible;
+                    Canvas.SetLeft(playerCursor, xR);
+                    Canvas.SetTop(playerCursor, yR);
+                }
+                
             }
+        }
+        private void fillInfo()
+        {
+           int x = 0;  
+           List<SmallWorld.Unit> unitsOnTile = _gManager.getUnits().FindAll(u => u.getX() == _i && u.getY() == _j);
+           if (unitsOnTile.Count != 0)
+           {
+               SmallWorld.Unit unitToDetail = unitsOnTile[x];
+               name.Content = unitToDetail.getName();
+               life.Content = unitToDetail.getLife();
+               movesLeft.Content = unitToDetail.getMovesLeft();
+
+               // this should not be edited here
+               turn.Content = _gManager.getTurnCurrent() + "/" + _gManager.getTurnNumber(); ;
+               playerTurn.Content = _gManager.getPlayerTurn();
+           }
         }
     }
 }

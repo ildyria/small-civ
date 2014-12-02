@@ -23,14 +23,17 @@ namespace UserInterface
     public partial class MainWindow : Window
     {
         SmallWorld.GameManager _gManager;
-        private Polygon _playerCursor;
-        private int _i;
-        private int _j;
+        //private Polygon _playerCursor;
+        private int _iSelected;
+        private int _jSelected;
+        private List<SmallWorld.Unit> _unitsOnTile;
+        private int _currentUnitNumber;
         
         public MainWindow()
         {
             InitializeComponent();
-            _playerCursor = (Polygon)this.Resources["cursorHex"];
+            //_playerCursor = (Polygon)this.Resources["cursorHex"];
+            _unitsOnTile = new List<SmallWorld.Unit>();
         }
 
         private void quit_clicked(object sender, RoutedEventArgs e)
@@ -119,7 +122,7 @@ namespace UserInterface
             {
                 double ch = 2 * BoardView.TILESIZE / (Math.Sqrt(7) + 1);
                 double a = (BoardView.TILESIZE - ch) / 2;
-                System.Windows.Point p = e.GetPosition(this);
+                System.Windows.Point p = e.GetPosition(mapCanvas);
                 double x = p.X;
                 double y = p.Y;
                 int i, j;
@@ -128,36 +131,89 @@ namespace UserInterface
                 double xOffset = (j % 2 == 1) ? BoardView.TILESIZE / 2 : 0;
                 i = (int) ((x - xOffset) / BoardView.TILESIZE);
 
+                //System.Diagnostics.Trace.WriteLine(x + " " + y);
                 // no move if not on grid
                 if (i < _gManager.getMap().getSize().Item1 && j < _gManager.getMap().getSize().Item2)
                 {
-                    _i = i;
-                    _j = j;
-                    double xR = xOffset + _i * BoardView.TILESIZE;
-                    double yR = _j * (BoardView.TILESIZE - a);
+                    _iSelected = i;
+                    _jSelected = j;
+                    double xR = xOffset + _iSelected * BoardView.TILESIZE;
+                    double yR = _jSelected * (BoardView.TILESIZE - a);
                     // if it is not on the map, maybe make the cursor invisible ?
                     //playerCursor.Visibility = Visibility.Visible;
                     Canvas.SetLeft(playerCursor, xR);
                     Canvas.SetTop(playerCursor, yR);
+                    selectedTileChanged();
                 }
                 
             }
         }
-        private void fillInfo()
+        private void selectedTileChanged()
         {
-           int x = 0;  
-           List<SmallWorld.Unit> unitsOnTile = _gManager.getUnits().FindAll(u => u.getX() == _i && u.getY() == _j);
-           if (unitsOnTile.Count != 0)
+            _unitsOnTile = _gManager.getUnits().FindAll(u => u.getX() == _iSelected && u.getY() == _jSelected);
+            _currentUnitNumber = 0;
+            setEnableUnitsButtons();
+            fillUnitInfo();
+        }
+        private void fillUnitInfo()
+        {
+           // buttons are disabled, so no problem should arise ...
+           if (_unitsOnTile.Count != 0)
            {
-               SmallWorld.Unit unitToDetail = unitsOnTile[x];
+               currentUnitListPosition.Content = _currentUnitNumber + "/" + _unitsOnTile.Count;
+               SmallWorld.Unit unitToDetail = _unitsOnTile[_currentUnitNumber];
                name.Content = unitToDetail.getName();
                life.Content = unitToDetail.getLife();
                movesLeft.Content = unitToDetail.getMovesLeft();
-
-               // this should not be edited here
-               turn.Content = _gManager.getTurnCurrent() + "/" + _gManager.getTurnNumber(); ;
-               playerTurn.Content = _gManager.getPlayerTurn();
            }
+           else // resetting fields
+           {
+               currentUnitListPosition.Content = "";
+               name.Content = "";
+               life.Content = "";
+               movesLeft.Content = "";
+           }
+        }
+
+        //private void fillN
+        private void fillGeneralInfo()
+        {
+            pointsJ1.Content = _gManager.getPlayer(1).getPoints() + " points";
+            pointsJ2.Content = _gManager.getPlayer(2).getPoints() + " points";
+            turn.Content = _gManager.getTurnCurrent() + "/" + _gManager.getTurnNumber();
+            playerTurn.Content = _gManager.getPlayerTurn();
+        }
+
+        private void setEnableUnitsButtons()
+        {
+            if (_currentUnitNumber == 0)
+            {
+                buttonPrecUnit.IsEnabled = false;
+            }
+            else
+            {
+                buttonPrecUnit.IsEnabled = true;
+            }
+
+            if (_currentUnitNumber == _unitsOnTile.Count - 1 || _unitsOnTile.Count == 0)
+            {
+                buttonNextUnit.IsEnabled = false;
+            }
+            else
+            {
+                buttonNextUnit.IsEnabled = true;
+            }
+        }
+
+        private void nextUnit_clicked(object sender, RoutedEventArgs e)
+        {
+            _currentUnitNumber++;
+            fillUnitInfo();
+        }
+        private void precUnit_clicked(object sender, RoutedEventArgs e)
+        {
+            _currentUnitNumber--;
+            fillUnitInfo();
         }
     }
 }

@@ -8,8 +8,10 @@ namespace SmallWorld
 {
     public class SmallMap : MapAlgoritms, SmallWorld.ISmallMap
     {
+        // Values could be directly written in functions ...
         static int _sideLength = 10;
-        static int _nbUnit = 6;
+        static int _nbUnitAdvised = 6;
+        static int _nbTurnAdvised = 20;
 
         public override List<int> generateMap()
         {
@@ -19,8 +21,12 @@ namespace SmallWorld
         public override Tuple<int, int> mapSize() {
             return new Tuple<int, int>(_sideLength, _sideLength);
         }
-        public override int nbUnits() {
-            return _nbUnit;
+        public override int getNbUnitsAdvised() {
+            return _nbUnitAdvised;
+        }
+        public override int getNbTurnAdvised()
+        {
+            return _nbTurnAdvised;
         }
     }
 }

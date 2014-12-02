@@ -41,12 +41,13 @@ namespace SmallWorld
 
         public override List<Unit> createUnits(int numPlayer)
         {
-            //get position of player 1
+            //get position of player X
             int x = 0, y = 0;
             List<Unit> ul = new List<Unit>();
             UnitFactory uf = tribeFactory(_tribes[numPlayer-1]);
-            for (int i = 0; i < _mapGen.nbUnits(); i++)
+            for (int i = 0; i < _mapGen.getNbUnitsAdvised(); i++)
             {
+                System.Diagnostics.Trace.WriteLine("hello");
                 Unit u = uf.makeUnit();
                 u.setPosition(x, y);
                 ul.Add(u);

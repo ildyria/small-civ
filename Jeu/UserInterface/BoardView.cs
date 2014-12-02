@@ -58,10 +58,18 @@ namespace UserInterface
                         // Show tile at pos x,y
                         dc.DrawImage(im, new Rect(x, y, TILESIZE, TILESIZE));
                     }
+
                 }
-                //May be necessary
-                //base.OnRender(dc);
+                
+                foreach (SmallWorld.Unit u in GameManager.Instance().getUnits())
+                {
+                    System.Diagnostics.Trace.WriteLine("hello");
+                    dc.DrawRectangle(Brushes.LightGreen, new Pen(Brushes.White, 2), new Rect(u.getX(), u.getY(), 50, 50));
+                    // this.Children.Add(XXX)
+                }
             }
+            //May be necessary
+            //base.OnRender(dc);
         }
     }
 }

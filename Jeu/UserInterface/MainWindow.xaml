@@ -76,6 +76,10 @@
                             <RadioButton x:Name="tribeJ1_orc" GroupName="tribeJ1" Style="{StaticResource orc_icon}" IsEnabled="{Binding ElementName=tribeJ2_orc, Path=IsChecked, Converter={StaticResource invertBoolConverter}}"/>
                         </StackPanel>
                     </GroupBox>
+                    <DockPanel>
+                        <Label Content="Nb units :"/>
+                        <Slider x:Name="nbUnitsJ1" Style="{StaticResource unitNumberSliderStyle}"/>
+                    </DockPanel>
                 </StackPanel>
                 <StackPanel>
                     <TextBox x:Name="p2Name" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="Nom" VerticalAlignment="Top" Width="120"/>
@@ -86,6 +90,10 @@
                             <RadioButton x:Name="tribeJ2_orc" GroupName="tribeJ2" Style="{StaticResource orc_icon}" IsEnabled="{Binding ElementName=tribeJ1_orc, Path=IsChecked, Converter={StaticResource invertBoolConverter}}" IsChecked="True"/>
                         </StackPanel>
                     </GroupBox>
+                    <DockPanel>
+                        <Label Content="Nb units :"/>
+                        <Slider x:Name="nbUnitsJ2" Style="{StaticResource unitNumberSliderStyle}"/>
+                    </DockPanel>
                 </StackPanel>
             </StackPanel>
             <GroupBox Header="Taille de la carte :">
@@ -95,6 +103,10 @@
                     <RadioButton x:Name="mapSize_classic" GroupName="mapSize" Content="Classic" Style="{StaticResource radioNoDot}"/>
                 </StackPanel>
             </GroupBox>
+            <DockPanel>
+                <Label Content="Nombre de tours :" />
+                <Slider x:Name="nbTurnSlider"/>
+            </DockPanel>
             <Button x:Name="startNewGame_button" Content="Lancer la partie" Click="startNewGame_clicked">
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="Button.Click">

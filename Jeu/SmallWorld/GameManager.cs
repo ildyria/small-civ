@@ -100,9 +100,7 @@ namespace SmallWorld
 
         public List<Unit> getUnits()
         {
-            List<Unit> allUnits = new List<Unit>();
-            allUnits.Concat(_players[0].getUnits()).Concat(_players[1].getUnits());
-            return allUnits;
+            return _players[0].getUnits().Concat(_players[1].getUnits()).ToList();
         }
 
         public void computeFinalScore()

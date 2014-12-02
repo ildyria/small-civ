@@ -110,7 +110,8 @@ namespace UserInterface
             gmn.setTribes(listTribes);
             gmn.setMapSize(mapSize);
             _gManager = gmn.makeGame();
-
+            //System.Diagnostics.Trace.WriteLine(_gManager.getPlayer(1).getUnits().Count);
+            //System.Diagnostics.Trace.WriteLine(_gManager.getUnits().Count);
             // RENDER
             //gameView.Visibility = Visibility.Visible;
             //createGameMenu.Visibility = Visibility.Collapsed;
@@ -160,7 +161,7 @@ namespace UserInterface
            // buttons are disabled, so no problem should arise ...
            if (_unitsOnTile.Count != 0)
            {
-               currentUnitListPosition.Content = _currentUnitNumber + "/" + _unitsOnTile.Count;
+               currentUnitListPosition.Content = (_currentUnitNumber+1) + "/" + _unitsOnTile.Count;
                SmallWorld.Unit unitToDetail = _unitsOnTile[_currentUnitNumber];
                name.Content = unitToDetail.getName();
                life.Content = unitToDetail.getLife();
@@ -208,11 +209,13 @@ namespace UserInterface
         private void nextUnit_clicked(object sender, RoutedEventArgs e)
         {
             _currentUnitNumber++;
+            setEnableUnitsButtons();
             fillUnitInfo();
         }
         private void precUnit_clicked(object sender, RoutedEventArgs e)
         {
             _currentUnitNumber--;
+            setEnableUnitsButtons();
             fillUnitInfo();
         }
     }

@@ -10,7 +10,7 @@
     <Position X="10.557" Y="2.185" Height="0.75" Width="1.7" />
   </Comment>
   <Comment CommentText="MapMaker est la la fabrique  permettant de réaliser un poids mouche sur les cases de GameMap">
-    <Position X="8.429" Y="4.713" Height="0.75" Width="1.7" />
+    <Position X="8.252" Y="5.515" Height="0.75" Width="1.7" />
   </Comment>
   <Comment CommentText="Un patron strategy est aussi implémenté pour la gestion des formats de sauvegarde">
     <Position X="12.415" Y="10.733" Height="0.75" Width="1.7" />
@@ -128,33 +128,33 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SmallWorld.DemoMap">
-    <Position X="6.5" Y="0.75" Width="1.5" />
+    <Position X="6.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAARAAAAAAAAAAAAAQAAAAAAACACAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAQAAAAEAAAAAAAAIAAAAAAACACAAAAAAAAAAIAg=</HashCode>
       <FileName>DemoMap.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SmallWorld.ClassicMap">
-    <Position X="10" Y="0.75" Width="1.5" />
+    <Position X="10" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAARAAAAAAAAAAAAAQAAAAAAACACAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAQAAAAEAAAAAAAAIAAAAAAACACAAAAAAAAAAIAg=</HashCode>
       <FileName>ClassicMap.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SmallWorld.SmallMap">
-    <Position X="8.25" Y="0.75" Width="1.5" />
+    <Position X="8.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAARAAAAAAAAAAAAAQAAAAAAACACAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAQAAAAEAAAAAAAAIAAAAAAACACAAAAAAAAAAIAg=</HashCode>
       <FileName>SmallMap.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SmallWorld.MapAlgoritms">
-    <Position X="8.25" Y="3.25" Width="1.5" />
+    <Position X="8.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAACACAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAAAACACAAAAAAAAAAAAg=</HashCode>
       <FileName>MapAlgoritms.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />

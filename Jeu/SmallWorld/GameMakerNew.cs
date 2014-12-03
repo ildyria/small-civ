@@ -10,10 +10,11 @@ namespace SmallWorld
         private MapAlgoritms _mapGen;
         private UnitType[] _tribes;
         private string[] _names;
+        private int[] _nbUnits;
 
         public GameMakerNew()
         {
-            
+            _nbUnits = null;
         }
         public override GameMap makeMap()
         {
@@ -41,13 +42,17 @@ namespace SmallWorld
 
         public override List<Unit> createUnits(int numPlayer)
         {
+            int nbUnits = _mapGen.getNbUnitsAdvised();
+            if (_nbUnits != null)
+            {
+                nbUnits = _nbUnits[numPlayer - 1];
+            }
             //get position of player X
             int x = 0, y = 0;
             List<Unit> ul = new List<Unit>();
             UnitFactory uf = tribeFactory(_tribes[numPlayer-1]);
-            for (int i = 0; i < _mapGen.getNbUnitsAdvised(); i++)
+            for (int i = 0; i < nbUnits; i++)
             {
-                System.Diagnostics.Trace.WriteLine("hello");
                 Unit u = uf.makeUnit();
                 u.setPosition(x, y);
                 ul.Add(u);
@@ -110,6 +115,10 @@ namespace SmallWorld
                     _mapGen = new DemoMap();
                     break;
             } 
+        }
+        public void setNbUnit(int[] nbunits)
+        {
+            _nbUnits = nbunits;
         }
     }
 }

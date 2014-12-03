@@ -109,12 +109,14 @@ namespace UserInterface
             gmn.setNames(new string[2] {p1Name.Text, p2Name.Text });
             gmn.setTribes(listTribes);
             gmn.setMapSize(mapSize);
+            //gmn.setNbUnit(new int)
             _gManager = gmn.makeGame();
             //System.Diagnostics.Trace.WriteLine(_gManager.getPlayer(1).getUnits().Count);
             //System.Diagnostics.Trace.WriteLine(_gManager.getUnits().Count);
             // RENDER
             //gameView.Visibility = Visibility.Visible;
             //createGameMenu.Visibility = Visibility.Collapsed;
+            setUnitsOnMap();
             
         }
         private void mouseDown(object sender, MouseButtonEventArgs e)
@@ -123,7 +125,7 @@ namespace UserInterface
             {
                 double ch = 2 * BoardView.TILESIZE / (Math.Sqrt(7) + 1);
                 double a = (BoardView.TILESIZE - ch) / 2;
-                System.Windows.Point p = e.GetPosition(mapCanvas);
+                System.Windows.Point p = e.GetPosition(mapPanel);
                 double x = p.X;
                 double y = p.Y;
                 int i, j;
@@ -217,6 +219,22 @@ namespace UserInterface
             _currentUnitNumber--;
             setEnableUnitsButtons();
             fillUnitInfo();
+        }
+        private void setUnitsOnMap()
+        {
+            foreach (SmallWorld.Unit u in _gManager.getUnits())
+            {
+                System.Diagnostics.Trace.WriteLine("hello");
+                System.Windows.Shapes.Rectangle rect = new System.Windows.Shapes.Rectangle();
+                rect.Width = 60;
+                rect.Height = 60;
+                rect.Stroke = new SolidColorBrush(Colors.Black);
+                rect.Fill = new SolidColorBrush(Colors.Black);
+                Canvas.SetLeft(rect, u.getX());
+                Canvas.SetTop(rect, u.getY());
+                mapControl.Children.Add(rect);
+            }
+
         }
     }
 }

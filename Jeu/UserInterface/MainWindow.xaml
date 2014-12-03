@@ -5,7 +5,7 @@
         Title="SmallWorld" Height="531.682" Width="765.315" PreviewMouseDown="mouseDown">
     <Window.Resources>
     </Window.Resources>
-    <StackPanel x:Name="screen" Background="{StaticResource background}" >
+    <Grid x:Name="screen" Background="{StaticResource background}" >
         <!--Main menu, graphical improvement need to be done-->
         <StackPanel x:Name="mainMenu" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Visible">
             <StackPanel.Resources>
@@ -185,27 +185,8 @@
             </Button>
         </StackPanel>
 
-        <Grid x:Name="gameView" Visibility="Collapsed">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="100"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Joueur 1 :"/>
-                <Label x:Name="pointsJ1" />
-                <Label Content="Joueur 2 :"/>
-                <Label x:Name="pointsJ2" />
-            </StackPanel>
-            <ScrollViewer x:Name="mapView" Height="502" Width="556" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Column="0" Grid.Row="1">
-                <local:BoardView x:Name="mapCanvas">
-                    <ContentControl x:Name="playerCursor" Content="{StaticResource cursorHex}"/>
-                </local:BoardView>
-            </ScrollViewer>
-            <StackPanel Grid.Column="1" Grid.Row="1">
+        <DockPanel x:Name="gameView" Visibility="Collapsed" >
+            <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center">
                 <!-- TODO -->
                 <Grid x:Name="unitDetails">
                     <Grid.ColumnDefinitions>
@@ -231,18 +212,35 @@
                     <Label x:Name="turn"  Grid.Column="1" Grid.Row="3"/>
                     <Label x:Name="playerTurn" Grid.Column="1" Grid.Row="4" />
                 </Grid>
-                <StackPanel Orientation="Horizontal">
-                    <Button x:Name="buttonPrecUnit" Content="Prec." Click="precUnit_clicked" IsEnabled="False"/>
-                    <Label x:Name="currentUnitListPosition"/>
-                    <Button  x:Name="buttonNextUnit" Content="Suiv." Click="nextUnit_clicked" IsEnabled="False"/>
-                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="buttonPrecUnit" Content="Prec." Click="precUnit_clicked" IsEnabled="False" Grid.Column="0"/>
+                    <Label x:Name="currentUnitListPosition" Grid.Column="1"/>
+                    <Button  x:Name="buttonNextUnit" Content="Suiv." Click="nextUnit_clicked" IsEnabled="False" Grid.Column="2"/>
+                </Grid>
                 <Button Content="Sauvegarder/Changer"/>
                 <Button Content="Find de tour"/>
                 <Button Content="Abandonner"/>
             </StackPanel>
-        </Grid>
-
-
-
-    </StackPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <Label Content="Joueur 1 :"/>
+                <Label x:Name="pointsJ1" />
+                <Label Content="Joueur 2 :"/>
+                <Label x:Name="pointsJ2" />
+            </StackPanel>
+            <ScrollViewer x:Name="mapView" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <Grid>
+                    <local:BoardView x:Name="mapPanel"/>
+                    <Canvas x:Name="mapControl">
+                        <ContentControl x:Name="playerCursor" Content="{StaticResource cursorHex}"/>
+                    </Canvas>
+                </Grid>
+            </ScrollViewer>
+            
+        </DockPanel>
+    </Grid>
 </Window>

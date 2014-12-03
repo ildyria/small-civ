@@ -39,7 +39,6 @@
             <Setter Property="TickPlacement" Value="BottomRight" />
             <Setter Property="TickFrequency" Value="5" />
             
-            
         </Style>
         
         <Style TargetType="{x:Type RadioButton}" x:Key="radioNoDot">

@@ -16,7 +16,7 @@ using SmallWorld;
 
 namespace UserInterface
 {
-    class BoardView : Canvas
+    class BoardView : Panel
     {
         public static int TILESIZE = 60;
 
@@ -59,13 +59,6 @@ namespace UserInterface
                         dc.DrawImage(im, new Rect(x, y, TILESIZE, TILESIZE));
                     }
 
-                }
-                
-                foreach (SmallWorld.Unit u in GameManager.Instance().getUnits())
-                {
-                    System.Diagnostics.Trace.WriteLine("hello");
-                    dc.DrawRectangle(Brushes.LightGreen, new Pen(Brushes.White, 2), new Rect(u.getX(), u.getY(), 50, 50));
-                    // this.Children.Add(XXX)
                 }
             }
             //May be necessary

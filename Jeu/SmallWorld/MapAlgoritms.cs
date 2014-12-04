@@ -9,6 +9,7 @@ namespace SmallWorld
     {
         public abstract List<int> generateMap();
         public abstract Tuple<int, int> mapSize();
+        public abstract List<Tuple<int, int>> getStartingPositions();
         public abstract int getNbUnitsAdvised();
         public abstract int getNbTurnAdvised();
     }

@@ -34,13 +34,16 @@ namespace Wrapper {
 				return lCases;
 			}
 			// I expect to go to hell for this <3
-			Tuple<Tuple<int, int>^, Tuple<int, int>^>^ placePlayer(List<int>^ unwanted) {
+			List<Tuple<int, int>^>^ placePlayer(List<int>^ unwanted) {
 				std::list<int> unwantedStdList;
 				for each(int i in unwanted) { unwantedStdList.push_back(i); }
 				std::pair<std::pair<int, int>, std::pair<int, int>> result = GenMap_placePlayer(_genMap, unwantedStdList);
 				Tuple<int, int>^ p1 = gcnew Tuple<int, int>(result.first.first, result.first.second);
 				Tuple<int, int>^ p2 = gcnew Tuple<int, int>(result.second.first, result.second.second);
-				return gcnew Tuple<Tuple<int, int>^, Tuple<int, int>^>(p1, p2);
+				List<Tuple<int, int>^>^ listPos = gcnew List<Tuple<int, int>^>();
+				listPos->Add(p1);
+				listPos->Add(p2);
+				return listPos;
 			}
 
 			List<int>^ bestMoves(int nbMovesWanted, Tuple<int, int, int> u, List<int> movesPossibles, Dictionary<int, Tuple<int, int>^>^ terrainData, List<Tuple<int, int, int>^>^ opponents) {

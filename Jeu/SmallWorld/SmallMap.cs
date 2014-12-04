@@ -13,10 +13,18 @@ namespace SmallWorld
         static int _nbUnitAdvised = 6;
         static int _nbTurnAdvised = 20;
 
+        private List<Tuple<int, int>> _startingPos;
+
         public override List<int> generateMap()
         {
             WrapperGenMap g = new WrapperGenMap(_sideLength, _sideLength);
-            return g.generateMap(GameMap.nbTerrainType);
+            List<int> gmap = g.generateMap(GameMap.nbTerrainType);
+            _startingPos = g.placePlayer(new List<int>());
+            return gmap;
+        }
+        public override List<Tuple<int, int>> getStartingPositions()
+        {
+            return _startingPos;
         }
         public override Tuple<int, int> mapSize() {
             return new Tuple<int, int>(_sideLength, _sideLength);

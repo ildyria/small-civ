@@ -11,6 +11,7 @@ namespace SmallWorld
         private UnitType[] _tribes;
         private string[] _names;
         private int[] _nbUnits;
+        private List<Tuple<int, int>> _startPositions;
 
         public GameMakerNew()
         {
@@ -20,6 +21,7 @@ namespace SmallWorld
         {
             Tuple<int, int> xy = _mapGen.mapSize();
             List<int> tileList = _mapGen.generateMap();
+            _startPositions = _mapGen.getStartingPositions();
             return new GameMap(xy.Item1, xy.Item2, tileList);
         }
 
@@ -47,14 +49,12 @@ namespace SmallWorld
             {
                 nbUnits = _nbUnits[numPlayer - 1];
             }
-            //get position of player X
-            int x = 0, y = 0;
             List<Unit> ul = new List<Unit>();
             UnitFactory uf = getTribeFactory(_tribes[numPlayer-1]);
             for (int i = 0; i < nbUnits; i++)
             {
                 Unit u = uf.makeUnit();
-                u.setPosition(x, y);
+                u.setPosition(_startPositions[numPlayer - 1].Item1, _startPositions[numPlayer - 1].Item2);
                 ul.Add(u);
             }
             return ul;

@@ -197,15 +197,15 @@ namespace UserInterface
         {
             foreach (SmallWorld.Unit u in _gManager.getUnits())
             {
-                System.Diagnostics.Trace.WriteLine("hello");
                 System.Windows.Shapes.Rectangle rect = new System.Windows.Shapes.Rectangle();
                 rect.Width = 60;
                 rect.Height = 60;
                 rect.Stroke = new SolidColorBrush(Colors.Black);
                 rect.Fill = new SolidColorBrush(Colors.Black);
                 //to convert to true coord
-                Canvas.SetLeft(rect, u.getX());
-                Canvas.SetTop(rect, u.getY());
+                Tuple<double, double> pos = indexToCoord(u.getX(), u.getY());
+                Canvas.SetLeft(rect, pos.Item1);
+                Canvas.SetTop(rect, pos.Item2);
                 mapControl.Children.Add(rect);
                 _visualUnitsElements.Add(u, rect);
 
@@ -266,8 +266,9 @@ namespace UserInterface
                 }
                 if (currentUnit.getLife() == 0)
                 {
-                    mapControl.Children.Remove(_visualUnitsElements[currentUnit]);
-                    _visualUnitsElements.Remove(currentUnit);
+                    //already done earlier in the ugly method above
+                    //mapControl.Children.Remove(_visualUnitsElements[currentUnit]);
+                    //_visualUnitsElements.Remove(currentUnit);
                 }
                 else 
                 {
@@ -316,6 +317,16 @@ namespace UserInterface
                 }
 
             }
+        }
+
+        private void endTurn_clicked(object sender, RoutedEventArgs e)
+        {
+            //Show graphic elements 
+            _gManager.nextTurn();
+        }
+        private void giveUp_clicked(object sender, RoutedEventArgs e)
+        {
+            //destroy everything ?
         }
     }
 }

@@ -161,6 +161,9 @@
                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="mainMenu"  Storyboard.TargetProperty="Visibility">
                                     <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
                                 </ObjectAnimationUsingKeyFrames>
+                                <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="gameView"  Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                                </ObjectAnimationUsingKeyFrames>-->
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger>
@@ -228,9 +231,39 @@
                     <Label x:Name="currentUnitListPosition" Grid.Column="1"/>
                     <Button  x:Name="buttonNextUnit" Content="Suiv." Click="nextUnit_clicked" IsEnabled="False" Grid.Column="2"/>
                 </Grid>
-                <Button Content="Sauvegarder/Changer"/>
-                <Button Content="Find de tour"/>
-                <Button Content="Abandonner"/>
+                <Button Content="Sauvegarder/Changer">
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gameView"  Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="loadMenu"  Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
+                <Button Content="Find de tour" Click="endTurn_clicked"/>
+                <Button Content="Abandonner" Click="giveUp_clicked">
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gameView"  Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="mainMenu"  Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
                 <Label Content="Joueur 1 :"/>
@@ -248,5 +281,17 @@
             </ScrollViewer>
             
         </DockPanel>
+        
+        <StackPanel x:Name="endGameMenu" Visibility="Collapsed">
+            <StackPanel x:Name="recapJ1" >
+                <Label Content="Joueur "/>
+                <Label x:Name="nameJ1"/>
+                <Label Content="Point :"/>
+                <Label x:Name="pointJ1"/>
+                <Label Content="Nombre d'unité :"/>
+                <Label x:Name="unitNbJ1"/>
+            </StackPanel>
+            
+        </StackPanel>
     </Grid>
 </Window>

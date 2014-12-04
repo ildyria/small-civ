@@ -132,13 +132,23 @@ namespace SmallWorld
                 if (op != null) // does this work ?
                 {
                     adv.deleteUnit(op);
-                    System.Diagnostics.Trace.WriteLine("");
                 }
             }
         }
         public Player opponent()
         {
             return getPlayer((_playerTurn + 1) % 2);
+        }
+
+        public void nextTurn()
+        {
+            _playerTurn = (_playerTurn + 1) % 2;
+            if (_playerTurn  == 0)
+            {
+                _turnCurrent++;
+            }
+            // no need to reset movement to zero
+            _players[_playerTurn].play();
         }
     }
 }

@@ -12,9 +12,9 @@ namespace SmallWorld
     {
         public GameManager makeGame() {
             init();
+            GameMap map = makeMap();
             Player p1 = makePlayer(1);
             Player p2 = makePlayer(2);
-            GameMap map = makeMap();
             GameManager gm = makeGameManager(p1, p2, map);
             return gm;
         }

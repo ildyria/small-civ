@@ -120,6 +120,8 @@ namespace UserInterface
             //gameView.Visibility = Visibility.Visible;
             //createGameMenu.Visibility = Visibility.Collapsed;
             setUnitsOnMap();
+            //Should start game instead
+            _gManager.getPlayer(1).play();
             
         }
         private void selectedTileChanged()
@@ -252,9 +254,29 @@ namespace UserInterface
             {
                 SmallWorld.Unit currentUnit = _unitsOnTile[_currentUnitNumber];
                 _gManager.moveUnit(currentUnit, i, j);
-                Tuple<double, double> coord = indexToCoord(currentUnit.getX(), currentUnit.getY());
-                Canvas.SetLeft(_visualUnitsElements[currentUnit], coord.Item1);
-                Canvas.SetTop(_visualUnitsElements[currentUnit], coord.Item2);
+
+                if (_gManager.getUnits().Count != _visualUnitsElements.Count) // not optimized at all
+                {
+                    List<SmallWorld.Unit> toDel = _visualUnitsElements.Keys.ToList().FindAll(u => !_gManager.getUnits().Contains(u));
+                    foreach (SmallWorld.Unit u in toDel)
+                    {
+                        mapControl.Children.Remove(_visualUnitsElements[currentUnit]);
+                        _visualUnitsElements.Remove(currentUnit);
+                    }
+                }
+                if (currentUnit.getLife() == 0)
+                {
+                    mapControl.Children.Remove(_visualUnitsElements[currentUnit]);
+                    _visualUnitsElements.Remove(currentUnit);
+                }
+                else 
+                {
+                    Tuple<double, double> coord = indexToCoord(currentUnit.getX(), currentUnit.getY());
+                    Canvas.SetLeft(_visualUnitsElements[currentUnit], coord.Item1);
+                    Canvas.SetTop(_visualUnitsElements[currentUnit], coord.Item2);
+                }
+                
+
             }
             
         }

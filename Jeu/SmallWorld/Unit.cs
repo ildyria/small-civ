@@ -36,7 +36,7 @@ namespace SmallWorld
         {
             // Diagram says movepossible, but that way movecost is used only once
             int cost = moveCost(x, y, t);
-            if (cost != IMPOSSIBLE_MOVE) {
+            if (cost != IMPOSSIBLE_MOVE && cost <= _movesLeft) {
                 _movesLeft -= cost;
 
                 //Search strongest unit

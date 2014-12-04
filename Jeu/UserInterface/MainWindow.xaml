@@ -2,11 +2,14 @@
         xmlns:local="clr-namespace:UserInterface"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="SmallWorld" Height="531.682" Width="765.315" PreviewMouseDown="mouseDown">
+        Title="SmallWorld" Height="531.682" Width="765.315" 
+        PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown"
+        PreviewMouseRightButtonDown="Window_PreviewMouseRightButtonDown">
     <Window.Resources>
     </Window.Resources>
     <Grid x:Name="screen" Background="{StaticResource background}" >
         <!--Main menu, graphical improvement need to be done-->
+<!--        <StackPanel x:Name="mainMenu" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">  -->
         <StackPanel x:Name="mainMenu" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Visible">
             <StackPanel.Resources>
                 <Style BasedOn="{StaticResource mainMenuButtonStyle}" TargetType="{x:Type Button}" />
@@ -65,8 +68,9 @@
 
 
 
-        <StackPanel x:Name="createGameMenu" Visibility="Collapsed">
-            <StackPanel Orientation="Horizontal">
+<!--        <StackPanel x:Name="createGameMenu" Visibility="Visible" Style="{StaticResource createGameMenuStyle}"> -->
+        <StackPanel x:Name="createGameMenu" Visibility="Collapsed" Style="{StaticResource createGameMenuStyle}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <StackPanel>
                     <TextBox x:Name="p1Name" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="Nom" VerticalAlignment="Top" Width="120"/>
                     <GroupBox Header="Peuple du joueur 1 :">
@@ -95,18 +99,20 @@
                         <Slider x:Name="nbUnitsJ2" Style="{StaticResource unitNumberSliderStyle}"/>
                     </DockPanel>
                 </StackPanel>
-            </StackPanel>
-            <GroupBox Header="Taille de la carte :">
-                <StackPanel Orientation="Horizontal">
-                    <RadioButton x:Name="mapSize_demo" GroupName="mapSize" Content="Demo" Style="{StaticResource radioNoDot}" IsChecked="True"/>
-                    <RadioButton x:Name="mapSize_small" GroupName="mapSize" Content="Small" Style="{StaticResource radioNoDot}"/>
-                    <RadioButton x:Name="mapSize_classic" GroupName="mapSize" Content="Classic" Style="{StaticResource radioNoDot}"/>
+                <StackPanel Style="{StaticResource createGameMenuSizeMapStyle}">
+                    <GroupBox Header="Taille de la carte :">
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="mapSize_demo" GroupName="mapSize" Content="Demo" Style="{StaticResource radioNoDot}" IsChecked="True"/>
+                            <RadioButton x:Name="mapSize_small" GroupName="mapSize" Content="Small" Style="{StaticResource radioNoDot}"/>
+                            <RadioButton x:Name="mapSize_classic" GroupName="mapSize" Content="Classic" Style="{StaticResource radioNoDot}"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <DockPanel>
+                        <Label Content="Nombre de tours :" />
+                        <Slider x:Name="nbTurnSlider"/>
+                    </DockPanel>
                 </StackPanel>
-            </GroupBox>
-            <DockPanel>
-                <Label Content="Nombre de tours :" />
-                <Slider x:Name="nbTurnSlider"/>
-            </DockPanel>
+            </StackPanel>
             <Button x:Name="startNewGame_button" Content="Lancer la partie" Click="startNewGame_clicked">
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="Button.Click">
@@ -236,7 +242,7 @@
                 <Grid>
                     <local:BoardView x:Name="mapPanel"/>
                     <Canvas x:Name="mapControl">
-                        <ContentControl x:Name="playerCursor" Content="{StaticResource cursorHex}"/>
+                        <ContentControl x:Name="playerCursor" Content="{StaticResource cursorHex}" Panel.ZIndex="5"/>
                     </Canvas>
                 </Grid>
             </ScrollViewer>

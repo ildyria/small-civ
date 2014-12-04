@@ -3,8 +3,8 @@ namespace SmallWorld
 {
     interface ITile
     {
-        System.Drawing.Bitmap getImage();
+        System.Windows.Media.Imaging.BitmapSource getImage();
         TerrainType getType();
-        void setImage(System.Drawing.Bitmap image);
+        void setImage(System.Windows.Media.Imaging.BitmapSource image);
     }
 }

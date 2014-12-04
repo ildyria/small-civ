@@ -28,12 +28,15 @@ namespace UserInterface
         private int _jSelected;
         private List<SmallWorld.Unit> _unitsOnTile;
         private int _currentUnitNumber;
+        private Dictionary<SmallWorld.Unit, UIElement>  _visualUnitsElements;
+
         
         public MainWindow()
         {
             InitializeComponent();
             //_playerCursor = (Polygon)this.Resources["cursorHex"];
             _unitsOnTile = new List<SmallWorld.Unit>();
+            _visualUnitsElements = new Dictionary<SmallWorld.Unit,UIElement>();
         }
 
         private void quit_clicked(object sender, RoutedEventArgs e)
@@ -119,38 +122,6 @@ namespace UserInterface
             setUnitsOnMap();
             
         }
-        private void mouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (mapView.IsMouseOver)
-            {
-                double ch = 2 * BoardView.TILESIZE / (Math.Sqrt(7) + 1);
-                double a = (BoardView.TILESIZE - ch) / 2;
-                System.Windows.Point p = e.GetPosition(mapPanel);
-                double x = p.X;
-                double y = p.Y;
-                int i, j;
-
-                j = (int) (y / (BoardView.TILESIZE - a));
-                double xOffset = (j % 2 == 1) ? BoardView.TILESIZE / 2 : 0;
-                i = (int) ((x - xOffset) / BoardView.TILESIZE);
-
-                //System.Diagnostics.Trace.WriteLine(x + " " + y);
-                // no move if not on grid
-                if (i < _gManager.getMap().getSize().Item1 && j < _gManager.getMap().getSize().Item2)
-                {
-                    _iSelected = i;
-                    _jSelected = j;
-                    double xR = xOffset + _iSelected * BoardView.TILESIZE;
-                    double yR = _jSelected * (BoardView.TILESIZE - a);
-                    // if it is not on the map, maybe make the cursor invisible ?
-                    //playerCursor.Visibility = Visibility.Visible;
-                    Canvas.SetLeft(playerCursor, xR);
-                    Canvas.SetTop(playerCursor, yR);
-                    selectedTileChanged();
-                }
-                
-            }
-        }
         private void selectedTileChanged()
         {
             _unitsOnTile = _gManager.getUnits().FindAll(u => u.getX() == _iSelected && u.getY() == _jSelected);
@@ -230,11 +201,99 @@ namespace UserInterface
                 rect.Height = 60;
                 rect.Stroke = new SolidColorBrush(Colors.Black);
                 rect.Fill = new SolidColorBrush(Colors.Black);
+                //to convert to true coord
                 Canvas.SetLeft(rect, u.getX());
                 Canvas.SetTop(rect, u.getY());
                 mapControl.Children.Add(rect);
-            }
+                _visualUnitsElements.Add(u, rect);
 
+            }
+        }
+
+        private SmallWorld.Unit getCurrentUnit()
+        {
+            if (_unitsOnTile.Count != 0)
+            {
+                return _unitsOnTile[_currentUnitNumber];
+            }
+            return null;
+        }
+
+        private Tuple<double, double> indexToCoord(int i, int j)
+        {
+            double ch = 2 * BoardView.TILESIZE / (Math.Sqrt(7) + 1);
+            double a = (BoardView.TILESIZE - ch) / 2;
+            double xOffset = getXOffset(j);
+
+            double xR = xOffset + i* BoardView.TILESIZE;
+            double yR = j * (BoardView.TILESIZE - a);
+            return new Tuple<double, double>(xR, yR);
+        }
+
+        private Tuple<int, int> coordToIndex(double x, double y)
+        {
+            double ch = 2 * BoardView.TILESIZE / (Math.Sqrt(7) + 1);
+            double a = (BoardView.TILESIZE - ch) / 2;
+
+            int j = (int)(y / (BoardView.TILESIZE - a));
+            double xOffset = getXOffset(j);
+            int i = (int)((x - xOffset) / BoardView.TILESIZE);
+            return new Tuple<int, int>(i, j);
+        }
+
+        private int getXOffset(int j)
+        {
+            return (j % 2 == 1) ? BoardView.TILESIZE / 2 : 0;
+        }
+
+        private void moveUnit(int i, int j)
+        {
+            if (_unitsOnTile.Count != 0)
+            {
+                SmallWorld.Unit currentUnit = _unitsOnTile[_currentUnitNumber];
+                _gManager.moveUnit(currentUnit, i, j);
+                Tuple<double, double> coord = indexToCoord(currentUnit.getX(), currentUnit.getY());
+                Canvas.SetLeft(_visualUnitsElements[currentUnit], coord.Item1);
+                Canvas.SetTop(_visualUnitsElements[currentUnit], coord.Item2);
+            }
+            
+        }
+
+        private void Window_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (mapView.IsMouseOver)
+            {
+                if (_unitsOnTile.Count != 0) // checked twice, for compat
+                {
+                    System.Windows.Point p = e.GetPosition(mapView);
+                    Tuple<int, int> coord = coordToIndex(p.X, p.Y);
+                    moveUnit(coord.Item1, coord.Item2);
+                }
+            }
+        }
+
+        private void Window_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (mapView.IsMouseOver)
+            {
+                System.Windows.Point p = e.GetPosition(mapPanel);
+                Tuple<int, int> posRel = coordToIndex(p.X, p.Y);
+
+                //System.Diagnostics.Trace.WriteLine(x + " " + y);
+                // no move if not on grid
+                if (posRel.Item1 < _gManager.getMap().getSize().Item1 && posRel.Item2 < _gManager.getMap().getSize().Item2)
+                {
+                    _iSelected = posRel.Item1;
+                    _jSelected = posRel.Item2;
+                    Tuple<double, double> coord = indexToCoord(_iSelected, _jSelected);
+                    // if it is not on the map, maybe make the cursor invisible ?
+                    //playerCursor.Visibility = Visibility.Visible;
+                    Canvas.SetLeft(playerCursor, coord.Item1);
+                    Canvas.SetTop(playerCursor, coord.Item2);
+                    selectedTileChanged();
+                }
+
+            }
         }
     }
 }

@@ -50,7 +50,7 @@ namespace SmallWorld
             //get position of player X
             int x = 0, y = 0;
             List<Unit> ul = new List<Unit>();
-            UnitFactory uf = tribeFactory(_tribes[numPlayer-1]);
+            UnitFactory uf = getTribeFactory(_tribes[numPlayer-1]);
             for (int i = 0; i < nbUnits; i++)
             {
                 Unit u = uf.makeUnit();
@@ -74,7 +74,7 @@ namespace SmallWorld
                     //Or null. Dunno. I like unknown.
             }
         }
-        public UnitFactory tribeFactory(UnitType t)
+        public UnitFactory getTribeFactory(UnitType t)
         {
             switch (t)
             {

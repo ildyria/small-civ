@@ -107,25 +107,33 @@ namespace SmallWorld
         {
             throw new System.NotImplementedException();
         }
-
+        public Player getCurrentPlayer()
+        {
+            return _players[_playerTurn];
+        }
         public void moveUnit(Unit u, int x, int y)
         {
-            Tile start = _map.getTile(u.getX(), u.getY());
-            Tile end = _map.getTile(x, y);
-            List<Unit> opponents = _players[(_playerTurn + 1) % 2].unitsAt(x, y);
-            Player adv = _players[(_playerTurn + 1) % 2];
-       
-            u.move(x, y, end, opponents);
-
-            if (u.getLife() == 0)
+            // You can only move units during your turn
+            if (getCurrentPlayer().getUnits().Contains(u))
             {
+                Tile start = _map.getTile(u.getX(), u.getY());
+                Tile end = _map.getTile(x, y);
+                List<Unit> opponents = _players[(_playerTurn + 1) % 2].unitsAt(x, y);
+                Player adv = _players[(_playerTurn + 1) % 2];
 
-            }
-            //another if, and not else if for compat with future updates.
-            Unit op = opponents.Find(z => z.getLife() == 0);
-            if (op != null) // does this work ?
-            {
-                adv.deleteUnit(op);
+                u.move(x, y, end, opponents);
+
+                if (u.getLife() == 0)
+                {
+                    getCurrentPlayer().deleteUnit(u);
+                }
+                //another if, and not else if for compat with future updates.
+                Unit op = opponents.Find(z => z.getLife() == 0);
+                if (op != null) // does this work ?
+                {
+                    adv.deleteUnit(op);
+                    System.Diagnostics.Trace.WriteLine("");
+                }
             }
         }
         public Player opponent()

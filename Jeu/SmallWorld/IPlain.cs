@@ -1,7 +1,7 @@
 ﻿using System;
 namespace SmallWorld
 {
-    interface IPlain : ITile
+    interface IPlain
     {
     }
 }

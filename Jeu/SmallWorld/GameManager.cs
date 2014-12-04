@@ -142,6 +142,7 @@ namespace SmallWorld
 
         public void nextTurn()
         {
+            _players[_playerTurn].scorePoints();
             _playerTurn = (_playerTurn + 1) % 2;
             if (_playerTurn  == 0)
             {

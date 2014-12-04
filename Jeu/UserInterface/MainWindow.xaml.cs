@@ -122,6 +122,7 @@ namespace UserInterface
             setUnitsOnMap();
             //Should start game instead
             _gManager.getPlayer(1).play();
+            fillGeneralInfo();
             
         }
         private void selectedTileChanged()
@@ -157,7 +158,7 @@ namespace UserInterface
             pointsJ1.Content = _gManager.getPlayer(1).getPoints() + " points";
             pointsJ2.Content = _gManager.getPlayer(2).getPoints() + " points";
             turn.Content = _gManager.getTurnCurrent() + "/" + _gManager.getTurnNumber();
-            playerTurn.Content = _gManager.getPlayerTurn();
+            playerTurn.Content = "Joueur " + _gManager.getPlayerTurn() + 1;
         }
 
         private void setEnableUnitsButtons()
@@ -323,10 +324,12 @@ namespace UserInterface
         {
             //Show graphic elements 
             _gManager.nextTurn();
+            fillGeneralInfo();
         }
         private void giveUp_clicked(object sender, RoutedEventArgs e)
         {
             //destroy everything ?
         }
+
     }
 }

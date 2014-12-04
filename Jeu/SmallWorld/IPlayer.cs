@@ -10,7 +10,7 @@ namespace SmallWorld
         System.Collections.Generic.List<Unit> getUnits();
         void moveUnit(Unit u, int x, int y);
         void play();
-        void scorePoints(Tile t);
+        void scorePoints();
         void setUnits(System.Collections.Generic.List<Unit> unitList);
         System.Collections.Generic.List<Unit> unitsAt(int x, int y);
     }

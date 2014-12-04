@@ -19,10 +19,10 @@ namespace SmallWorld
             _tribe = tribe;
             _points = points;
         }
-        public void scorePoints(Tile t)
+        public void scorePoints()
         {
             foreach (Unit u in _unitList) {
-                _points += u.scorePoints(t);
+                _points += u.scorePoints(GameManager.Instance().getMap().getTile(u.getX(), u.getY()));
             }
             
         }

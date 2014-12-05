@@ -30,10 +30,11 @@ namespace UserInterface
         private List<SmallWorld.Unit> _unitsOnTile;
         private int _currentUnitNumber;
         private Dictionary<SmallWorld.Unit, UIElement>  _visualUnitsElements;
+        // one way ticket to hell 
         private static Dictionary<Type, string> typeStyle = new Dictionary<Type, string>(){
             {typeof(SmallWorld.Elf), "elf_unit"},
             {typeof(SmallWorld.Orc), "orc_unit"},
-            {typeof(SmallWorld.Dwarf), "elf_unit"} // SHOULD BE CHANGED !
+            {typeof(SmallWorld.Dwarf), "dwarf_unit"} 
         };
 
         
@@ -283,6 +284,15 @@ namespace UserInterface
                 }
             }  
         }
+        private void moveCursor(int i, int j)
+        {
+            _iSelected = i;
+            _jSelected = j;
+            Tuple<double, double> coord =  indexToCoord(i, j);
+            Canvas.SetLeft(playerCursor, coord.Item1);
+            Canvas.SetTop(playerCursor, coord.Item2);
+            selectedTileChanged();
+        }
 
         private void Window_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -294,6 +304,8 @@ namespace UserInterface
                     Tuple<int, int> coord = coordToIndex(p.X, p.Y);
                     moveUnit(coord.Item1, coord.Item2);
                     gameEnd();
+
+                    moveCursor(coord.Item1, coord.Item2);
                 }
             }
         }
@@ -309,14 +321,9 @@ namespace UserInterface
                 // no move if not on grid
                 if (posRel.Item1 < _gManager.getMap().getSize().Item1 && posRel.Item2 < _gManager.getMap().getSize().Item2)
                 {
-                    _iSelected = posRel.Item1;
-                    _jSelected = posRel.Item2;
-                    Tuple<double, double> coord = indexToCoord(_iSelected, _jSelected);
                     // if it is not on the map, maybe make the cursor invisible ?
                     //playerCursor.Visibility = Visibility.Visible;
-                    Canvas.SetLeft(playerCursor, coord.Item1);
-                    Canvas.SetTop(playerCursor, coord.Item2);
-                    selectedTileChanged();
+                    moveCursor(posRel.Item1, posRel.Item2);
                 }
 
             }

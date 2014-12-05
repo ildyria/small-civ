@@ -7,7 +7,7 @@
         <local:InvertBoolConverter x:Key="invertBoolConverter"/>
 
         <!--They sucks (google img), and they are not cc; we need to find cc licensed art-->
-        <ImageBrush  ImageSource="/UserInterface;component/ressources/smallworld_bg.jpg" x:Key="background"/>
+        <ImageBrush ImageSource="/UserInterface;component/ressources/smallworld_bg.jpg" x:Key="background"/>
         
         <!-- Windows calc ... Not sure if it will fit (yeah, size matter !) -->
         <Polygon x:Key="cursorHex" Points="3,0 6,1.355 6,4.645 3,6 0,4.645 0,1.355" Width="60" Height="60" Stretch="Fill" Stroke="BlueViolet" StrokeThickness="3" />
@@ -119,33 +119,36 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
-        <Style x:Key="orc_unit" TargetType="Label">
+        <Style x:Key="unit_style" TargetType="Label">
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="Width" Value="60"/>
+        </Style>
+        <Style x:Key="orc_unit" TargetType="Label" BasedOn="{StaticResource unit_style}">
             <Setter Property="ContentTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <Image Source="/UserInterface;component/ressources/orc_unit.png" Width="32" Height="32"/>
+                        <Image Source="/UserInterface;component/ressources/orc_unit.png" />
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="elf_unit" TargetType="Label">
+        <Style x:Key="elf_unit" TargetType="Label" BasedOn="{StaticResource unit_style}">
             <Setter Property="ContentTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <Image Source="/UserInterface;component/ressources/elf_unit.png" Width="32" Height="32"/>
+                        <Image Source="/UserInterface;component/ressources/elf_unit.png"/>
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        <!--<Style x:Key="dwarf_unit" TargetType="ContentControl">
+        <Style x:Key="dwarf_unit" TargetType="Label" BasedOn="{StaticResource unit_style}">
             <Setter Property="ContentTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <Image Source="/UserInterface;component/ressources/dwarf_unit.png" Width="32" Height="32"/>
+                        <Image Source="/UserInterface;component/ressources/dwarf_unit.png"/>
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>-->
+        </Style>
     </Application.Resources>
 </Application>

@@ -290,6 +290,22 @@
                 <Label x:Name="pointJ1"/>
                 <Label Content="Nombre d'unité :"/>
                 <Label x:Name="unitNbJ1"/>
+                <Button Content="Retour au menu principal">
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="endGameMenu"  Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="mainMenu"  Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
             </StackPanel>
             
         </StackPanel>

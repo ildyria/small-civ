@@ -158,7 +158,7 @@ namespace UserInterface
             pointsJ1.Content = _gManager.getPlayer(1).getPoints() + " points";
             pointsJ2.Content = _gManager.getPlayer(2).getPoints() + " points";
             turn.Content = _gManager.getTurnCurrent() + "/" + _gManager.getTurnNumber();
-            playerTurn.Content = "Joueur " + _gManager.getPlayerTurn() + 1;
+            playerTurn.Content = "Joueur " + (_gManager.getPlayerTurn() + 1);
         }
 
         private void setEnableUnitsButtons()
@@ -277,10 +277,7 @@ namespace UserInterface
                     Canvas.SetLeft(_visualUnitsElements[currentUnit], coord.Item1);
                     Canvas.SetTop(_visualUnitsElements[currentUnit], coord.Item2);
                 }
-                
-
-            }
-            
+            }  
         }
 
         private void Window_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -292,6 +289,7 @@ namespace UserInterface
                     System.Windows.Point p = e.GetPosition(mapView);
                     Tuple<int, int> coord = coordToIndex(p.X, p.Y);
                     moveUnit(coord.Item1, coord.Item2);
+                    gameEnd();
                 }
             }
         }
@@ -325,10 +323,29 @@ namespace UserInterface
             //Show graphic elements 
             _gManager.nextTurn();
             fillGeneralInfo();
+            gameEnd();
         }
         private void giveUp_clicked(object sender, RoutedEventArgs e)
         {
-            //destroy everything ?
+            resetAll();
+        }
+
+        private void resetAll()
+        {
+            _gManager = null; // not enough i presume
+            _unitsOnTile = new List<SmallWorld.Unit>();
+            // that way we don't remove the cursor
+            _visualUnitsElements.Values.ToList().ForEach(u => mapControl.Children.Remove(u));
+            _visualUnitsElements.Clear();
+        }
+        private void gameEnd()
+        {
+            if (_gManager.gameEnd())
+            {
+                gameView.Visibility = Visibility.Hidden;
+                endGameMenu.Visibility = Visibility.Visible;
+            }
+            resetAll();
         }
 
     }

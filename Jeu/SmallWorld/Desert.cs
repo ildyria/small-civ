@@ -10,5 +10,10 @@ namespace SmallWorld
     public class Desert : Tile, SmallWorld.IDesert
     {
         public Desert() : base(new BitmapImage(new Uri("textures/tile_desert.png", UriKind.Relative)), TerrainType.DESERT) { }
+
+        public override string toStringFR()
+        {
+            return "Désert";
+        }
     }
 }

@@ -11,5 +11,10 @@ namespace SmallWorld
     {
         public Plain() : base(new BitmapImage(new Uri("textures/tile_plain.png", UriKind.Relative)), TerrainType.PLAIN) { }
         //new Bitmap("tile_plain.png")
+
+        public override string toStringFR()
+        {
+            return "Plaine";
+        }
     }
 }

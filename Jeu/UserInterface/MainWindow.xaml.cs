@@ -166,6 +166,16 @@ namespace UserInterface
             playerTurn.Content = "Joueur " + (_gManager.getPlayerTurn() + 1);
         }
 
+        private void fillTileInfo()
+        {
+            SmallWorld.Tile t = _gManager.getMap().getTile(_iSelected, _jSelected);
+            tileType.Content = t.toStringFR();
+            SmallWorld.Unit u = _gManager.getCurrentPlayer().getUnits()[0];
+            //that way we get the bare cost
+            tileMoveCost.Content = u.moveCost(u.getX()+1, u.getY(), t);
+            tilePoints.Content = u.scorePoints(t);
+        }
+
         private void setEnableUnitsButtons()
         {
             if (_currentUnitNumber == 0)
@@ -292,6 +302,7 @@ namespace UserInterface
             Canvas.SetLeft(playerCursor, coord.Item1);
             Canvas.SetTop(playerCursor, coord.Item2);
             selectedTileChanged();
+            fillTileInfo();
         }
 
         private void Window_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -353,7 +364,12 @@ namespace UserInterface
         {
             if (_gManager.gameEnd())
             {
-                gameView.Visibility = Visibility.Hidden;
+                mapView.Visibility = Visibility.Collapsed;
+                statusBar.Visibility = Visibility.Collapsed;
+                gameControl.Visibility = Visibility.Collapsed;
+                mapControl.Visibility = Visibility.Collapsed;
+                unitDetails.Visibility = Visibility.Collapsed;
+                gameView.Visibility = Visibility.Collapsed;
                 endGameMenu.Visibility = Visibility.Visible;
                 resetAll();
             } 

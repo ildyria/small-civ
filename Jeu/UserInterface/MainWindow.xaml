@@ -197,6 +197,24 @@
         <DockPanel x:Name="gameView" Visibility="Collapsed" >
             <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center">
                 <!-- TODO -->
+                <Grid x:Name="tileDetails">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <Label Content="Type :" Grid.Column="0" Grid.Row="0"/>
+                    <Label Content="Cout de déplacement :" Grid.Column="0" Grid.Row="1"/>
+                    <Label Content="Points :" Grid.Column="0" Grid.Row="2"/>
+   
+                    <Label x:Name="tileType" Grid.Column="1" Grid.Row="0"/>
+                    <Label x:Name="tileMoveCost" Grid.Column="1" Grid.Row="1"/>
+                    <Label x:Name="tilePoints" Grid.Column="1" Grid.Row="2" />
+                </Grid>
                 <Grid x:Name="unitDetails">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
@@ -221,51 +239,49 @@
                     <Label x:Name="turn"  Grid.Column="1" Grid.Row="3"/>
                     <Label x:Name="playerTurn" Grid.Column="1" Grid.Row="4" />
                 </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="2*" />
-                        <ColumnDefinition Width="1*" />
-                    </Grid.ColumnDefinitions>
-                    <Button x:Name="buttonPrecUnit" Content="Prec." Click="precUnit_clicked" IsEnabled="False" Grid.Column="0"/>
-                    <Label x:Name="currentUnitListPosition" Grid.Column="1"/>
-                    <Button  x:Name="buttonNextUnit" Content="Suiv." Click="nextUnit_clicked" IsEnabled="False" Grid.Column="2"/>
-                </Grid>
-                <Button Content="Sauvegarder/Changer">
-                    <Button.Triggers>
-                        <EventTrigger RoutedEvent="Button.Click">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gameView"  Storyboard.TargetProperty="Visibility">
-                                        <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
-                                    </ObjectAnimationUsingKeyFrames>
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="loadMenu"  Storyboard.TargetProperty="Visibility">
-                                        <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
-                                    </ObjectAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </Button.Triggers>
-                </Button>
-                <Button Content="Find de tour" Click="endTurn_clicked"/>
-                <Button Content="Abandonner" Click="giveUp_clicked">
-                    <Button.Triggers>
-                        <EventTrigger RoutedEvent="Button.Click">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gameView"  Storyboard.TargetProperty="Visibility">
-                                        <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
-                                    </ObjectAnimationUsingKeyFrames>
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="mainMenu"  Storyboard.TargetProperty="Visibility">
-                                        <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
-                                    </ObjectAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </Button.Triggers>
-                </Button>
+                <StackPanel x:Name="gameControl">
+                    <DockPanel>
+                        <Button x:Name="buttonPrecUnit" Content="Prec." Click="precUnit_clicked" IsEnabled="False" DockPanel.Dock="Left"/>
+                        <Button  x:Name="buttonNextUnit" Content="Suiv." Click="nextUnit_clicked" IsEnabled="False" DockPanel.Dock="Right"/>
+                        <Label x:Name="currentUnitListPosition"/>
+                    </DockPanel>
+                
+                    <Button Content="Sauvegarder/Changer">
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="Button.Click">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gameView"  Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="loadMenu"  Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Button.Triggers>
+                    </Button>
+                    <Button Content="Find de tour" Click="endTurn_clicked"/>
+                    <Button Content="Abandonner" Click="giveUp_clicked">
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="Button.Click">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gameView"  Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="mainMenu"  Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Button.Triggers>
+                    </Button>
+                </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+            <StackPanel x:Name="statusBar" Orientation="Horizontal" DockPanel.Dock="Top">
                 <Label Content="Joueur 1 :"/>
                 <Label x:Name="pointsJ1" />
                 <Label Content="Joueur 2 :"/>

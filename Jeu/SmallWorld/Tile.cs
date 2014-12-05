@@ -31,5 +31,7 @@ namespace SmallWorld
         {
             _image = image;
         }
+
+        public abstract string toStringFR();
     }
 }

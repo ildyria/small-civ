@@ -10,5 +10,10 @@ namespace SmallWorld
     public class Forest : Tile, SmallWorld.IForest
     {
         public Forest() : base(new BitmapImage(new Uri("textures/tile_forest.png", UriKind.Relative)), TerrainType.FOREST) { }
+
+        public override string toStringFR()
+        {
+            return "Forêt";
+        }
     }
 }

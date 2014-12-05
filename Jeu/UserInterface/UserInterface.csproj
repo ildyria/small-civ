@@ -129,7 +129,14 @@
       <Name>WrapperMapLib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="ressources\elf_unit.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressources\orc_unit.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="ressources\dwarf_icon.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Drawing;
+using SmallWorld;
 
 namespace UserInterface
 {
@@ -29,6 +30,11 @@ namespace UserInterface
         private List<SmallWorld.Unit> _unitsOnTile;
         private int _currentUnitNumber;
         private Dictionary<SmallWorld.Unit, UIElement>  _visualUnitsElements;
+        private static Dictionary<Type, string> typeStyle = new Dictionary<Type, string>(){
+            {typeof(SmallWorld.Elf), "elf_unit"},
+            {typeof(SmallWorld.Orc), "orc_unit"},
+            {typeof(SmallWorld.Dwarf), "elf_unit"} // SHOULD BE CHANGED !
+        };
 
         
         public MainWindow()
@@ -114,8 +120,6 @@ namespace UserInterface
             gmn.setMapSize(mapSize);
             //gmn.setNbUnit(new int)
             _gManager = gmn.makeGame();
-            //System.Diagnostics.Trace.WriteLine(_gManager.getPlayer(1).getUnits().Count);
-            //System.Diagnostics.Trace.WriteLine(_gManager.getUnits().Count);
             // RENDER
             //gameView.Visibility = Visibility.Visible;
             //createGameMenu.Visibility = Visibility.Collapsed;
@@ -198,17 +202,17 @@ namespace UserInterface
         {
             foreach (SmallWorld.Unit u in _gManager.getUnits())
             {
-                System.Windows.Shapes.Rectangle rect = new System.Windows.Shapes.Rectangle();
-                rect.Width = 60;
-                rect.Height = 60;
-                rect.Stroke = new SolidColorBrush(Colors.Black);
-                rect.Fill = new SolidColorBrush(Colors.Black);
+                Label asset = new Label();
+                asset.Style = App.Current.FindResource(typeStyle[u.GetType()]) as Style;
+                
                 //to convert to true coord
                 Tuple<double, double> pos = indexToCoord(u.getX(), u.getY());
-                Canvas.SetLeft(rect, pos.Item1);
-                Canvas.SetTop(rect, pos.Item2);
-                mapControl.Children.Add(rect);
-                _visualUnitsElements.Add(u, rect);
+                Canvas.SetLeft(asset, pos.Item1);
+                Canvas.SetTop(asset, pos.Item2);
+                //mapControl.Children.Insert(2, rect);
+                //Canvas.SetZIndex(rect, 2);
+                mapControl.Children.Add(asset);
+                _visualUnitsElements.Add(u, asset);
 
             }
         }
@@ -344,8 +348,8 @@ namespace UserInterface
             {
                 gameView.Visibility = Visibility.Hidden;
                 endGameMenu.Visibility = Visibility.Visible;
-            }
-            resetAll();
+                resetAll();
+            } 
         }
 
     }

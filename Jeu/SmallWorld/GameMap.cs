@@ -39,5 +39,10 @@ namespace SmallWorld
         {
             return _tilesList;
         }
+
+        /*public List<int> getAdvisedTiles()
+        {
+            //_mapMaker.
+        }*/
     }
 }

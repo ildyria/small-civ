@@ -12,5 +12,6 @@ namespace SmallWorld
         public abstract List<Tuple<int, int>> getStartingPositions();
         public abstract int getNbUnitsAdvised();
         public abstract int getNbTurnAdvised();
+        public abstract Wrapper.WrapperGenMap getGenerator();
     }
 }

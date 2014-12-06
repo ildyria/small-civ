@@ -11,6 +11,17 @@
         
         <!-- Windows calc ... Not sure if it will fit (yeah, size matter !) -->
         <Polygon x:Key="cursorHex" Points="3,0 6,1.355 6,4.645 3,6 0,4.645 0,1.355" Width="60" Height="60" Stretch="Fill" Stroke="BlueViolet" StrokeThickness="3" />
+        
+        
+        <Style x:Key="advisedTile" TargetType="Label">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Polygon Points="3,0 6,1.355 6,4.645 3,6 0,4.645 0,1.355" Width="60" Height="60" Stretch="Fill" Fill="Gold" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>        
 
 
         <Style x:Key="createGameMenuStyle" TargetType="StackPanel">

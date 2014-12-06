@@ -14,7 +14,7 @@ namespace TestsJeu
             //MapAlgoritms smap = new SmallMap();
             //MapAlgoritms cmap = new ClassicMap();
 
-            Assert.AreEqual(4, dmap.nbUnits());
+            Assert.AreEqual(4, dmap.getNbUnitsAdvised());
             Assert.AreEqual(6, dmap.mapSize().Item1);
             Assert.AreEqual(6, dmap.mapSize().Item2);
             Assert.AreEqual(36, dmap.generateMap().Count);

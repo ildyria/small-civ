@@ -96,9 +96,16 @@ std::list<int> GenMap::bestMoves(int nbMovesWanted, std::tuple<int, int, int> u,
 	for (int i = 0 ; i < nbMovesWanted ; i++)
 	{
 		std::map<int, int>::iterator it = std::max_element(possibilities.begin(), possibilities.end());
-		result.push_back((*it).first);
-		possibilities.erase(it);
+		if (it != possibilities.end()) {
+			result.push_back((*it).first);
+			possibilities.erase(it);
+		}
+		else {
+			break;
+		}
+		
 	}
+
 	return result;
 }
 

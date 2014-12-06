@@ -46,9 +46,9 @@ namespace Wrapper {
 				return listPos;
 			}
 
-			List<int>^ bestMoves(int nbMovesWanted, Tuple<int, int, int> u, List<int> movesPossibles, Dictionary<int, Tuple<int, int>^>^ terrainData, List<Tuple<int, int, int>^>^ opponents) {
+			List<int>^ bestMoves(int nbMovesWanted, Tuple<int, int, int>^ u, List<int>^ movesPossibles, Dictionary<int, Tuple<int, int>^>^ terrainData, List<Tuple<int, int, int>^>^ opponents) {
 				List<int>^ result = gcnew List<int>();
-				std::tuple<int, int, int> uConv(u.Item1, u.Item2, u.Item3);
+				std::tuple<int, int, int> uConv(u->Item1, u->Item2, u->Item3);
 				std::list<int> movesPossiblesConv;
 				for each (int move in movesPossibles)
 				{
@@ -70,6 +70,7 @@ namespace Wrapper {
 				{
 					result->Add(pos);
 				}
+				
 				return result;
 			}
 			

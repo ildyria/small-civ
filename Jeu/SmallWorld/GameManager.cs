@@ -17,6 +17,7 @@ namespace SmallWorld
         private int _playerTurn;
         private Player[] _players;
         private GameMap _map;
+        private Wrapper.WrapperGenMap _mapAlgo;
 
         private GameManager() { }
         public static void  init(Player p1, Player p2, GameMap map, int nbTurns, int turn, int playerTurn)
@@ -41,6 +42,14 @@ namespace SmallWorld
         public GameMap getMap()
         {
             return _map;
+        }
+        public Wrapper.WrapperGenMap getMapAlgo()
+        {
+            return _mapAlgo;
+        }
+        public void setMapAlgo(Wrapper.WrapperGenMap g)
+        {
+            _mapAlgo = g;
         }
         public void setMap(GameMap map)
         {

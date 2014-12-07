@@ -53,8 +53,6 @@ namespace UserInterface
                         x = xOffset + i * TILESIZE;
                         y = j * (TILESIZE - a);
 
-                        //IntPtr btptr = map.getTile(i, j).getImage().GetHbitmap();
-                        //ImageSource im = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(btptr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
                         // Show tile at pos x,y
                         dc.DrawImage(map.getTile(i, j).getImage(), new Rect(x, y, TILESIZE, TILESIZE));
                     }

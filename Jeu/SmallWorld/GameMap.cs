@@ -23,7 +23,6 @@ namespace SmallWorld
             _tilesList = tiles;
             _mapMaker = new MapMaker();
 
-
         }
         public Tile getTile(int x, int y)
         {

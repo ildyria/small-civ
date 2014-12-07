@@ -73,27 +73,36 @@ std::list<int> GenMap::bestMoves(int nbMovesWanted, std::tuple<int, int, int> u,
 
 	for each (int move in movesPossibles)
 	{
-		possibilities[move] = terrainData[_mapCreated[move]].second;
+		if (terrainData.find(_mapCreated[move]) != terrainData.end()) {
+			possibilities[move] = terrainData[_mapCreated[move]].second;
+		}
+		else {
+			possibilities[move] = 1;
+		}
+		
 	}
-
+	
 	//delete moves where opponent has more life than me => probability that i will die
 	//Could be enhance to delete move that are to close
 	//find low life opponent
-	for each (std::tuple<int, int, int> adv in opponents)
+	/*for each (std::tuple<int, int, int> adv in opponents)
 	{
 		int pos = std::get<0>(adv) * _sizeX + std::get<1>(adv);
-		if (std::get<2>(adv) > std::get<2>(u)) {
-			possibilities[pos] -= DANGEROUS;
+		if (possibilities.find(pos) != possibilities.end()) {
+			if (std::get<2>(adv) > std::get<2>(u)) {
+				possibilities[pos] -= DANGEROUS;
+			}
+			else if (std::get<2>(adv) == LOW_LIFE) {
+				possibilities[pos] += BLOODSHED_POINTS;
+			}
+			else {
+				possibilities[pos] -= ENEMY;
+			}
 		}
-		else if (std::get<2>(adv) == LOW_LIFE) {
-			possibilities[pos] += BLOODSHED_POINTS;
-		}
-		else {
-			possibilities[pos] -= ENEMY;
-		}
-	}
+	}*/
 	std::list<int> result;
-	for (int i = 0 ; i < nbMovesWanted ; i++)
+	//for (int i = 0 ; i < nbMovesWanted ; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		std::map<int, int>::iterator it = std::max_element(possibilities.begin(), possibilities.end());
 		if (it != possibilities.end()) {
@@ -103,9 +112,8 @@ std::list<int> GenMap::bestMoves(int nbMovesWanted, std::tuple<int, int, int> u,
 		else {
 			break;
 		}
-		
 	}
-
+	//return movesPossibles;
 	return result;
 }
 

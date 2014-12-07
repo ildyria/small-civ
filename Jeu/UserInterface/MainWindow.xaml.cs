@@ -390,15 +390,17 @@ namespace UserInterface
                 Wrapper.WrapperGenMap g = _gManager.getMapAlgo();
                 SmallWorld.Unit u = _unitsOnTile[_currentUnitNumber];
                 List<int> movesPossibles = new List<int>();
-                foreach(int i in _gManager.getMap().getTileList())
+                for (int x = Math.Max(u.getX() - 1, 0); x <= Math.Min(u.getX(), _gManager.getMap().getSize().Item1 - 1); x++ )
                 {
-                    int x = i / _gManager.getMap().getSize().Item1;
-                    int y = i % _gManager.getMap().getSize().Item1;
-                    if (u.moveCost(x, y, _gManager.getMap().getTile(x, y)) >= 0)
+                    for (int y = Math.Max(u.getY() - 1, 0); y <= Math.Min(u.getY() + 1, _gManager.getMap().getSize().Item1 - 1); y++)
                     {
-                        movesPossibles.Add(i);
+                        if (u.moveCost(x, y, _gManager.getMap().getTile(x, y)) > 0)
+                        {
+                            movesPossibles.Add(x * _gManager.getMap().getSize().Item1 + y);
+                        }
                     }
                 }
+
                 Dictionary<int, Tuple<int, int>> terrainData = new Dictionary<int, Tuple<int, int>>();
                 foreach(KeyValuePair<SmallWorld.TerrainType, Tuple<int, int>> entry in u.getTerrainData())
                 {
@@ -408,6 +410,7 @@ namespace UserInterface
                 _gManager.opponent().getUnits().ForEach(w => listOpponents.Add(new Tuple<int, int, int>(w.getX(), w.getY(), w.getLife())));
                 List<int> best = g.bestMoves(3, new Tuple<int, int, int>(u.getX(), u.getY(), u.getLife()), movesPossibles, terrainData, listOpponents);
                 foreach (int move in best)
+
                 {
                     Label adt = new Label();
                     int i = move / _gManager.getMap().getSize().Item1;

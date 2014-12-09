@@ -62,5 +62,32 @@ namespace UserInterface
             //May be necessary
             //base.OnRender(dc);
         }
+        public static Tuple<double, double> indexToCoord(int i, int j)
+        {
+            double ch = 2 * BoardView.TILESIZE / (Math.Sqrt(7) + 1);
+            double a = (BoardView.TILESIZE - ch) / 2;
+            double xOffset = getXOffset(j);
+
+            double xR = xOffset + i * BoardView.TILESIZE;
+            double yR = j * (BoardView.TILESIZE - a);
+            return new Tuple<double, double>(xR, yR);
+        }
+
+        public static Tuple<int, int> coordToIndex(double x, double y)
+        {
+            double ch = 2 * BoardView.TILESIZE / (Math.Sqrt(7) + 1);
+            double a = (BoardView.TILESIZE - ch) / 2;
+
+            int j = (int)(y / (BoardView.TILESIZE - a));
+            double xOffset = getXOffset(j);
+            int i = (int)((x - xOffset) / BoardView.TILESIZE);
+            return new Tuple<int, int>(i, j);
+        }
+
+        public static int getXOffset(int j)
+        {
+            return (j % 2 == 1) ? BoardView.TILESIZE / 2 : 0;
+        }
+
     }
 }

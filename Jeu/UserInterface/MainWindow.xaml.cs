@@ -219,7 +219,7 @@ namespace UserInterface
                 asset.Style = App.Current.FindResource(typeStyle[u.GetType()]) as Style;
                 
                 //to convert to true coord
-                Tuple<double, double> pos = indexToCoord(u.getX(), u.getY());
+                Tuple<double, double> pos = BoardView.indexToCoord(u.getX(), u.getY());
                 Canvas.SetLeft(asset, pos.Item1);
                 Canvas.SetTop(asset, pos.Item2);
                 //mapControl.Children.Insert(2, rect);
@@ -237,33 +237,6 @@ namespace UserInterface
                 return _unitsOnTile[_currentUnitNumber];
             }
             return null;
-        }
-
-        private Tuple<double, double> indexToCoord(int i, int j)
-        {
-            double ch = 2 * BoardView.TILESIZE / (Math.Sqrt(7) + 1);
-            double a = (BoardView.TILESIZE - ch) / 2;
-            double xOffset = getXOffset(j);
-
-            double xR = xOffset + i* BoardView.TILESIZE;
-            double yR = j * (BoardView.TILESIZE - a);
-            return new Tuple<double, double>(xR, yR);
-        }
-
-        private Tuple<int, int> coordToIndex(double x, double y)
-        {
-            double ch = 2 * BoardView.TILESIZE / (Math.Sqrt(7) + 1);
-            double a = (BoardView.TILESIZE - ch) / 2;
-
-            int j = (int)(y / (BoardView.TILESIZE - a));
-            double xOffset = getXOffset(j);
-            int i = (int)((x - xOffset) / BoardView.TILESIZE);
-            return new Tuple<int, int>(i, j);
-        }
-
-        private int getXOffset(int j)
-        {
-            return (j % 2 == 1) ? BoardView.TILESIZE / 2 : 0;
         }
 
         private void moveUnit(int i, int j)
@@ -290,7 +263,7 @@ namespace UserInterface
                 }
                 else 
                 {
-                    Tuple<double, double> coord = indexToCoord(currentUnit.getX(), currentUnit.getY());
+                    Tuple<double, double> coord = BoardView.indexToCoord(currentUnit.getX(), currentUnit.getY());
                     Canvas.SetLeft(_visualUnitsElements[currentUnit], coord.Item1);
                     Canvas.SetTop(_visualUnitsElements[currentUnit], coord.Item2);
                 }
@@ -306,7 +279,7 @@ namespace UserInterface
 
             _iSelected = i;
             _jSelected = j;
-            Tuple<double, double> coord =  indexToCoord(i, j);
+            Tuple<double, double> coord = BoardView.indexToCoord(i, j);
             Canvas.SetLeft(playerCursor, coord.Item1);
             Canvas.SetTop(playerCursor, coord.Item2);
             selectedTileChanged();
@@ -321,7 +294,7 @@ namespace UserInterface
                 if (_unitsOnTile.Count != 0) // checked twice, for compat
                 {
                     System.Windows.Point p = e.GetPosition(mapView);
-                    Tuple<int, int> coord = coordToIndex(p.X, p.Y);
+                    Tuple<int, int> coord = BoardView.coordToIndex(p.X, p.Y);
                     moveUnit(coord.Item1, coord.Item2);
                     gameEnd();
 
@@ -335,7 +308,7 @@ namespace UserInterface
             if (mapView.IsMouseOver)
             {
                 System.Windows.Point p = e.GetPosition(mapPanel);
-                Tuple<int, int> posRel = coordToIndex(p.X, p.Y);
+                Tuple<int, int> posRel = BoardView.coordToIndex(p.X, p.Y);
 
                 //System.Diagnostics.Trace.WriteLine(x + " " + y);
                 // no move if not on grid
@@ -416,7 +389,7 @@ namespace UserInterface
                     int i = move / _gManager.getMap().getSize().Item1;
                     int j = move % _gManager.getMap().getSize().Item1;
                     adt.Style = App.Current.FindResource("advisedTile") as Style;
-                    Tuple<double, double> adtPos =  indexToCoord(i, j);
+                    Tuple<double, double> adtPos = BoardView.indexToCoord(i, j);
                     Canvas.SetLeft(adt, adtPos.Item1);
                     Canvas.SetTop(adt, adtPos.Item2);
                     Canvas.SetZIndex(adt, 2);

@@ -4,7 +4,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="SmallWorld" Height="531.682" Width="765.315" 
         PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown"
-        PreviewMouseRightButtonDown="Window_PreviewMouseRightButtonDown">
+        PreviewMouseRightButtonDown="Window_PreviewMouseRightButtonDown"
+        KeyDown="Window_KeyDown">
     <Window.Resources>
     </Window.Resources>
     <Grid x:Name="screen" Background="{StaticResource background}" >

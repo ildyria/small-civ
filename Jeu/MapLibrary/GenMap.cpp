@@ -85,7 +85,7 @@ std::list<int> GenMap::bestMoves(int nbMovesWanted, std::tuple<int, int, int> u,
 	//delete moves where opponent has more life than me => probability that i will die
 	//Could be enhance to delete move that are to close
 	//find low life opponent
-	/*for each (std::tuple<int, int, int> adv in opponents)
+	for each (std::tuple<int, int, int> adv in opponents)
 	{
 		int pos = std::get<0>(adv) * _sizeX + std::get<1>(adv);
 		if (possibilities.find(pos) != possibilities.end()) {
@@ -99,7 +99,7 @@ std::list<int> GenMap::bestMoves(int nbMovesWanted, std::tuple<int, int, int> u,
 				possibilities[pos] -= ENEMY;
 			}
 		}
-	}*/
+	}
 	std::list<int> result;
 	//for (int i = 0 ; i < nbMovesWanted ; i++)
 	for (int i = 0; i < 3; i++)

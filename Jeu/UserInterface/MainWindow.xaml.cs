@@ -241,7 +241,7 @@ namespace UserInterface
 
         private void moveUnit(int i, int j)
         {
-            if (_unitsOnTile.Count != 0)
+            if (_unitsOnTile.Count != 0 && i < _gManager.getMap().getSize().Item1 && j < _gManager.getMap().getSize().Item2 && i >= 0 && j >= 0)
             {
                 SmallWorld.Unit currentUnit = _unitsOnTile[_currentUnitNumber];
                 _gManager.moveUnit(currentUnit, i, j);
@@ -271,20 +271,26 @@ namespace UserInterface
         }
         private void moveCursor(int i, int j)
         {
-            foreach (UIElement elem in _advisedElements)
+            // no move if not on grid
+            // if it is not on the map, maybe make the cursor invisible ?
+            if (i < _gManager.getMap().getSize().Item1 && j < _gManager.getMap().getSize().Item2 && i >= 0 && j >= 0)
             {
-                mapControl.Children.Remove(elem);
-            }
-            _advisedElements.Clear();
+                
+                foreach (UIElement elem in _advisedElements)
+                {
+                    mapControl.Children.Remove(elem);
+                }
+                _advisedElements.Clear();
 
-            _iSelected = i;
-            _jSelected = j;
-            Tuple<double, double> coord = BoardView.indexToCoord(i, j);
-            Canvas.SetLeft(playerCursor, coord.Item1);
-            Canvas.SetTop(playerCursor, coord.Item2);
-            selectedTileChanged();
-            fillTileInfo();
-            showAdvisedTiles();
+                _iSelected = i;
+                _jSelected = j;
+                Tuple<double, double> coord = BoardView.indexToCoord(i, j);
+                Canvas.SetLeft(playerCursor, coord.Item1);
+                Canvas.SetTop(playerCursor, coord.Item2);
+                selectedTileChanged();
+                fillTileInfo();
+                showAdvisedTiles();
+            }
         }
 
         private void Window_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -295,12 +301,15 @@ namespace UserInterface
                 {
                     System.Windows.Point p = e.GetPosition(mapView);
                     Tuple<int, int> coord = BoardView.coordToIndex(p.X, p.Y);
-                    moveUnit(coord.Item1, coord.Item2);
-                    gameEnd();
-
-                    moveCursor(coord.Item1, coord.Item2);
+                    moveUnitAndCursor(coord.Item1, coord.Item2);
                 }
             }
+        }
+        private void moveUnitAndCursor(int i, int j)
+        {
+            moveUnit(i, j);
+            gameEnd();
+            moveCursor(i, j);
         }
 
         private void Window_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -311,14 +320,9 @@ namespace UserInterface
                 Tuple<int, int> posRel = BoardView.coordToIndex(p.X, p.Y);
 
                 //System.Diagnostics.Trace.WriteLine(x + " " + y);
-                // no move if not on grid
-                if (posRel.Item1 < _gManager.getMap().getSize().Item1 && posRel.Item2 < _gManager.getMap().getSize().Item2)
-                {
-                    // if it is not on the map, maybe make the cursor invisible ?
-                    //playerCursor.Visibility = Visibility.Visible;
-                    moveCursor(posRel.Item1, posRel.Item2);
-                }
-
+                
+                //playerCursor.Visibility = Visibility.Visible;
+                moveCursor(posRel.Item1, posRel.Item2);
             }
         }
 
@@ -398,6 +402,38 @@ namespace UserInterface
                 }
             }
             
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (_unitsOnTile.Count != 0)
+            {
+                SmallWorld.Unit u = _unitsOnTile[_currentUnitNumber];
+                int offset = u.getY() % 2 == 0 ? -1 : 0;
+                switch (e.Key)
+                {
+                    case Key.NumPad1:
+                        moveUnitAndCursor(u.getX() + offset, u.getY() + 1);
+                        break;
+                    case Key.NumPad3:
+                        moveUnitAndCursor(u.getX() + offset + 1, u.getY() + 1);
+                        break;
+                    case Key.NumPad4:
+                        moveUnitAndCursor(u.getX() - 1, u.getY());
+                        break;
+                    case Key.NumPad6:
+                        moveUnitAndCursor(u.getX() + 1, u.getY());
+                        break;
+                    case Key.NumPad7:
+                        moveUnitAndCursor(u.getX() + offset, u.getY() - 1);
+                        break;
+                    case Key.NumPad9:
+                        moveUnitAndCursor(u.getX() + offset + 1, u.getY() - 1);
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
 

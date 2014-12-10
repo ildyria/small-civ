@@ -7,15 +7,16 @@ namespace SmallWorld
         void die();
         void fight(Unit opponent);
         bool fightRound(Unit opponent);
-        int getArmour();
-        int getAttack();
-        int getLife();
-        int getMovesLeft();
-        string getName();
+        int Armour { get; }
+        int Attack { get; }
+        int Life { get; }
+        int MovesLeft { get; }
+        string Name { get; }
+        int Value { get; }
+        int X { get; }
+        int Y { get; }
         System.Collections.Generic.Dictionary<TerrainType, Tuple<int, int>> getTerrainData();
-        int getValue();
-        int getX();
-        int getY();
+        
         void move(int x, int y, Tile t, System.Collections.Generic.IEnumerable<Unit> advList);
         int moveCost(int x, int y, Tile t);
         int scorePoints(Tile t);

@@ -21,9 +21,9 @@ namespace SmallWorld
         {
             base.fight(opponent);
             // if the opponent is dead and i'm not
-            if (opponent.getLife() == 0 && _life != 0)
+            if (opponent.Life == 0 && Life != 0)
             {
-                _value++;
+                Value++;
             }
         }
     }

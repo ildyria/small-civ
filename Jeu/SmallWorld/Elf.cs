@@ -27,16 +27,16 @@ namespace SmallWorld
                 bool canMove = true;
                 if (canMove)
                 {
-                    _life++;
+                    Life++;
 
                     //perhaps prioritize forest and a tile with dist 2 ?
                     for (int i = -1; i <= 1; i++)
                     {
                         for (int j = -1; j <= 1; j++)
                         {
-                            if (GameManager.Instance().opponent().unitsAt(_posX + i, _posY + j).Count == 0)
+                            if (GameManager.Instance().opponent().unitsAt(X + i, Y + j).Count == 0)
                             {
-                                setPosition(_posX + i, _posY + j);
+                                setPosition(X + i, Y + j);
                                 break;
                             }
                         }

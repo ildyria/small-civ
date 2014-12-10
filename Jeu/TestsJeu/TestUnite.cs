@@ -18,7 +18,7 @@ namespace TestsJeu
             Plain p = new Plain();
 
             d.damage();
-            Assert.AreEqual(4, d.getLife());
+            Assert.AreEqual(4, d.Life);
             Assert.AreEqual(0, d.scorePoints(p));
             Assert.AreEqual(1, d.moveCost(0, 1, p));
         }
@@ -33,7 +33,7 @@ namespace TestsJeu
             Tile t2 = new Forest();
 
             d.damage();
-            Assert.AreEqual(4, d.getLife());
+            Assert.AreEqual(4, d.Life);
             Assert.AreEqual(4, d.moveCost(0, 1, t1));
             Assert.AreEqual(1, d.moveCost(0, 1, t2));
         }
@@ -48,7 +48,7 @@ namespace TestsJeu
             Forest f = new Forest();
 
             d.damage();
-            Assert.AreEqual(4, d.getLife());
+            Assert.AreEqual(4, d.Life);
             Assert.AreEqual(1, d.moveCost(0, 1, p));
             Assert.AreEqual(0, d.scorePoints(f));
         }
@@ -60,9 +60,9 @@ namespace TestsJeu
             Unit orc = of.makeUnit();
             Unit dw = df.makeUnit();
             orc.setPosition(1, 1);
-            Assert.AreEqual(10, orc.getLife() + dw.getLife());
+            Assert.AreEqual(10, orc.Life + dw.Life);
             orc.fightRound(dw);
-            Assert.AreEqual(9, orc.getLife() + dw.getLife());
+            Assert.AreEqual(9, orc.Life + dw.Life);
         }
         
         [TestMethod]
@@ -84,10 +84,10 @@ namespace TestsJeu
             dw.damage();
             dw.damage();
 
-            Assert.AreEqual(6, orc.getLife() + dw.getLife());
+            Assert.AreEqual(6, orc.Life + dw.Life);
             orc.fight(dw);
             //if we have no luck, the test fail ...
-            Assert.AreEqual(0, dw.getLife());
+            Assert.AreEqual(0, dw.Life);
         }
         [TestMethod]
         public void BasicMoveOddY()

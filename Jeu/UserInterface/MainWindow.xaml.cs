@@ -134,7 +134,7 @@ namespace UserInterface
         }
         private void selectedTileChanged()
         {
-            _unitsOnTile = _gManager.getUnits().FindAll(u => u.getX() == _iSelected && u.getY() == _jSelected);
+            _unitsOnTile = _gManager.getUnits().FindAll(u => u.X == _iSelected && u.Y == _jSelected);
             _currentUnitNumber = 0;
             setEnableUnitsButtons();
             fillUnitInfo();
@@ -146,9 +146,9 @@ namespace UserInterface
            {
                currentUnitListPosition.Content = (_currentUnitNumber+1) + "/" + _unitsOnTile.Count;
                SmallWorld.Unit unitToDetail = _unitsOnTile[_currentUnitNumber];
-               name.Content = unitToDetail.getName();
-               life.Content = unitToDetail.getLife();
-               movesLeft.Content = unitToDetail.getMovesLeft();
+               name.Content = unitToDetail.Name;
+               life.Content = unitToDetail.Life;
+               movesLeft.Content = unitToDetail.MovesLeft;
            }
            else // resetting fields
            {
@@ -174,7 +174,7 @@ namespace UserInterface
             tileType.Content = t.toStringFR();
             SmallWorld.Unit u = _gManager.getCurrentPlayer().getUnits()[0];
             //that way we get the bare cost
-            tileMoveCost.Content = u.moveCost(u.getX()+1, u.getY(), t);
+            tileMoveCost.Content = u.moveCost(u.X+1, u.Y, t);
             tilePoints.Content = u.scorePoints(t);
         }
 
@@ -219,7 +219,7 @@ namespace UserInterface
                 asset.Style = App.Current.FindResource(typeStyle[u.GetType()]) as Style;
                 
                 //to convert to true coord
-                Tuple<double, double> pos = BoardView.indexToCoord(u.getX(), u.getY());
+                Tuple<double, double> pos = BoardView.indexToCoord(u.X, u.Y);
                 Canvas.SetLeft(asset, pos.Item1);
                 Canvas.SetTop(asset, pos.Item2);
                 //mapControl.Children.Insert(2, rect);
@@ -255,7 +255,7 @@ namespace UserInterface
                         _visualUnitsElements.Remove(currentUnit);
                     }
                 }
-                if (currentUnit.getLife() == 0)
+                if (currentUnit.Life == 0)
                 {
                     //already done earlier in the ugly method above
                     //mapControl.Children.Remove(_visualUnitsElements[currentUnit]);
@@ -263,7 +263,7 @@ namespace UserInterface
                 }
                 else 
                 {
-                    Tuple<double, double> coord = BoardView.indexToCoord(currentUnit.getX(), currentUnit.getY());
+                    Tuple<double, double> coord = BoardView.indexToCoord(currentUnit.X, currentUnit.Y);
                     Canvas.SetLeft(_visualUnitsElements[currentUnit], coord.Item1);
                     Canvas.SetTop(_visualUnitsElements[currentUnit], coord.Item2);
                 }
@@ -367,9 +367,9 @@ namespace UserInterface
                 Wrapper.WrapperGenMap g = _gManager.getMapAlgo();
                 SmallWorld.Unit u = _unitsOnTile[_currentUnitNumber];
                 List<int> movesPossibles = new List<int>();
-                for (int x = Math.Max(u.getX() - 1, 0); x <= Math.Min(u.getX(), _gManager.getMap().getSize().Item1 - 1); x++ )
+                for (int x = Math.Max(u.X - 1, 0); x <= Math.Min(u.X, _gManager.getMap().getSize().Item1 - 1); x++ )
                 {
-                    for (int y = Math.Max(u.getY() - 1, 0); y <= Math.Min(u.getY() + 1, _gManager.getMap().getSize().Item1 - 1); y++)
+                    for (int y = Math.Max(u.Y - 1, 0); y <= Math.Min(u.Y + 1, _gManager.getMap().getSize().Item1 - 1); y++)
                     {
                         if (u.moveCost(x, y, _gManager.getMap().getTile(x, y)) > 0)
                         {
@@ -384,8 +384,8 @@ namespace UserInterface
                     terrainData.Add((int)entry.Key, entry.Value);
                 }
                 List<Tuple<int, int, int>> listOpponents = new List<Tuple<int, int, int>>();
-                _gManager.opponent().getUnits().ForEach(w => listOpponents.Add(new Tuple<int, int, int>(w.getX(), w.getY(), w.getLife())));
-                List<int> best = g.bestMoves(3, new Tuple<int, int, int>(u.getX(), u.getY(), u.getLife()), movesPossibles, terrainData, listOpponents);
+                _gManager.opponent().getUnits().ForEach(w => listOpponents.Add(new Tuple<int, int, int>(w.X, w.Y, w.Life)));
+                List<int> best = g.bestMoves(3, new Tuple<int, int, int>(u.X, u.Y, u.Life), movesPossibles, terrainData, listOpponents);
                 foreach (int move in best)
 
                 {
@@ -409,26 +409,26 @@ namespace UserInterface
             if (_unitsOnTile.Count != 0)
             {
                 SmallWorld.Unit u = _unitsOnTile[_currentUnitNumber];
-                int offset = u.getY() % 2 == 0 ? -1 : 0;
+                int offset = u.Y % 2 == 0 ? -1 : 0;
                 switch (e.Key)
                 {
                     case Key.NumPad1:
-                        moveUnitAndCursor(u.getX() + offset, u.getY() + 1);
+                        moveUnitAndCursor(u.X + offset, u.Y + 1);
                         break;
                     case Key.NumPad3:
-                        moveUnitAndCursor(u.getX() + offset + 1, u.getY() + 1);
+                        moveUnitAndCursor(u.X + offset + 1, u.Y + 1);
                         break;
                     case Key.NumPad4:
-                        moveUnitAndCursor(u.getX() - 1, u.getY());
+                        moveUnitAndCursor(u.X - 1, u.Y);
                         break;
                     case Key.NumPad6:
-                        moveUnitAndCursor(u.getX() + 1, u.getY());
+                        moveUnitAndCursor(u.X + 1, u.Y);
                         break;
                     case Key.NumPad7:
-                        moveUnitAndCursor(u.getX() + offset, u.getY() - 1);
+                        moveUnitAndCursor(u.X + offset, u.Y - 1);
                         break;
                     case Key.NumPad9:
-                        moveUnitAndCursor(u.getX() + offset + 1, u.getY() - 1);
+                        moveUnitAndCursor(u.X + offset + 1, u.Y - 1);
                         break;
                     default:
                         break;
@@ -462,7 +462,7 @@ namespace UserInterface
             }
 
 
-            moveCursor(uNext.getX(), uNext.getY());
+            moveCursor(uNext.X, uNext.Y);
             _currentUnitNumber = _unitsOnTile.IndexOf(uNext);
             setEnableUnitsButtons();
             fillUnitInfo();

@@ -22,7 +22,7 @@ namespace SmallWorld
         public void scorePoints()
         {
             foreach (Unit u in _unitList) {
-                _points += u.scorePoints(GameManager.Instance().getMap().getTile(u.getX(), u.getY()));
+                _points += u.scorePoints(GameManager.Instance().getMap().getTile(u.X, u.Y));
             }
             
         }
@@ -63,7 +63,7 @@ namespace SmallWorld
         {
             List<Unit> units = new List<Unit>();
             foreach (Unit u in _unitList) {
-                if (u.getX ()== x && u.getY() == y)
+                if (u.X == x && u.Y == y)
                 {
                     units.Add(u);
                 }

@@ -13,46 +13,47 @@ namespace SmallWorld
         public static readonly int DEFAULT_POINT = 1;
         public static readonly int IMPOSSIBLE_MOVE = -1;
 
-        protected int _posX;
-        protected int _posY;
-        protected int _movesLeft;
-        protected int _armour;
-        protected int _life;
-        protected int _attack;
-        protected string _name;
-        protected int _value;
+        public int Armour { get; private set; }
+        public int Attack { get; private set; }
+
+        public int Life { get; protected set; }
+        public int MovesLeft { get; protected set; }
+        public string Name { get; private set; }
+        public int X { get; protected set; }
+        public int Y { get; protected set; }
+        public int Value { get; protected set; }
 
         protected Unit(int posX = 0, int posY = 0, int movesLeft = 0, int armour = 1, int life = 5, int attack = 2, string name = "unnamed", int value = 0) {
-            _posX = posX;
-            _posY = posY;
-            _movesLeft = movesLeft;
-            _armour = armour;
-            _life = life;
-            _attack = attack;
-            _name = name;
-            _value = value;
+            X = posX;
+            Y = posY;
+            MovesLeft = movesLeft;
+            Armour = armour;
+            Life = life;
+            Attack = attack;
+            Name = name;
+            Value = value;
         }
         public virtual void move(int x, int y, Tile t, IEnumerable<Unit> advList)
         {
             // Diagram says movepossible, but that way movecost is used only once
             int cost = moveCost(x, y, t);
-            if (cost != IMPOSSIBLE_MOVE && cost <= _movesLeft) {
-                _movesLeft -= cost;
+            if (cost != IMPOSSIBLE_MOVE && cost <= MovesLeft) {
+                MovesLeft -= cost;
 
                 //Search strongest unit
                 //We could make a new list with the strongest and rand on it ... is it worth it performance wise ?
                 int max = 0;
                 Unit adv = null;
                 foreach (Unit unit in advList ){
-                    if (unit.getLife() > max) {
+                    if (unit.Life > max) {
                         adv = unit;
-                        max = unit.getLife();
+                        max = unit.Life;
                     }
                 }
                 if (adv != null)
                 {
                     fight(adv);
-                    if (adv.getLife() == 0 && advList.Count() == 1)
+                    if (adv.Life == 0 && advList.Count() == 1)
                     {
                         setPosition(x, y);
                     }  
@@ -71,7 +72,7 @@ namespace SmallWorld
             bool died = false;
             Random r = new Random();
             // + 3 because max is not included
-            int nbTurns = r.Next(3, Math.Max(opponent.getLife(), _life) + 3);
+            int nbTurns = r.Next(3, Math.Max(opponent.Life, Life) + 3);
             for (int i = 0; i < nbTurns && !died; ++i)
             {
                 died = fightRound(opponent);
@@ -80,17 +81,17 @@ namespace SmallWorld
         }
         //return true if someone died
         public virtual bool fightRound(Unit opponent) {
-            int atk = _attack * _life / 5;
-            int def = opponent.getArmour() * opponent.getLife() / 5;
+            int atk = Attack * Life / 5;
+            int def = opponent.Armour * opponent.Life / 5;
             double seuil = (atk - def) * 12.5 + 50;
             Random rand = new Random();
             if (rand.Next(0, 100) > seuil) {
                 opponent.damage();
-                return opponent.getLife() == 0;
+                return opponent.Life == 0;
             }
             else {
                 damage();
-                return _life == 0;
+                return Life == 0;
             }
 
         }
@@ -116,25 +117,25 @@ namespace SmallWorld
 
         public virtual void damage()
         {
-            _life--;
-            if (_life == 0) {
+            Life--;
+            if (Life == 0) {
                 die();
             }
         }
 
         public virtual void startTurn()
         {
-            _movesLeft = 4;
+            MovesLeft = 4;
         }
 
         //result = -1 if move impossible
         public virtual int moveCost(int x, int y, Tile t)
         {
-            int deltaX = Math.Abs(_posX - x);
-            int deltaY = Math.Abs(_posY - y);
+            int deltaX = Math.Abs(X - x);
+            int deltaY = Math.Abs(Y - y);
             Tuple<int, int> val;
             // A simplification must exist
-            if (deltaX <= 1 && deltaY <= 1 && (deltaY == 0 || (_posY % 2 == 1 && (x - _posX) >= 0) || (_posY % 2 == 0 && (x - _posX) <= 0)))
+            if (deltaX <= 1 && deltaY <= 1 && (deltaY == 0 || (Y % 2 == 1 && (x - X) >= 0) || (Y % 2 == 0 && (x - X) <= 0)))
             {
                 if (this.getTerrainData().TryGetValue(t.getType(), out val))
                 {
@@ -154,52 +155,14 @@ namespace SmallWorld
 
         public void setPosition(int x, int y)
         {
-            _posX = x;
-            _posY = y;
+            X = x;
+            Y = y;
         }
 
-        public int getArmour()
-        {
-            return _armour;
-        }
-
-        public int getAttack()
-        {
-            return _attack;
-        }
-
-        public int getLife()
-        {
-            return _life;
-        }
-
-        public int getMovesLeft()
-        {
-            return _movesLeft;
-        }
-
-        public string getName()
-        {
-            return _name;
-        }
-
-        public int getX()
-        {
-            return _posX;
-        }
-
-        public int getY()
-        {
-            return _posY;
-        }
-
-        public int getValue()
-        {
-            return _value;
-        }
+        
         public Tile whereAmI()
         {
-            return GameManager.Instance().getMap().getTile(_posX, _posY);
+            return GameManager.Instance().getMap().getTile(X, Y);
         }
     }
 }

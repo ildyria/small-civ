@@ -125,19 +125,19 @@ namespace SmallWorld
             // You can only move units during your turn
             if (getCurrentPlayer().getUnits().Contains(u))
             {
-                Tile start = _map.getTile(u.getX(), u.getY());
+                Tile start = _map.getTile(u.X, u.Y);
                 Tile end = _map.getTile(x, y);
                 List<Unit> opponents = _players[(_playerTurn + 1) % 2].unitsAt(x, y);
                 Player adv = _players[(_playerTurn + 1) % 2];
 
                 u.move(x, y, end, opponents);
 
-                if (u.getLife() == 0)
+                if (u.Life == 0)
                 {
                     getCurrentPlayer().deleteUnit(u);
                 }
                 //another if, and not else if for compat with future updates.
-                Unit op = opponents.Find(z => z.getLife() == 0);
+                Unit op = opponents.Find(z => z.Life == 0);
                 if (op != null) // does this work ?
                 {
                     adv.deleteUnit(op);

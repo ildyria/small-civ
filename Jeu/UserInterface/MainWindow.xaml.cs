@@ -326,7 +326,7 @@ namespace UserInterface
             }
         }
 
-        private void endTurn_clicked(object sender, RoutedEventArgs e)
+        private void endTurn_clicked(object sender = null, RoutedEventArgs e = null)
         {
             //Show graphic elements 
             _gManager.nextTurn();
@@ -363,7 +363,7 @@ namespace UserInterface
 
         private void showAdvisedTiles()
         {
-            if (_unitsOnTile.Count != 0) {
+            if (_unitsOnTile.Count != 0 && _gManager.getCurrentPlayer().getUnits().Contains(_unitsOnTile[_currentUnitNumber])) {
                 Wrapper.WrapperGenMap g = _gManager.getMapAlgo();
                 SmallWorld.Unit u = _unitsOnTile[_currentUnitNumber];
                 List<int> movesPossibles = new List<int>();
@@ -434,8 +434,38 @@ namespace UserInterface
                         break;
                 }
             }
+
+            switch (e.Key)
+            { 
+                case Key.Space:
+                    nextUnit();
+                    break;
+                case Key.Enter:
+                    endTurn_clicked();
+                    break;
+                default:
+                    break;     
+            }
         }
 
+        private void nextUnit()
+        {
+            SmallWorld.Unit uNext;
+            List<SmallWorld.Unit> lu = _gManager.getCurrentPlayer().getUnits();
+            if (_unitsOnTile.Count != 0) // if an unit is selected
+            {
+                uNext = lu[(lu.IndexOf(_unitsOnTile[_currentUnitNumber]) + 1) % lu.Count];
+            }
+            else 
+            {
+                uNext = _gManager.getCurrentPlayer().getUnits().First();
+            }
 
+
+            moveCursor(uNext.getX(), uNext.getY());
+            _currentUnitNumber = _unitsOnTile.IndexOf(uNext);
+            setEnableUnitsButtons();
+            fillUnitInfo();
+        }
     }
 }

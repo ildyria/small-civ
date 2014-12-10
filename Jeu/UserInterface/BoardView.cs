@@ -42,7 +42,7 @@ namespace UserInterface
             double a = (TILESIZE - ch) / 2;
             double xOffset = 0, x = 0, y = 0;
 
-            GameMap map = GameManager.Instance().getMap();
+            GameMap map = GameManager.Instance().Map;
             if (map != null)
             {
                 for (int i = 0; i < map.getSize().Item1; i++)

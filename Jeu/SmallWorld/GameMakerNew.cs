@@ -37,7 +37,7 @@ namespace SmallWorld
         {
             // nbTurns = 10 ?
             GameManager.init(p1, p2, map, _mapGen.getNbTurnAdvised(), 1, 0);
-            GameManager.Instance().setMapAlgo(_mapGen.getGenerator());
+            GameManager.Instance().MapAlgo = _mapGen.getGenerator();
             return GameManager.Instance();
         }
 

@@ -6,16 +6,14 @@ namespace SmallWorld
         void computeFinalScore();
         bool gameEnd();
         void gameStart();
-        GameMap getMap();
-        Player getPlayer1();
-        Player getPlayer2();
-        int getPlayerTurn();
-        int getTurnNumber();
-        int getTurnCurrent();
+        GameMap Map { get; }
+        int PlayerTurn { get; }
+        int TurnNumber { get; }
+        int TurnCurrent { get; }
         System.Collections.Generic.List<Unit> getUnits();
         void moveUnit(Unit u, int x, int y);
-        void setMap(GameMap map);
         void setPlayer1(Player p);
         void setPlayer2(Player p);
+        Player getPlayer(int numPlayer);
     }
 }

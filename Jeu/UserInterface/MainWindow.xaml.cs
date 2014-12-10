@@ -164,13 +164,13 @@ namespace UserInterface
         {
             pointsJ1.Content = _gManager.getPlayer(1).getPoints() + " points";
             pointsJ2.Content = _gManager.getPlayer(2).getPoints() + " points";
-            turn.Content = _gManager.getTurnCurrent() + "/" + _gManager.getTurnNumber();
-            playerTurn.Content = "Joueur " + (_gManager.getPlayerTurn() + 1);
+            turn.Content = _gManager.TurnCurrent + "/" + _gManager.TurnNumber;
+            playerTurn.Content = "Joueur " + (_gManager.PlayerTurn + 1);
         }
 
         private void fillTileInfo()
         {
-            SmallWorld.Tile t = _gManager.getMap().getTile(_iSelected, _jSelected);
+            SmallWorld.Tile t = _gManager.Map.getTile(_iSelected, _jSelected);
             tileType.Content = t.toStringFR();
             SmallWorld.Unit u = _gManager.getCurrentPlayer().getUnits()[0];
             //that way we get the bare cost
@@ -241,7 +241,7 @@ namespace UserInterface
 
         private void moveUnit(int i, int j)
         {
-            if (_unitsOnTile.Count != 0 && i < _gManager.getMap().getSize().Item1 && j < _gManager.getMap().getSize().Item2 && i >= 0 && j >= 0)
+            if (_unitsOnTile.Count != 0 && i < _gManager.Map.getSize().Item1 && j < _gManager.Map.getSize().Item2 && i >= 0 && j >= 0)
             {
                 SmallWorld.Unit currentUnit = _unitsOnTile[_currentUnitNumber];
                 _gManager.moveUnit(currentUnit, i, j);
@@ -273,7 +273,7 @@ namespace UserInterface
         {
             // no move if not on grid
             // if it is not on the map, maybe make the cursor invisible ?
-            if (i < _gManager.getMap().getSize().Item1 && j < _gManager.getMap().getSize().Item2 && i >= 0 && j >= 0)
+            if (i < _gManager.Map.getSize().Item1 && j < _gManager.Map.getSize().Item2 && i >= 0 && j >= 0)
             {
                 
                 foreach (UIElement elem in _advisedElements)
@@ -364,16 +364,16 @@ namespace UserInterface
         private void showAdvisedTiles()
         {
             if (_unitsOnTile.Count != 0 && _gManager.getCurrentPlayer().getUnits().Contains(_unitsOnTile[_currentUnitNumber])) {
-                Wrapper.WrapperGenMap g = _gManager.getMapAlgo();
+                Wrapper.WrapperGenMap g = _gManager.MapAlgo;
                 SmallWorld.Unit u = _unitsOnTile[_currentUnitNumber];
                 List<int> movesPossibles = new List<int>();
-                for (int x = Math.Max(u.X - 1, 0); x <= Math.Min(u.X, _gManager.getMap().getSize().Item1 - 1); x++ )
+                for (int x = Math.Max(u.X - 1, 0); x <= Math.Min(u.X, _gManager.Map.getSize().Item1 - 1); x++ )
                 {
-                    for (int y = Math.Max(u.Y - 1, 0); y <= Math.Min(u.Y + 1, _gManager.getMap().getSize().Item1 - 1); y++)
+                    for (int y = Math.Max(u.Y - 1, 0); y <= Math.Min(u.Y + 1, _gManager.Map.getSize().Item1 - 1); y++)
                     {
-                        if (u.moveCost(x, y, _gManager.getMap().getTile(x, y)) > 0)
+                        if (u.moveCost(x, y, _gManager.Map.getTile(x, y)) > 0)
                         {
-                            movesPossibles.Add(x * _gManager.getMap().getSize().Item1 + y);
+                            movesPossibles.Add(x * _gManager.Map.getSize().Item1 + y);
                         }
                     }
                 }
@@ -390,8 +390,8 @@ namespace UserInterface
 
                 {
                     Label adt = new Label();
-                    int i = move / _gManager.getMap().getSize().Item1;
-                    int j = move % _gManager.getMap().getSize().Item1;
+                    int i = move / _gManager.Map.getSize().Item1;
+                    int j = move % _gManager.Map.getSize().Item1;
                     adt.Style = App.Current.FindResource("advisedTile") as Style;
                     Tuple<double, double> adtPos = BoardView.indexToCoord(i, j);
                     Canvas.SetLeft(adt, adtPos.Item1);

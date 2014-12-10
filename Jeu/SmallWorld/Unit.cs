@@ -162,7 +162,7 @@ namespace SmallWorld
         
         public Tile whereAmI()
         {
-            return GameManager.Instance().getMap().getTile(X, Y);
+            return GameManager.Instance().Map.getTile(X, Y);
         }
     }
 }

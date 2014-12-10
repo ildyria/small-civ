@@ -104,7 +104,7 @@ namespace SmallWorld
         public virtual int scorePoints(Tile t)
         {
             Tuple<int, int> val;
-            if (this.getTerrainData().TryGetValue(t.getType(), out val))
+            if (this.getTerrainData().TryGetValue(t.TerrainType, out val))
             {
                 return val.Item2;
             }
@@ -137,7 +137,7 @@ namespace SmallWorld
             // A simplification must exist
             if (deltaX <= 1 && deltaY <= 1 && (deltaY == 0 || (Y % 2 == 1 && (x - X) >= 0) || (Y % 2 == 0 && (x - X) <= 0)))
             {
-                if (this.getTerrainData().TryGetValue(t.getType(), out val))
+                if (this.getTerrainData().TryGetValue(t.TerrainType, out val))
                 {
                     return val.Item1;
                 }

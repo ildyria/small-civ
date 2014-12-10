@@ -9,27 +9,14 @@ namespace SmallWorld
     public abstract class Tile : SmallWorld.ITile
     {
         public static readonly int TILESIZE = 60;
-        private BitmapSource _image;
-        private TerrainType _type;
+
+        public BitmapSource Image { get; private set; }
+        public TerrainType TerrainType { get; private set; }
 
         public Tile(BitmapSource img, TerrainType type) 
         {
-            _image = img;
-            _type = type;
-        }
-        public TerrainType getType()
-        {
-            return _type;
-        }
-
-        public BitmapSource getImage()
-        {
-            return _image;
-        }
-
-        public void setImage(BitmapSource image)
-        {
-            _image = image;
+            Image = img;
+            TerrainType = type;
         }
 
         public abstract string toStringFR();

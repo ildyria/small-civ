@@ -54,7 +54,7 @@ namespace UserInterface
                         y = j * (TILESIZE - a);
 
                         // Show tile at pos x,y
-                        dc.DrawImage(map.getTile(i, j).getImage(), new Rect(x, y, TILESIZE, TILESIZE));
+                        dc.DrawImage(map.getTile(i, j).Image, new Rect(x, y, TILESIZE, TILESIZE));
                     }
 
                 }

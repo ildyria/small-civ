@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Windows.Media.Imaging;
+
 namespace SmallWorld
 {
     interface ITile
     {
-        System.Windows.Media.Imaging.BitmapSource getImage();
-        TerrainType getType();
-        void setImage(System.Windows.Media.Imaging.BitmapSource image);
+        BitmapSource Image { get; }
+        TerrainType TerrainType { get; }
     }
 }

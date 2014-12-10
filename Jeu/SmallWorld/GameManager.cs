@@ -18,7 +18,7 @@ namespace SmallWorld
         public int TurnNumber { get; private set; }
         public int PlayerTurn { get; private set; }
         public WrapperGenMap MapAlgo { get; set; }
-        public GameMap Map { get; private set; }
+        public GameMap Map { get; set; }
         
 
 
@@ -61,7 +61,7 @@ namespace SmallWorld
 
         public bool gameEnd()
         {
-            if (TurnCurrent > TurnNumber || _players[0].getUnits().Count == 0 || _players[1].getUnits().Count == 0)
+            if (TurnCurrent > TurnNumber || _players[0].UnitList.Count == 0 || _players[1].UnitList.Count == 0)
             {
                 return true;
             }
@@ -73,9 +73,9 @@ namespace SmallWorld
             throw new System.NotImplementedException();
         }
 
-        public List<Unit> getUnits()
+        public List<Unit> getAllUnits()
         {
-            return _players[0].getUnits().Concat(_players[1].getUnits()).ToList();
+            return _players[0].UnitList.Concat(_players[1].UnitList).ToList();
         }
 
         public void computeFinalScore()
@@ -89,7 +89,7 @@ namespace SmallWorld
         public void moveUnit(Unit u, int x, int y)
         {
             // You can only move units during your turn
-            if (getCurrentPlayer().getUnits().Contains(u))
+            if (getCurrentPlayer().UnitList.Contains(u))
             {
                 Tile start = Map.getTile(u.X, u.Y);
                 Tile end = Map.getTile(x, y);

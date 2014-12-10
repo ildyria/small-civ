@@ -7,7 +7,7 @@ namespace SmallWorld
 {
     public class GameMakerNew : GameMaker, SmallWorld.IGameMakerNew
     {
-        private MapAlgoritms _mapGen;
+        public MapAlgoritms MapGenerator { get; set; }
         private UnitType[] _tribes;
         private string[] _names;
         private int[] _nbUnits;
@@ -19,9 +19,9 @@ namespace SmallWorld
         }
         public override GameMap makeMap()
         {
-            Tuple<int, int> xy = _mapGen.mapSize();
-            List<int> tileList = _mapGen.generateMap();
-            _startPositions = _mapGen.getStartingPositions();
+            Tuple<int, int> xy = MapGenerator.mapSize();
+            List<int> tileList = MapGenerator.generateMap();
+            _startPositions = MapGenerator.getStartingPositions();
             return new GameMap(xy.Item1, xy.Item2, tileList);
         }
 
@@ -29,15 +29,15 @@ namespace SmallWorld
         {
             Player p = new Player(_names[numPlayer-1], tribeName(_tribes[numPlayer-1]), 0);
             
-            p.setUnits(createUnits(numPlayer));
+            p.UnitList = createUnits(numPlayer);
             return p;
         }
 
         public override GameManager makeGameManager(Player p1, Player p2, GameMap map)
         {
             // nbTurns = 10 ?
-            GameManager.init(p1, p2, map, _mapGen.getNbTurnAdvised(), 1, 0);
-            GameManager.Instance().MapAlgo = _mapGen.getGenerator();
+            GameManager.init(p1, p2, map, MapGenerator.getNbTurnAdvised(), 1, 0);
+            GameManager.Instance().MapAlgo = MapGenerator.getGenerator();
             return GameManager.Instance();
         }
 
@@ -45,7 +45,7 @@ namespace SmallWorld
 
         public override List<Unit> createUnits(int numPlayer)
         {
-            int nbUnits = _mapGen.getNbUnitsAdvised();
+            int nbUnits = MapGenerator.getNbUnitsAdvised();
             if (_nbUnits != null)
             {
                 nbUnits = _nbUnits[numPlayer - 1];
@@ -104,16 +104,16 @@ namespace SmallWorld
             switch (size)
             {
                 case MapSize.DEMO:
-                    _mapGen = new DemoMap();
+                    MapGenerator = new DemoMap();
                     break;
                 case MapSize.SMALL:
-                    _mapGen = new SmallMap();
+                    MapGenerator = new SmallMap();
                     break;
                 case MapSize.CLASSIC:
-                    _mapGen = new ClassicMap();
+                    MapGenerator = new ClassicMap();
                     break;
                 default:
-                    _mapGen = new DemoMap();
+                    MapGenerator = new DemoMap();
                     break;
             } 
         }

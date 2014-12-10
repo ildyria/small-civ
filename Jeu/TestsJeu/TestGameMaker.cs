@@ -18,9 +18,9 @@ namespace TestsJeu
             GameManager gmg = gmk.makeGame();
 
             Assert.IsNotNull(gmg);
-            Assert.AreEqual(1, gmg.getTurnCurrent());
-            Assert.AreEqual(5, gmg.getTurnNumber());
-            Assert.AreEqual(0, gmg.getPlayerTurn());
+            Assert.AreEqual(1, gmg.TurnCurrent);
+            Assert.AreEqual(5, gmg.TurnNumber);
+            Assert.AreEqual(0, gmg.PlayerTurn);
             Unit u = gmg.getPlayer(1).unitsAt(0, 0)[0];
             Assert.IsInstanceOfType(u, typeof(Dwarf));
         }
@@ -33,9 +33,9 @@ namespace TestsJeu
             //gmk.setSaveFile();
             GameManager gmg = gmk.makeGame();
             Assert.IsNotNull(gmg);
-            Assert.AreEqual(0, gmg.getTurnCurrent());
-            Assert.AreEqual(10, gmg.getTurnNumber());
-            Assert.AreEqual(0, gmg.getPlayerTurn());
+            Assert.AreEqual(0, gmg.TurnCurrent);
+            Assert.AreEqual(10, gmg.TurnNumber);
+            Assert.AreEqual(0, gmg.PlayerTurn);
             Unit u = gmg.getPlayer(1).unitsAt(0, 0)[0];
             Assert.IsInstanceOfType(u, typeof(Dwarf));
             Assert.Fail();

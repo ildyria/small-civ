@@ -134,7 +134,7 @@ namespace UserInterface
         }
         private void selectedTileChanged()
         {
-            _unitsOnTile = _gManager.getUnits().FindAll(u => u.X == _iSelected && u.Y == _jSelected);
+            _unitsOnTile = _gManager.getAllUnits().FindAll(u => u.X == _iSelected && u.Y == _jSelected);
             _currentUnitNumber = 0;
             setEnableUnitsButtons();
             fillUnitInfo();
@@ -162,17 +162,17 @@ namespace UserInterface
         //private void fillN
         private void fillGeneralInfo()
         {
-            pointsJ1.Content = _gManager.getPlayer(1).getPoints() + " points";
-            pointsJ2.Content = _gManager.getPlayer(2).getPoints() + " points";
+            pointsJ1.Content = _gManager.getPlayer(1).Points + " points";
+            pointsJ2.Content = _gManager.getPlayer(2).Points + " points";
             turn.Content = _gManager.TurnCurrent + "/" + _gManager.TurnNumber;
             playerTurn.Content = "Joueur " + (_gManager.PlayerTurn + 1);
         }
 
         private void fillTileInfo()
         {
-            SmallWorld.Tile t = _gManager.Map.getTile(_iSelected, _jSelected);
+            Tile t = _gManager.Map.getTile(_iSelected, _jSelected);
             tileType.Content = t.toStringFR();
-            SmallWorld.Unit u = _gManager.getCurrentPlayer().getUnits()[0];
+            Unit u = _gManager.getCurrentPlayer().UnitList[0];
             //that way we get the bare cost
             tileMoveCost.Content = u.moveCost(u.X+1, u.Y, t);
             tilePoints.Content = u.scorePoints(t);
@@ -213,7 +213,7 @@ namespace UserInterface
         }
         private void setUnitsOnMap()
         {
-            foreach (SmallWorld.Unit u in _gManager.getUnits())
+            foreach (SmallWorld.Unit u in _gManager.getAllUnits())
             {
                 Label asset = new Label();
                 asset.Style = App.Current.FindResource(typeStyle[u.GetType()]) as Style;
@@ -246,9 +246,9 @@ namespace UserInterface
                 SmallWorld.Unit currentUnit = _unitsOnTile[_currentUnitNumber];
                 _gManager.moveUnit(currentUnit, i, j);
 
-                if (_gManager.getUnits().Count != _visualUnitsElements.Count) // not optimized at all
+                if (_gManager.getAllUnits().Count != _visualUnitsElements.Count) // not optimized at all
                 {
-                    List<SmallWorld.Unit> toDel = _visualUnitsElements.Keys.ToList().FindAll(u => !_gManager.getUnits().Contains(u));
+                    List<SmallWorld.Unit> toDel = _visualUnitsElements.Keys.ToList().FindAll(u => !_gManager.getAllUnits().Contains(u));
                     foreach (SmallWorld.Unit u in toDel)
                     {
                         mapControl.Children.Remove(_visualUnitsElements[currentUnit]);
@@ -363,7 +363,7 @@ namespace UserInterface
 
         private void showAdvisedTiles()
         {
-            if (_unitsOnTile.Count != 0 && _gManager.getCurrentPlayer().getUnits().Contains(_unitsOnTile[_currentUnitNumber])) {
+            if (_unitsOnTile.Count != 0 && _gManager.getCurrentPlayer().UnitList.Contains(_unitsOnTile[_currentUnitNumber])) {
                 Wrapper.WrapperGenMap g = _gManager.MapAlgo;
                 SmallWorld.Unit u = _unitsOnTile[_currentUnitNumber];
                 List<int> movesPossibles = new List<int>();
@@ -384,7 +384,7 @@ namespace UserInterface
                     terrainData.Add((int)entry.Key, entry.Value);
                 }
                 List<Tuple<int, int, int>> listOpponents = new List<Tuple<int, int, int>>();
-                _gManager.opponent().getUnits().ForEach(w => listOpponents.Add(new Tuple<int, int, int>(w.X, w.Y, w.Life)));
+                _gManager.opponent().UnitList.ForEach(w => listOpponents.Add(new Tuple<int, int, int>(w.X, w.Y, w.Life)));
                 List<int> best = g.bestMoves(3, new Tuple<int, int, int>(u.X, u.Y, u.Life), movesPossibles, terrainData, listOpponents);
                 foreach (int move in best)
 
@@ -451,14 +451,14 @@ namespace UserInterface
         private void nextUnit()
         {
             SmallWorld.Unit uNext;
-            List<SmallWorld.Unit> lu = _gManager.getCurrentPlayer().getUnits();
+            List<SmallWorld.Unit> lu = _gManager.getCurrentPlayer().UnitList;
             if (_unitsOnTile.Count != 0) // if an unit is selected
             {
                 uNext = lu[(lu.IndexOf(_unitsOnTile[_currentUnitNumber]) + 1) % lu.Count];
             }
             else 
             {
-                uNext = _gManager.getCurrentPlayer().getUnits().First();
+                uNext = _gManager.getCurrentPlayer().UnitList.First();
             }
 
 

@@ -134,7 +134,7 @@ namespace SmallWorld
             int deltaY = Math.Abs(_posY - y);
             Tuple<int, int> val;
             // A simplification must exist
-            if (deltaX <= 1 && deltaY <= 1 && (deltaY == 0 || (y % 2 == 1 && (_posX - x) >= 0) || (y % 2 == 0 && (_posX - x) <= 0)))
+            if (deltaX <= 1 && deltaY <= 1 && (deltaY == 0 || (_posY % 2 == 1 && (x - _posX) >= 0) || (_posY % 2 == 0 && (x - _posX) <= 0)))
             {
                 if (this.getTerrainData().TryGetValue(t.getType(), out val))
                 {

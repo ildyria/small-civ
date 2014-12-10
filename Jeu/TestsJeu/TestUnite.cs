@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmallWorld;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace TestsJeu
 {
@@ -18,7 +20,7 @@ namespace TestsJeu
             d.damage();
             Assert.AreEqual(4, d.getLife());
             Assert.AreEqual(0, d.scorePoints(p));
-            Assert.AreEqual(1, d.moveCost(1, 1, p));
+            Assert.AreEqual(1, d.moveCost(0, 1, p));
         }
 
         [TestMethod]
@@ -32,8 +34,8 @@ namespace TestsJeu
 
             d.damage();
             Assert.AreEqual(4, d.getLife());
-            Assert.AreEqual(4, d.moveCost(1, 1, t1));
-            Assert.AreEqual(1, d.moveCost(1, 1, t2));
+            Assert.AreEqual(4, d.moveCost(0, 1, t1));
+            Assert.AreEqual(1, d.moveCost(0, 1, t2));
         }
 
         [TestMethod]
@@ -47,7 +49,7 @@ namespace TestsJeu
 
             d.damage();
             Assert.AreEqual(4, d.getLife());
-            Assert.AreEqual(1, d.moveCost(1, 1, p));
+            Assert.AreEqual(1, d.moveCost(0, 1, p));
             Assert.AreEqual(0, d.scorePoints(f));
         }
         [TestMethod]
@@ -76,7 +78,7 @@ namespace TestsJeu
             DwarfFactory df = new DwarfFactory();
             Unit orc = of.makeUnit();
             Unit dw = df.makeUnit();
-            orc.setPosition(1, 1);
+            orc.setPosition(0, 1);
             dw.damage();
             dw.damage();
             dw.damage();
@@ -88,7 +90,7 @@ namespace TestsJeu
             Assert.AreEqual(0, dw.getLife());
         }
         [TestMethod]
-        public void BasicMove()
+        public void BasicMoveOddY()
         {
             // Should use a loaded game
             GameMakerNew gmn = new GameMakerNew();
@@ -96,8 +98,43 @@ namespace TestsJeu
             gmn.setNames(new string[2] { "J1", "J2" });
             gmn.setMapSize(MapSize.DEMO);
             gmn.makeGame();
+            Tile t = new Plain();
             //all test above concerning move should be also there ...
-            Assert.Fail();
+            GameManager.Instance().getCurrentPlayer().getUnits()[0].setPosition(1,1);
+            
+            Assert.AreEqual(Unit.IMPOSSIBLE_MOVE, GameManager.Instance().getCurrentPlayer().getUnits()[0].moveCost(0, 0, t));
+
+            Assert.AreNotEqual(Unit.IMPOSSIBLE_MOVE, GameManager.Instance().getCurrentPlayer().getUnits()[0].moveCost(0, 1, t));
+            Assert.AreEqual(Unit.IMPOSSIBLE_MOVE, GameManager.Instance().getCurrentPlayer().getUnits()[0].moveCost(0, 2, t));
+            Assert.AreNotEqual(Unit.IMPOSSIBLE_MOVE, GameManager.Instance().getCurrentPlayer().getUnits()[0].moveCost(1, 0, t));
+            Assert.AreNotEqual(Unit.IMPOSSIBLE_MOVE, GameManager.Instance().getCurrentPlayer().getUnits()[0].moveCost(1, 1, t));
+            Assert.AreNotEqual(Unit.IMPOSSIBLE_MOVE, GameManager.Instance().getCurrentPlayer().getUnits()[0].moveCost(1, 2, t));
+            Assert.AreNotEqual(Unit.IMPOSSIBLE_MOVE, GameManager.Instance().getCurrentPlayer().getUnits()[0].moveCost(2, 0, t));
+            Assert.AreNotEqual(Unit.IMPOSSIBLE_MOVE, GameManager.Instance().getCurrentPlayer().getUnits()[0].moveCost(2, 1, t));
+            Assert.AreNotEqual(Unit.IMPOSSIBLE_MOVE, GameManager.Instance().getCurrentPlayer().getUnits()[0].moveCost(2, 2, t));
+        }
+
+        [TestMethod]
+        public void BasicMoveEvenY()
+        {
+            // Should use a loaded game
+            GameMakerNew gmn = new GameMakerNew();
+            gmn.setTribes(new UnitType[2] { UnitType.ORC, UnitType.DWARF });
+            gmn.setNames(new string[2] { "J1", "J2" });
+            gmn.setMapSize(MapSize.DEMO);
+            gmn.makeGame();
+            Tile t = new Plain();
+            //all test above concerning move should be also there ...
+            GameManager.Instance().getCurrentPlayer().getUnits()[0].setPosition(1, 2);
+            Assert.AreNotEqual(Unit.IMPOSSIBLE_MOVE, GameManager.Instance().getCurrentPlayer().getUnits()[0].moveCost(0, 1, t));
+            Assert.AreNotEqual(Unit.IMPOSSIBLE_MOVE, GameManager.Instance().getCurrentPlayer().getUnits()[0].moveCost(0, 2, t));
+            Assert.AreNotEqual(Unit.IMPOSSIBLE_MOVE, GameManager.Instance().getCurrentPlayer().getUnits()[0].moveCost(0, 3, t));
+            Assert.AreNotEqual(Unit.IMPOSSIBLE_MOVE, GameManager.Instance().getCurrentPlayer().getUnits()[0].moveCost(1, 1, t));
+            Assert.AreNotEqual(Unit.IMPOSSIBLE_MOVE, GameManager.Instance().getCurrentPlayer().getUnits()[0].moveCost(1, 2, t));
+            Assert.AreNotEqual(Unit.IMPOSSIBLE_MOVE, GameManager.Instance().getCurrentPlayer().getUnits()[0].moveCost(1, 3, t));
+            Assert.AreEqual(Unit.IMPOSSIBLE_MOVE, GameManager.Instance().getCurrentPlayer().getUnits()[0].moveCost(2, 1, t));
+            Assert.AreNotEqual(Unit.IMPOSSIBLE_MOVE, GameManager.Instance().getCurrentPlayer().getUnits()[0].moveCost(2, 2, t));
+            Assert.AreEqual(Unit.IMPOSSIBLE_MOVE, GameManager.Instance().getCurrentPlayer().getUnits()[0].moveCost(2, 3, t));
         }
 
         [TestMethod]
@@ -111,17 +148,34 @@ namespace TestsJeu
             gmn.makeGame();
             //it fail cuz no ameManager is instanciated
             DwarfFactory df = new DwarfFactory();
-            Unit dw1 = df.makeUnit();  // he should be on a mountain
-            Unit dw2 = df.makeUnit();  // he sould be on a plain
+            Unit dw1 = df.makeUnit();  
+            dw1.setPosition(0, 0); // mountain
+            Unit dw2 = df.makeUnit();
+            dw2.setPosition(0, 1); //plain
             Mountain m = new Mountain();
             Plain p = new Plain();
+            List<int> tilelist = new List<int>() {
+                (int) TerrainType.MOUNTAIN,  (int) TerrainType.PLAIN, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0
+            };
+            GameManager.Instance().setMap(new GameMap(6, 6, tilelist));
+            
 
-            Assert.AreEqual(Unit.IMPOSSIBLE_MOVE, dw1.moveCost(6, 6, p));
-            Assert.AreEqual(Unit.DEFAULT_MOVE_COST, dw1.moveCost(6, 6, m));
-            Assert.AreEqual(Unit.IMPOSSIBLE_MOVE, dw2.moveCost(6, 6, p));
-            Assert.AreEqual(Unit.IMPOSSIBLE_MOVE, dw2.moveCost(6, 6, m));
+            Assert.AreEqual(Unit.IMPOSSIBLE_MOVE, dw1.moveCost(4, 4, p));
+            Assert.AreNotEqual(Unit.IMPOSSIBLE_MOVE, dw1.moveCost(4, 4, m));
+            Assert.AreEqual(Unit.IMPOSSIBLE_MOVE, dw2.moveCost(4, 4, p));
+            Assert.AreEqual(Unit.IMPOSSIBLE_MOVE, dw2.moveCost(4, 4, m));
 
-            // this need another test, when there is an enemy on the mountain
+            // there is an enemy on the mountain
+            GameManager.Instance().opponent().getUnits()[0].setPosition(5, 5);
+            Assert.AreEqual(Unit.IMPOSSIBLE_MOVE, dw1.moveCost(5, 5, p));
+            Assert.AreEqual(Unit.IMPOSSIBLE_MOVE, dw1.moveCost(5, 5, m));
+            Assert.AreEqual(Unit.IMPOSSIBLE_MOVE, dw2.moveCost(5, 5, p));
+            Assert.AreEqual(Unit.IMPOSSIBLE_MOVE, dw2.moveCost(5, 5, m));
         }
         [TestMethod]
         public void SurroundedDyingElf()

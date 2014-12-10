@@ -18,8 +18,8 @@ namespace TestsJeu
             GameManager gmg = gmk.makeGame();
 
             Assert.IsNotNull(gmg);
-            Assert.AreEqual(0, gmg.getTurnCurrent());
-            Assert.AreEqual(10, gmg.getTurnNumber());
+            Assert.AreEqual(1, gmg.getTurnCurrent());
+            Assert.AreEqual(5, gmg.getTurnNumber());
             Assert.AreEqual(0, gmg.getPlayerTurn());
             Unit u = gmg.getPlayer1().unitsAt(0, 0)[0];
             Assert.IsInstanceOfType(u, typeof(Dwarf));

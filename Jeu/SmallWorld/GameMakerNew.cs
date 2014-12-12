@@ -36,8 +36,8 @@ namespace SmallWorld
         public override GameManager makeGameManager(Player p1, Player p2, GameMap map)
         {
             // nbTurns = 10 ?
-            GameManager.init(p1, p2, map, MapGenerator.getNbTurnAdvised(), 1, 0);
-            GameManager.Instance().MapAlgo = MapGenerator.getGenerator();
+            GameManager.init(p1, p2, map, MapGenerator.NbTurnAdvised, 1, 0);
+            GameManager.Instance().MapAlgo = MapGenerator.Generator;
             return GameManager.Instance();
         }
 
@@ -45,7 +45,7 @@ namespace SmallWorld
 
         public override List<Unit> createUnits(int numPlayer)
         {
-            int nbUnits = MapGenerator.getNbUnitsAdvised();
+            int nbUnits = MapGenerator.NbUnitsAdvised;
             if (_nbUnits != null)
             {
                 nbUnits = _nbUnits[numPlayer - 1];

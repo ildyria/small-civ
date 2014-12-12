@@ -149,6 +149,7 @@
         </StackPanel>
 
         <StackPanel x:Name="loadMenu" Visibility="Collapsed">
+            <ScrollViewer x:Name="saveList"/>
             <Button Content="Charger" Click="startLoadGame_clicked"/>
             <Button Content="Supprimer"/>
             <Button Content="Annuler">

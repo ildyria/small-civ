@@ -15,7 +15,6 @@ namespace SmallWorld
 
         public int Armour { get; private set; }
         public int Attack { get; private set; }
-
         public int Life { get; protected set; }
         public int MovesLeft { get; protected set; }
         public string Name { get; private set; }
@@ -85,7 +84,7 @@ namespace SmallWorld
             int def = opponent.Armour * opponent.Life / 5;
             double seuil = (atk - def) * 12.5 + 50;
             Random rand = new Random();
-            if (rand.Next(0, 100) > seuil) {
+            if (rand.Next(0, 101) > seuil) {
                 opponent.damage();
                 return opponent.Life == 0;
             }

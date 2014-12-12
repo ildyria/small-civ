@@ -20,7 +20,6 @@ namespace UserInterface
     {
         public static int TILESIZE = 60;
 
-
         public BoardView() : base()
         {
            // _playerCursor = new ContentControl();

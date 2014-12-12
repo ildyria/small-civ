@@ -50,14 +50,7 @@ namespace SmallWorld
         }
         public List<Unit> unitsAt(int x, int y)
         {
-            List<Unit> units = new List<Unit>();
-            foreach (Unit u in UnitList) {
-                if (u.X == x && u.Y == y)
-                {
-                    units.Add(u);
-                }
-            }
-            return units;
+            return UnitList.FindAll(u => u.X == x && u.Y == y);
         }
     }
 }

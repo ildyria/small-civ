@@ -7,15 +7,15 @@ namespace SmallWorld
 {
     public class MapMaker : SmallWorld.IMapMaker
     {
-        private Dictionary<TerrainType, Tile> _tiles;
+        private Dictionary<TerrainType, Tile> Tiles { get; set; }
         public MapMaker()
         {
-            _tiles = new Dictionary<TerrainType, Tile>();
+            Tiles = new Dictionary<TerrainType, Tile>();
         }
         public Tile getTile(TerrainType type)
         {
             Tile t = null;  
-            if (_tiles.TryGetValue(type, out t))
+            if (Tiles.TryGetValue(type, out t))
             {
                 return t;
             }
@@ -40,7 +40,7 @@ namespace SmallWorld
                         break;
                 }
                 if (t != null){ //Exception, maybe ?
-                    _tiles.Add(type, t);
+                    Tiles.Add(type, t);
                 }
                 return t;
             }

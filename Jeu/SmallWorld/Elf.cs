@@ -51,7 +51,7 @@ namespace SmallWorld
                 while (index < possible_move.Count)
                 {
                     pos = possible_move[index];
-                    if (GameManager.Instance().opponent().unitsAt(pos.Item1, pos.Item2).Count != 0)
+                    if (GameManager.Instance.opponent().unitsAt(pos.Item1, pos.Item2).Count != 0)
                     {
                         possible_move.RemoveAt(0);
                     }

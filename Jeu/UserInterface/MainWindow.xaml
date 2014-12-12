@@ -149,7 +149,19 @@
         </StackPanel>
 
         <StackPanel x:Name="loadMenu" Visibility="Collapsed">
-            <ScrollViewer x:Name="saveList"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <ListView x:Name="saveList">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <!-- TODO -->
+                                <TextBlock Text="{Binding}"/>
+                                <TextBlock Text="{Binding}"/>
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
             <Button Content="Charger" Click="startLoadGame_clicked"/>
             <Button Content="Supprimer"/>
             <Button Content="Annuler">
@@ -212,7 +224,8 @@
                     <Label Content="Type :" Grid.Column="0" Grid.Row="0"/>
                     <Label Content="Cout de déplacement :" Grid.Column="0" Grid.Row="1"/>
                     <Label Content="Points :" Grid.Column="0" Grid.Row="2"/>
-   
+
+                    <!-- <Label x:Name="tileType" Grid.Column="1" Grid.Row="0"/> -->
                     <Label x:Name="tileType" Grid.Column="1" Grid.Row="0"/>
                     <Label x:Name="tileMoveCost" Grid.Column="1" Grid.Row="1"/>
                     <Label x:Name="tilePoints" Grid.Column="1" Grid.Row="2" />

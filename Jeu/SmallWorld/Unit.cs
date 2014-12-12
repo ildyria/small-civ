@@ -99,7 +99,7 @@ namespace SmallWorld
             return Unit.terrainData;
         }
 
-        //could use GameManager.Instance()
+        //could use GameManager.Instance
         public virtual int scorePoints(Tile t)
         {
             Tuple<int, int> val;
@@ -161,7 +161,7 @@ namespace SmallWorld
         
         public Tile whereAmI()
         {
-            return GameManager.Instance().Map.getTile(X, Y);
+            return GameManager.Instance.Map.getTile(X, Y);
         }
     }
 }

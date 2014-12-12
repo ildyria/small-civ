@@ -8,26 +8,26 @@ namespace SmallWorld
     public class GameMakerNew : GameMaker, SmallWorld.IGameMakerNew
     {
         public MapAlgoritms MapGenerator { get; set; }
-        private UnitType[] _tribes;
-        private string[] _names;
-        private int[] _nbUnits;
-        private List<Tuple<int, int>> _startPositions;
+        public UnitType[] Tribes { get; set; }
+        public string[] Names { get; set; }
+        public int[] NbUnits { get; set; }
+        private List<Tuple<int, int>> StartPositions { get; set; }
 
         public GameMakerNew()
         {
-            _nbUnits = null;
+            NbUnits = null;
         }
         public override GameMap makeMap()
         {
             Tuple<int, int> xy = MapGenerator.mapSize();
             List<int> tileList = MapGenerator.generateMap();
-            _startPositions = MapGenerator.getStartingPositions();
+            StartPositions = MapGenerator.getStartingPositions();
             return new GameMap(xy.Item1, xy.Item2, tileList);
         }
 
         public override Player makePlayer(int numPlayer)
         {
-            Player p = new Player(_names[numPlayer-1], tribeName(_tribes[numPlayer-1]), 0);
+            Player p = new Player(Names[numPlayer-1], tribeName(Tribes[numPlayer-1]), 0);
             
             p.UnitList = createUnits(numPlayer);
             return p;
@@ -37,8 +37,8 @@ namespace SmallWorld
         {
             // nbTurns = 10 ?
             GameManager.init(p1, p2, map, MapGenerator.NbTurnAdvised, 1, 0);
-            GameManager.Instance().MapAlgo = MapGenerator.Generator;
-            return GameManager.Instance();
+            GameManager.Instance.MapAlgo = MapGenerator.Generator;
+            return GameManager.Instance;
         }
 
         public override void init() {}
@@ -46,16 +46,16 @@ namespace SmallWorld
         public override List<Unit> createUnits(int numPlayer)
         {
             int nbUnits = MapGenerator.NbUnitsAdvised;
-            if (_nbUnits != null)
+            if (NbUnits != null)
             {
-                nbUnits = _nbUnits[numPlayer - 1];
+                nbUnits = NbUnits[numPlayer - 1];
             }
             List<Unit> ul = new List<Unit>();
-            UnitFactory uf = getTribeFactory(_tribes[numPlayer-1]);
+            UnitFactory uf = getTribeFactory(Tribes[numPlayer-1]);
             for (int i = 0; i < nbUnits; i++)
             {
                 Unit u = uf.makeUnit();
-                u.setPosition(_startPositions[numPlayer - 1].Item1, _startPositions[numPlayer - 1].Item2);
+                u.setPosition(StartPositions[numPlayer - 1].Item1, StartPositions[numPlayer - 1].Item2);
                 ul.Add(u);
             }
             return ul;
@@ -91,14 +91,6 @@ namespace SmallWorld
             }
         }
 
-        public void setTribes(UnitType[] t)
-        {
-            _tribes = t;
-        }
-        public void setNames(string[] t)
-        {
-            _names = t;
-        }
         public void setMapSize(MapSize size)
         {
             switch (size)
@@ -116,10 +108,6 @@ namespace SmallWorld
                     MapGenerator = new DemoMap();
                     break;
             } 
-        }
-        public void setNbUnit(int[] nbunits)
-        {
-            _nbUnits = nbunits;
         }
     }
 }

@@ -12,8 +12,8 @@ namespace TestsJeu
         {
             //Need to change to GameMaker
             GameMakerNew gmk = new GameMakerNew();
-            gmk.setTribes(new UnitType[2] { UnitType.DWARF, UnitType.ORC });
-            gmk.setNames(new string[2] { "J1", "J2" });
+            gmk.Tribes = new UnitType[2] { UnitType.DWARF, UnitType.ORC };
+            gmk.Names = new string[2] { "J1", "J2" };
             gmk.setMapSize(MapSize.DEMO);
             GameManager gmg = gmk.makeGame();
 

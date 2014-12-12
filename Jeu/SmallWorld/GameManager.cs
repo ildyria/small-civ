@@ -12,8 +12,19 @@ namespace SmallWorld
         //A good way to decide would be to do that Rutger Hauer style but I don't want to declaim poetry on a rainy night on a rooftop with only underwear on.
         //Sorry if that seems a bit egoistic.
         private static GameManager _instance;
+        public static GameManager Instance
+        {
+            get 
+            {
+                if (_instance == null)
+                {
+                    _instance = new GameManager();
+                }
+                return _instance; 
+            }
+        }
 
-        private Player[] _players;
+        public Player[] Players { get; private set; }
         public int TurnCurrent { get; private set; }
         public int TurnNumber { get; private set; }
         public int PlayerTurn { get; private set; }
@@ -26,42 +37,35 @@ namespace SmallWorld
         public static void  init(Player p1, Player p2, GameMap map, int nbTurns, int turn, int playerTurn)
         {
             _instance = new GameManager();
-            _instance._players = new Player[2] {p1, p2};
+            _instance.Players = new Player[2] {p1, p2};
             _instance.Map = map;
             _instance.TurnCurrent = turn;
             _instance.TurnNumber = nbTurns;
             _instance.PlayerTurn = playerTurn;
         }
 
-        public static GameManager Instance() {
-            if (_instance == null)
-            {
-                _instance = new GameManager();
-            }
-            return _instance;
-        }
-
-        //The following is not static. It should. But i have no chocolate, so i can't change that.      
+        //The following is not static. It should. But i have no chocolate, so i can't change that.  
+        // This should dissapear
         public void setPlayer(int numPlayer, Player p)
         {
-            _players[(numPlayer + 1) % 2] = p;
+            Players[(numPlayer + 1) % 2] = p;
         }
         public Player getPlayer(int numPlayer)
         {
-            return _players[(numPlayer + 1) % 2];
+            return Players[(numPlayer + 1) % 2];
         }
         public void setPlayer1(Player p)
         {
-            _players[0] = p;
+            Players[0] = p;
         }
         public void setPlayer2(Player p)
         {
-            _players[1] = p;
+            Players[1] = p;
         }
 
         public bool gameEnd()
         {
-            if (TurnCurrent > TurnNumber || _players[0].UnitList.Count == 0 || _players[1].UnitList.Count == 0)
+            if (TurnCurrent > TurnNumber || Players[0].UnitList.Count == 0 || Players[1].UnitList.Count == 0)
             {
                 return true;
             }
@@ -75,7 +79,7 @@ namespace SmallWorld
 
         public List<Unit> getAllUnits()
         {
-            return _players[0].UnitList.Concat(_players[1].UnitList).ToList();
+            return Players[0].UnitList.Concat(Players[1].UnitList).ToList();
         }
 
         public void computeFinalScore()
@@ -84,7 +88,7 @@ namespace SmallWorld
         }
         public Player getCurrentPlayer()
         {
-            return _players[PlayerTurn];
+            return Players[PlayerTurn];
         }
         public void moveUnit(Unit u, int x, int y)
         {
@@ -93,8 +97,8 @@ namespace SmallWorld
             {
                 Tile start = Map.getTile(u.X, u.Y);
                 Tile end = Map.getTile(x, y);
-                List<Unit> opponents = _players[(PlayerTurn + 1) % 2].unitsAt(x, y);
-                Player adv = _players[(PlayerTurn + 1) % 2];
+                List<Unit> opponents = Players[(PlayerTurn + 1) % 2].unitsAt(x, y);
+                Player adv = Players[(PlayerTurn + 1) % 2];
 
                 u.move(x, y, end, opponents);
 
@@ -117,14 +121,14 @@ namespace SmallWorld
 
         public void nextTurn()
         {
-            _players[PlayerTurn].scorePoints();
+            Players[PlayerTurn].scorePoints();
             PlayerTurn = (PlayerTurn + 1) % 2;
             if (PlayerTurn  == 0)
             {
                 TurnCurrent++;
             }
             // no need to reset movement to zero
-            _players[PlayerTurn].play();
+            Players[PlayerTurn].play();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace SmallWorld
 
         public override int moveCost(int x, int y, Tile t)
         {
-            if (t.TerrainType == TerrainType.MOUNTAIN && whereAmI().TerrainType == TerrainType.MOUNTAIN && GameManager.Instance().opponent().unitsAt(x, y).Count == 0) // Teleport !
+            if (t.TerrainType == TerrainType.MOUNTAIN && whereAmI().TerrainType == TerrainType.MOUNTAIN && GameManager.Instance.opponent().unitsAt(x, y).Count == 0) // Teleport !
             {
                 return Dwarf.DEFAULT_MOVE_COST;
             }

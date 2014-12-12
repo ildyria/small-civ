@@ -32,7 +32,7 @@ namespace SmallWorld
         {
             Tuple<int, int, int> state = SaveManager.getGameState();
             GameManager.init(p1, p2, map, state.Item1, state.Item2, state.Item3);
-            return GameManager.Instance();
+            return GameManager.Instance;
         }
 
         public override void init()

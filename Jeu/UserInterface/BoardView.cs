@@ -32,7 +32,7 @@ namespace UserInterface
             gmn.setNames(new string[2] { "J1", "J2" });
             gmn.setMapSize(MapSize.DEMO);
             gmn.makeGame();*/
-            //GameManager.Instance().setMap(new GameMap(5, 5, new List<int> { 1, 2, 3, 0, 1, 1, 1, 1, 2, 3, 0, 1, 1, 1, 3, 3, 3, 2, 2, 2, 3, 3, 3, 2, 2 }));
+            //GameManager.Instance.setMap(new GameMap(5, 5, new List<int> { 1, 2, 3, 0, 1, 1, 1, 1, 2, 3, 0, 1, 1, 1, 3, 3, 3, 2, 2, 2, 3, 3, 3, 2, 2 }));
         }
         
         protected override void OnRender(DrawingContext dc)
@@ -41,12 +41,12 @@ namespace UserInterface
             double a = (TILESIZE - ch) / 2;
             double xOffset = 0, x = 0, y = 0;
 
-            GameMap map = GameManager.Instance().Map;
+            GameMap map = GameManager.Instance.Map;
             if (map != null)
             {
-                for (int i = 0; i < map.getSize().Item1; i++)
+                for (int i = 0; i < map.SizeX; i++)
                 {
-                    for (int j = 0; j < map.getSize().Item2; j++)
+                    for (int j = 0; j < map.SizeY; j++)
                     {
                         xOffset = (j % 2 == 1) ? TILESIZE / 2 : 0;
                         x = xOffset + i * TILESIZE;

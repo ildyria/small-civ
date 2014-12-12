@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 namespace SmallWorld
 {
     interface IGameMap
     {
-        Tuple<int, int> getSize();
+        int SizeX { get; }
+        int SizeY { get; }
         Tile getTile(int x, int y);
-        System.Collections.Generic.List<int> getTileList();
+        List<int> TilesList { get; }
     }
 }

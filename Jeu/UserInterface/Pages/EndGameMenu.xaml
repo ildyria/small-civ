@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="UserInterface.Pages.EndGameMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Background="{StaticResource background}">
+        <StackPanel x:Name="endGameMenu">
+            <StackPanel x:Name="recapJ1" >
+                <Label Content="Joueur "/>
+                <Label x:Name="nameJ1"/>
+                <Label Content="Point :"/>
+                <Label x:Name="pointJ1"/>
+                <Label Content="Nombre d'unité :"/>
+                <Label x:Name="unitNbJ1"/>
+                <Button Content="Retour au menu principal" Click="returnToMainMenuButton_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

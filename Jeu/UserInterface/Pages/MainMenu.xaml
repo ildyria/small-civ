@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="UserInterface.Pages.MainMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Background="{StaticResource background}" >
+        <!--Main menu, graphical improvement need to be done-->
+        <StackPanel x:Name="mainMenu" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel.Resources>
+                <Style BasedOn="{StaticResource mainMenuButtonStyle}" TargetType="{x:Type Button}" />
+            </StackPanel.Resources>
+            <Label Content="SmallWorld !" Style="{StaticResource ResourceKey=mainMenuTitleStyle}"/>
+            <Button x:Name="newGame_button" Content="Nouvelle partie" Click="newGameButton_Click"/>
+            <Button x:Name="loadGame_button" Content="Charger partie" Click="loadGameButton_Click"/>
+            <Button x:Name="help_button" Content="Comment jouer ?" Click="helpButton_Click"/>
+            <Button x:Name="leave_button" Content="Quitter" Click="quit_clicked" />
+        </StackPanel>
+    </Grid>
+</UserControl>

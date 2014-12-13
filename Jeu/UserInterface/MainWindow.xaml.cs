@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,14 +25,11 @@ namespace UserInterface
     /// </summary>
     public partial class MainWindow : Window
     {
-        GameManager _gManager;
-        private List<SmallWorld.Unit> _unitsOnTile;
+        GameManager GManager { get; set; }
         //private Polygon _playerCursor;
-        private int ISelected { get; set; }
-        private int JSelected { get; set; }
-        private int CurrentUnitNumber { get; set; }
-        private Dictionary<SmallWorld.Unit, UIElement> VisualUnitsElements { get; set; }
+        private Dictionary<Unit, UIElement> VisualUnitsElements { get; set; }
         private List<UIElement> AdvisedElements { get; set; }
+        private Data DataValues { get; set; }
         
         
         // one way ticket to hell 
@@ -44,8 +43,11 @@ namespace UserInterface
         public MainWindow()
         {
             InitializeComponent();
+            DataValues = new Data();
+            //DataValues.CurrentUnit = new Dwarf(0, 0, 88, 12, 11, 1, "SATAN", 32);
+            this.DataContext = DataValues;
             //_playerCursor = (Polygon)this.Resources["cursorHex"];
-            _unitsOnTile = new List<SmallWorld.Unit>();
+            DataValues.UnitsOnTile = new List<SmallWorld.Unit>();
             VisualUnitsElements = new Dictionary<SmallWorld.Unit,UIElement>();
             AdvisedElements = new List<UIElement>();
         }
@@ -61,7 +63,7 @@ namespace UserInterface
         private void startLoadGame_clicked(object sender, RoutedEventArgs e)
         {
             SmallWorld.GameMakerLoad gmn = new SmallWorld.GameMakerLoad();
-            _gManager = gmn.makeGame();
+            GManager = gmn.makeGame();
         }
         private void startNewGame_clicked(object sender, RoutedEventArgs e)
         {
@@ -124,57 +126,45 @@ namespace UserInterface
             gmn.Tribes =listTribes;
             gmn.setMapSize(mapSize);
             //gmn.setNbUnit(new int)
-            _gManager = gmn.makeGame();
+            GManager = gmn.makeGame();
             // RENDER
             //gameView.Visibility = Visibility.Visible;
             //createGameMenu.Visibility = Visibility.Collapsed;
             setUnitsOnMap();
             //Should start game instead
-            _gManager.getPlayer(1).play();
+            GManager.getPlayer(1).play();
             fillGeneralInfo();
             
         }
         private void selectedTileChanged()
         {
-            _unitsOnTile = _gManager.getAllUnits().FindAll(u => u.X == ISelected && u.Y == JSelected);
-            CurrentUnitNumber = 0;
+            DataValues.UnitsOnTile = GManager.getAllUnits().FindAll(u => u.X == DataValues.ISelected && u.Y == DataValues.JSelected);
+            DataValues.CurrentUnitNumber = 0;
             setEnableUnitsButtons();
-            fillUnitInfo();
-        }
-        private void fillUnitInfo()
-        {
-           // buttons are disabled, so no problem should arise ...
-           if (_unitsOnTile.Count != 0)
-           {
-               currentUnitListPosition.Content = (CurrentUnitNumber + 1) + "/" + _unitsOnTile.Count;
-               SmallWorld.Unit unitToDetail = _unitsOnTile[CurrentUnitNumber];
-               name.Content = unitToDetail.Name;
-               life.Content = unitToDetail.Life;
-               movesLeft.Content = unitToDetail.MovesLeft;
-           }
-           else // resetting fields
-           {
-               currentUnitListPosition.Content = "";
-               name.Content = "";
-               life.Content = "";
-               movesLeft.Content = "";
-           }
         }
 
+        public string PlayerTurn 
+        { 
+            get  {
+                if (GManager != null)
+                {
+                    return "Joueur " + (GManager.PlayerTurn + 1);
+                }
+                return "ERROR";
+            } 
+        }
         //private void fillN
         private void fillGeneralInfo()
         {
-            pointsJ1.Content = _gManager.getPlayer(1).Points + " points";
-            pointsJ2.Content = _gManager.getPlayer(2).Points + " points";
-            turn.Content = _gManager.TurnCurrent + "/" + _gManager.TurnNumber;
-            playerTurn.Content = "Joueur " + (_gManager.PlayerTurn + 1);
+            pointsJ1.Content = GManager.getPlayer(1).Points + " points";
+            pointsJ2.Content = GManager.getPlayer(2).Points + " points";
         }
 
         private void fillTileInfo()
         {
-            Tile t = _gManager.Map.getTile(ISelected, JSelected);
-            tileType.Content = t.toStringFR();
-            Unit u = _gManager.getCurrentPlayer().UnitList[0];
+            Tile t = DataValues.CurrentTile;
+            //tileType.Content = t.toStringFR();
+            Unit u = DataValues.CurrentPlayerUnit;
             //that way we get the bare cost
             tileMoveCost.Content = u.moveCost(u.X+1, u.Y, t);
             tilePoints.Content = u.scorePoints(t);
@@ -182,7 +172,7 @@ namespace UserInterface
 
         private void setEnableUnitsButtons()
         {
-            if (CurrentUnitNumber == 0)
+            if (DataValues.CurrentUnitNumber == 0)
             {
                 buttonPrecUnit.IsEnabled = false;
             }
@@ -191,7 +181,7 @@ namespace UserInterface
                 buttonPrecUnit.IsEnabled = true;
             }
 
-            if (CurrentUnitNumber == _unitsOnTile.Count - 1 || _unitsOnTile.Count == 0)
+            if (DataValues.CurrentUnitNumber == DataValues.UnitsOnTile.Count - 1 || DataValues.UnitsOnTile.Count == 0)
             {
                 buttonNextUnit.IsEnabled = false;
             }
@@ -203,19 +193,17 @@ namespace UserInterface
 
         private void nextUnit_clicked(object sender, RoutedEventArgs e)
         {
-            CurrentUnitNumber++;
+            DataValues.CurrentUnitNumber++;
             setEnableUnitsButtons();
-            fillUnitInfo();
         }
         private void precUnit_clicked(object sender, RoutedEventArgs e)
         {
-            CurrentUnitNumber--;
+            DataValues.CurrentUnitNumber--;
             setEnableUnitsButtons();
-            fillUnitInfo();
         }
         private void setUnitsOnMap()
         {
-            foreach (SmallWorld.Unit u in _gManager.getAllUnits())
+            foreach (SmallWorld.Unit u in GManager.getAllUnits())
             {
                 Label asset = new Label();
                 asset.Style = App.Current.FindResource(typeStyle[u.GetType()]) as Style;
@@ -232,25 +220,16 @@ namespace UserInterface
             }
         }
 
-        private SmallWorld.Unit getCurrentUnit()
-        {
-            if (_unitsOnTile.Count != 0)
-            {
-                return _unitsOnTile[CurrentUnitNumber];
-            }
-            return null;
-        }
-
         private void moveUnit(int i, int j)
         {
-            if (_unitsOnTile.Count != 0 && i < _gManager.Map.SizeX && j < _gManager.Map.SizeY && i >= 0 && j >= 0)
+            if (DataValues.UnitsOnTile.Count != 0 && i < GManager.Map.SizeX && j < GManager.Map.SizeY && i >= 0 && j >= 0)
             {
-                SmallWorld.Unit currentUnit = _unitsOnTile[CurrentUnitNumber];
-                _gManager.moveUnit(currentUnit, i, j);
+                SmallWorld.Unit currentUnit = DataValues.UnitsOnTile[DataValues.CurrentUnitNumber];
+                GManager.moveUnit(currentUnit, i, j);
 
-                if (_gManager.getAllUnits().Count != VisualUnitsElements.Count) // not optimized at all
+                if (GManager.getAllUnits().Count != VisualUnitsElements.Count) // not optimized at all
                 {
-                    List<SmallWorld.Unit> toDel = VisualUnitsElements.Keys.ToList().FindAll(u => !_gManager.getAllUnits().Contains(u));
+                    List<SmallWorld.Unit> toDel = VisualUnitsElements.Keys.ToList().FindAll(u => !GManager.getAllUnits().Contains(u));
                     foreach (SmallWorld.Unit u in toDel)
                     {
                         mapControl.Children.Remove(VisualUnitsElements[currentUnit]);
@@ -275,7 +254,7 @@ namespace UserInterface
         {
             // no move if not on grid
             // if it is not on the map, maybe make the cursor invisible ?
-            if (i < _gManager.Map.SizeX && j < _gManager.Map.SizeY && i >= 0 && j >= 0)
+            if (i < GManager.Map.SizeX && j < GManager.Map.SizeY && i >= 0 && j >= 0)
             {
                 
                 foreach (UIElement elem in AdvisedElements)
@@ -284,11 +263,11 @@ namespace UserInterface
                 }
                 AdvisedElements.Clear();
 
-                ISelected = i;
-                JSelected = j;
-                Tuple<double, double> coord = BoardView.indexToCoord(i, j);
-                Canvas.SetLeft(playerCursor, coord.Item1);
-                Canvas.SetTop(playerCursor, coord.Item2);
+                DataValues.ISelected = i;
+                DataValues.JSelected = j;
+                //Tuple<double, double> coord = BoardView.indexToCoord(i, j);
+                //Canvas.SetLeft(playerCursor, coord.Item1);
+                //Canvas.SetTop(playerCursor, coord.Item2);
                 selectedTileChanged();
                 fillTileInfo();
                 showAdvisedTiles();
@@ -299,7 +278,7 @@ namespace UserInterface
         {
             if (mapView.IsMouseOver)
             {
-                if (_unitsOnTile.Count != 0) // checked twice, for compat
+                if (DataValues.UnitsOnTile.Count != 0) // checked twice, for compat
                 {
                     System.Windows.Point p = e.GetPosition(mapView);
                     Tuple<int, int> coord = BoardView.coordToIndex(p.X, p.Y);
@@ -331,8 +310,9 @@ namespace UserInterface
         private void endTurn_clicked(object sender = null, RoutedEventArgs e = null)
         {
             //Show graphic elements 
-            _gManager.nextTurn();
+            GManager.nextTurn();
             fillGeneralInfo();
+            DataValues.updateManager();
             gameEnd();
         }
         private void giveUp_clicked(object sender, RoutedEventArgs e)
@@ -342,15 +322,15 @@ namespace UserInterface
 
         private void resetAll()
         {
-            _gManager = null; // not enough i presume
-            _unitsOnTile = new List<SmallWorld.Unit>();
+            GManager = null; // not enough i presume
+            DataValues.UnitsOnTile = new List<SmallWorld.Unit>();
             // that way we don't remove the cursor
             VisualUnitsElements.Values.ToList().ForEach(u => mapControl.Children.Remove(u));
             VisualUnitsElements.Clear();
         }
         private void gameEnd()
         {
-            if (_gManager.gameEnd())
+            if (GManager.gameEnd())
             {
                 mapView.Visibility = Visibility.Collapsed;
                 statusBar.Visibility = Visibility.Collapsed;
@@ -365,17 +345,17 @@ namespace UserInterface
 
         private void showAdvisedTiles()
         {
-            if (_unitsOnTile.Count != 0 && _gManager.getCurrentPlayer().UnitList.Contains(_unitsOnTile[CurrentUnitNumber])) {
-                Wrapper.WrapperGenMap g = _gManager.MapAlgo;
-                SmallWorld.Unit u = _unitsOnTile[CurrentUnitNumber];
+            if (DataValues.UnitsOnTile.Count != 0 && GManager.getCurrentPlayer().UnitList.Contains(DataValues.UnitsOnTile[DataValues.CurrentUnitNumber])) {
+                Wrapper.WrapperGenMap g = GManager.MapAlgo;
+                SmallWorld.Unit u = DataValues.UnitsOnTile[DataValues.CurrentUnitNumber];
                 List<int> movesPossibles = new List<int>();
-                for (int x = Math.Max(u.X - 1, 0); x <= Math.Min(u.X, _gManager.Map.SizeX - 1); x++ )
+                for (int x = Math.Max(u.X - 1, 0); x <= Math.Min(u.X, GManager.Map.SizeX - 1); x++ )
                 {
-                    for (int y = Math.Max(u.Y - 1, 0); y <= Math.Min(u.Y + 1, _gManager.Map.SizeX - 1); y++)
+                    for (int y = Math.Max(u.Y - 1, 0); y <= Math.Min(u.Y + 1, GManager.Map.SizeX - 1); y++)
                     {
-                        if (u.moveCost(x, y, _gManager.Map.getTile(x, y)) > 0)
+                        if (u.moveCost(x, y, GManager.Map.getTile(x, y)) > 0)
                         {
-                            movesPossibles.Add(x * _gManager.Map.SizeX + y);
+                            movesPossibles.Add(x * GManager.Map.SizeX + y);
                         }
                     }
                 }
@@ -386,14 +366,14 @@ namespace UserInterface
                     terrainData.Add((int)entry.Key, entry.Value);
                 }
                 List<Tuple<int, int, int>> listOpponents = new List<Tuple<int, int, int>>();
-                _gManager.opponent().UnitList.ForEach(w => listOpponents.Add(new Tuple<int, int, int>(w.X, w.Y, w.Life)));
+                GManager.opponent().UnitList.ForEach(w => listOpponents.Add(new Tuple<int, int, int>(w.X, w.Y, w.Life)));
                 List<int> best = g.bestMoves(3, new Tuple<int, int, int>(u.X, u.Y, u.Life), movesPossibles, terrainData, listOpponents);
                 foreach (int move in best)
 
                 {
                     Label adt = new Label();
-                    int i = move / _gManager.Map.SizeX;
-                    int j = move % _gManager.Map.SizeX;
+                    int i = move / GManager.Map.SizeX;
+                    int j = move % GManager.Map.SizeX;
                     adt.Style = App.Current.FindResource("advisedTile") as Style;
                     Tuple<double, double> adtPos = BoardView.indexToCoord(i, j);
                     Canvas.SetLeft(adt, adtPos.Item1);
@@ -408,9 +388,9 @@ namespace UserInterface
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            if (_unitsOnTile.Count != 0)
+            if (DataValues.UnitsOnTile.Count != 0)
             {
-                SmallWorld.Unit u = _unitsOnTile[CurrentUnitNumber];
+                SmallWorld.Unit u = DataValues.UnitsOnTile[DataValues.CurrentUnitNumber];
                 int offset = u.Y % 2 == 0 ? -1 : 0;
                 switch (e.Key)
                 {
@@ -453,21 +433,106 @@ namespace UserInterface
         private void nextUnit()
         {
             SmallWorld.Unit uNext;
-            List<SmallWorld.Unit> lu = _gManager.getCurrentPlayer().UnitList;
-            if (_unitsOnTile.Count != 0) // if an unit is selected
+            List<SmallWorld.Unit> lu = GManager.getCurrentPlayer().UnitList;
+            if (DataValues.UnitsOnTile.Count != 0) // if an unit is selected
             {
-                uNext = lu[(lu.IndexOf(_unitsOnTile[CurrentUnitNumber]) + 1) % lu.Count];
+                uNext = lu[(lu.IndexOf(DataValues.UnitsOnTile[DataValues.CurrentUnitNumber]) + 1) % lu.Count];
             }
             else 
             {
-                uNext = _gManager.getCurrentPlayer().UnitList.First();
+                uNext = GManager.getCurrentPlayer().UnitList.First();
             }
 
 
             moveCursor(uNext.X, uNext.Y);
-            CurrentUnitNumber = _unitsOnTile.IndexOf(uNext);
+            DataValues.CurrentUnitNumber = DataValues.UnitsOnTile.IndexOf(uNext);
             setEnableUnitsButtons();
-            fillUnitInfo();
         }
+    }
+
+    public class Data : INotifyPropertyChanged
+    {
+        private List<Unit> _unitsOnTile;
+        private int _currentUnitNumber;
+        private int _iSelected;
+        private int _jSelected;
+
+        GameManager GManager {
+            get { return GameManager.Instance; } 
+        }
+        public double XCursor
+        {
+            get { return BoardView.indexToCoord(ISelected, JSelected).Item1; }
+        }
+        public double YCursor
+        {
+            get { return BoardView.indexToCoord(ISelected, JSelected).Item2; }
+        }
+        public int ISelected 
+        {
+            get { return _iSelected; }
+            set { _iSelected = value; OnPropertyChanged("Xcursor");  }
+        }
+        public int JSelected 
+        {
+            get { return _jSelected; }
+            set { _jSelected = value; OnPropertyChanged("Xcursor"); OnPropertyChanged("Ycursor"); }
+        }
+        public Tile CurrentTile
+        {
+            get { return GManager.Map.getTile(ISelected, JSelected); }
+        }
+        public Unit CurrentPlayerUnit
+        {
+            get { return GManager.getCurrentPlayer().UnitList[0]; }
+        }
+
+        public List<Unit> UnitsOnTile
+        {
+            get { return _unitsOnTile; }
+            set { _unitsOnTile = value; OnPropertyChanged("CurrentUnit"); }
+        }
+        public int CurrentUnitNumber
+        {
+            get { return _currentUnitNumber; }
+            set { _currentUnitNumber = value; OnPropertyChanged("CurrentUnit"); }
+        }
+        public Unit CurrentUnit
+        {
+            get 
+            {
+                if (UnitsOnTile != null && UnitsOnTile.Count > CurrentUnitNumber)
+                {
+                    return UnitsOnTile[CurrentUnitNumber]; 
+                }
+                // need a good way for resetting fields
+                /*
+                currentUnitListPosition.Content = "";
+                name.Content = "";
+                life.Content = "";
+                movesLeft.Content = "";
+                return null;
+                */
+                return new Dwarf(0, 0, 0, 0, 0, 0, "SATAN", 0);
+                
+            }
+        }
+        public void updateManager()
+        {
+            // does not work ...
+            OnPropertyChanged("GManager");
+        }
+        // Declare the event
+        public event PropertyChangedEventHandler PropertyChanged;
+        // Create the OnPropertyChanged method to raise the event 
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
     }
 }

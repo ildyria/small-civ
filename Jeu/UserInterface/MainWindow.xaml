@@ -226,7 +226,7 @@
                     <Label Content="Points :" Grid.Column="0" Grid.Row="2"/>
 
                     <!-- <Label x:Name="tileType" Grid.Column="1" Grid.Row="0"/> -->
-                    <Label x:Name="tileType" Grid.Column="1" Grid.Row="0"/>
+                    <Label x:Name="tileType" Grid.Column="1" Grid.Row="0" />
                     <Label x:Name="tileMoveCost" Grid.Column="1" Grid.Row="1"/>
                     <Label x:Name="tilePoints" Grid.Column="1" Grid.Row="2" />
                 </Grid>
@@ -248,11 +248,11 @@
                     <Label Content="Tour :" Grid.Column="0" Grid.Row="3" />
                     <Label Content="Tour de " Grid.Column="0" Grid.Row="4"/>
 
-                    <Label x:Name="name" Grid.Column="1" Grid.Row="0"/>
-                    <Label x:Name="life" Grid.Column="1" Grid.Row="1"/>
-                    <Label x:Name="movesLeft" Grid.Column="1" Grid.Row="2" />
-                    <Label x:Name="turn"  Grid.Column="1" Grid.Row="3"/>
-                    <Label x:Name="playerTurn" Grid.Column="1" Grid.Row="4" />
+                    <Label Grid.Column="1" Grid.Row="0" Content="{Binding CurrentUnit.Name, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Grid.Column="1" Grid.Row="1" Content="{Binding CurrentUnit.Life, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Grid.Column="1" Grid.Row="2" Content="{Binding CurrentUnit.MovesLeft, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label x:Name="turn"  Grid.Column="1" Grid.Row="3" Content="{Binding GManager.CurrentTurn, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label x:Name="playerTurn" Grid.Column="1" Grid.Row="4" Content="{Binding GManager.PlayerTurn, UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
                 <StackPanel x:Name="gameControl">
                     <DockPanel>
@@ -306,7 +306,7 @@
                 <Grid>
                     <local:BoardView x:Name="mapPanel"/>
                     <Canvas x:Name="mapControl">
-                        <ContentControl x:Name="playerCursor" Content="{StaticResource cursorHex}" Panel.ZIndex="5"/>
+                        <ContentControl x:Name="playerCursor" Content="{StaticResource cursorHex}" Panel.ZIndex="5" Canvas.Left="{Binding XCursor, UpdateSourceTrigger=PropertyChanged}" Canvas.Top="{Binding YCursor, UpdateSourceTrigger=PropertyChanged}"/>
                     </Canvas>
                 </Grid>
             </ScrollViewer>

@@ -9,6 +9,10 @@ GenMap::GenMap(int sizeX, int sizeY) : _sizeX(sizeX), _sizeY(sizeY)
 {
 }
 
+GenMap::GenMap(int sizeX, int sizeY, int* tilelist) : _sizeX(sizeX), _sizeY(sizeY), _mapCreated(tilelist)
+{
+}
+
 int GenMap::getX(){
 	return _sizeX;
 }
@@ -143,6 +147,7 @@ std::vector<std::pair<int, int>> GenMap::possibleMoves(int posX, int posY, int n
 
 GenMap* GenMap_new() { return new GenMap(); }
 GenMap* GenMap_new(int sizeX, int sizeY) { return new GenMap(sizeX, sizeY); }
+GenMap* GenMap_new(int sizeX, int sizeY, int* tilelist) { return new GenMap(sizeX, sizeY, tilelist); }
 void GenMap_delete(GenMap* genmap) { delete genmap; }
 int* GenMap_generate(GenMap* genmap, int nbElementDiff) { return genmap->generate(nbElementDiff); }
 std::pair<std::pair<int, int>, std::pair<int, int>> GenMap_placePlayer(GenMap* genmap, std::list<int> unwanted) { return genmap->placePlayer(unwanted); }

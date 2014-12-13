@@ -20,7 +20,8 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </ScrollViewer>
-            <Button Content="Charger" Click="startLoadGame_clicked"/>
+            <Button Content="Sauvegarder" IsEnabled="{Binding FromGame}" Click="saveGame_Click"/>
+            <Button Content="Charger" Click="startLoadGame_Click"/>
             <Button Content="Supprimer" Click="deleteSaveButton_Click"/>
             <Button Content="Annuler" Click="cancelButton_Click"/>
         </StackPanel>

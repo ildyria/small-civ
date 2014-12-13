@@ -23,26 +23,42 @@ namespace UserInterface.Pages
         public LoadPage()
         {
             InitializeComponent();
+            this.DataContext = Data.Instance;
         }
-        private void startLoadGame_clicked(object sender, RoutedEventArgs e)
+        private void saveGame_Click(object sender, RoutedEventArgs e)
+        {
+            SmallWorld.SaveManagerSerial sm = new SmallWorld.SaveManagerSerial();
+            sm.save();
+            // random after save info ?
+        }
+        private void startLoadGame_Click(object sender, RoutedEventArgs e)
         {
             SmallWorld.GameMakerLoad gmn = new SmallWorld.GameMakerLoad();
-            //GManager = gmn.makeGame();
+            gmn.makeGame();
+            Switcher.Switch(new Pages.InGame());
         }
         private void deleteSaveButton_Click(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
         }
 
-        private void cancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            Switcher.Switch(new Pages.MainMenu());
-        }
+        
 
         #region ISwitchable Members
         public void UtilizeState(object state)
         {
             throw new NotImplementedException();
+        }
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Data.Instance.FromGame)
+            {
+                Switcher.Switch(new Pages.InGame());
+            }
+            else
+            {
+                Switcher.Switch(new Pages.MainMenu());
+            }
         }
         #endregion
 

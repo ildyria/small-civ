@@ -6,6 +6,7 @@ using System.Text;
 
 namespace SmallWorld
 {
+    [Serializable]
     public abstract class Unit : SmallWorld.IUnit
     {
         protected static readonly Dictionary<TerrainType, Tuple<int, int>> terrainData = new Dictionary<TerrainType, Tuple<int, int>>();

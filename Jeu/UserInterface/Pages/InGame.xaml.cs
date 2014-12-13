@@ -33,6 +33,7 @@ namespace UserInterface.Pages
         {
             InitializeComponent();
             this.DataContext = Data.Instance;
+            Data.Instance.FromGame = true;
             //Data.Instance.CurrentUnit = new Dwarf(0, 0, 88, 12, 11, 1, "SATAN", 32);
             //_playerCursor = (Polygon)this.Resources["cursorHex"];
             Data.Instance.UnitsOnTile = new List<SmallWorld.Unit>();
@@ -167,6 +168,7 @@ namespace UserInterface.Pages
         {
             if (Data.Instance.GManager.gameEnd())
             {
+                Data.Instance.FromGame = false;
                 Switcher.Switch(new Pages.EndGameMenu());
                 resetAll();
             }
@@ -256,11 +258,7 @@ namespace UserInterface.Pages
             Data.Instance.updateManager();
             gameEnd();
         }
-        private void giveUp_clicked(object sender, RoutedEventArgs e)
-        {
-            resetAll();
-            Switcher.Switch(new Pages.MainMenu()); // perhaps end screen ?
-        }
+        
 
         private void resetAll()
         {
@@ -358,6 +356,13 @@ namespace UserInterface.Pages
         {
             // need to implement origin
             Switcher.Switch(new Pages.LoadPage());
+        }
+
+        private void giveUp_clicked(object sender, RoutedEventArgs e)
+        {
+            resetAll();
+            Data.Instance.FromGame = false;
+            Switcher.Switch(new Pages.MainMenu()); // perhaps end screen ?
         }
         #endregion
 

@@ -1,7 +1,7 @@
 ﻿using System;
 namespace SmallWorld
 {
-    interface ISaveManagerText
+    interface ISaveManagerSerial
     {
         Tuple<int, int, int> getGameState();
         Tuple<int, int, System.Collections.Generic.List<int>> getMapData();

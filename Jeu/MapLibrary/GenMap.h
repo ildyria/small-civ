@@ -42,6 +42,7 @@ private:
 public:
 	GenMap();
 	GenMap(int sizeX, int sizeY);
+	GenMap(int sizeX, int sizeY, int* tilelist);
 	~GenMap();
 	int getX();
 	int getY();
@@ -56,6 +57,7 @@ public:
 
 EXTERNC DLL GenMap* GenMap_new();
 EXTERNC DLL GenMap* GenMap_new(int sizeX, int sizeY);
+EXTERNC DLL GenMap* GenMap_new(int sizeX, int sizeY, int* tilelist);
 EXTERNC DLL void GenMap_delete(GenMap* genmap);
 EXTERNC DLL int* GenMap_generate(GenMap* genmap, int nbElementDiff);
 EXTERNC DLL std::pair<std::pair<int, int>, std::pair<int, int>> GenMap_placePlayer(GenMap* genmap, std::list<int> unwanted);

@@ -5,6 +5,7 @@ using System.Text;
 
 namespace SmallWorld
 {
+    [Serializable]
     public class Orc : Unit, SmallWorld.IOrc
     {
         protected static new readonly Dictionary<TerrainType, Tuple<int, int>> terrainData = new Dictionary<TerrainType, Tuple<int, int>>()

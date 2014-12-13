@@ -22,6 +22,14 @@ namespace Wrapper {
 		public:
 			WrapperGenMap(){ _genMap = GenMap_new(); }
 			WrapperGenMap(int sizeX, int sizeY) { _genMap = GenMap_new(sizeX, sizeY); }
+			WrapperGenMap(int sizeX, int sizeY, List<int>^ tilelist) {
+				int* tilelistConv = (int*) malloc(sizeof(int) * tilelist->Count);
+				for (int i = 0; i < tilelist->Count; i++)
+				{
+					tilelistConv[i] = tilelist[i];
+				}
+				_genMap = GenMap_new(sizeX, sizeY, tilelistConv);
+			}
 			~WrapperGenMap(){ GenMap_delete(_genMap); }
 			List<int>^ generateMap(int nbElementDiff) {
 				int* cases = GenMap_generate(_genMap, nbElementDiff);

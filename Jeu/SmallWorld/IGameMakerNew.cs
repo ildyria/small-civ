@@ -8,5 +8,6 @@ namespace SmallWorld
         GameManager makeGameManager(Player p1, Player p2, GameMap map);
         GameMap makeMap();
         Player makePlayer(int numPlayer);
+        void end();
     }
 }

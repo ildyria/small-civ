@@ -34,7 +34,7 @@ namespace SmallWorld
         {
             return (Tuple<string, string, int>)_formatter.Deserialize(_stream);
         }
-        public Player getPlayers()
+        public override Player getPlayers()
         {
             return (Player)_formatter.Deserialize(_stream);
         }
@@ -44,25 +44,19 @@ namespace SmallWorld
         }
         public override void load()
         {
-            _stream = new FileStream("F:\\MyFile.bin", FileMode.Open, FileAccess.Read, FileShare.Read);
-
-            /*_g.Map = 
-
-            List<Unit> lu = getUnits(1);
-            */
-            
-            //_stream.Close();
+            _stream = new FileStream(SaveManager.saveFolder + FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
         }
 
         public override void save()
         {
-            _stream = new FileStream("F:\\MyFile.bin", FileMode.Create, FileAccess.Write, FileShare.None);            
+            _stream = new FileStream(SaveManager.saveFolder + FileName, FileMode.Create, FileAccess.Write, FileShare.None);            
             saveMap();
             savePlayer();
             //saveUnit();
             saveGameManagerState();
             _stream.Close();
         }
+
 
         public void saveGameManagerState() 
         {
@@ -85,6 +79,10 @@ namespace SmallWorld
         {
             _formatter.Serialize(_stream, _g.Players[0].UnitList);
             _formatter.Serialize(_stream, _g.Players[1].UnitList);
+        }
+        public override void end()
+        {
+            _stream.Close();
         }
 
     }

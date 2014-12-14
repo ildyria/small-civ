@@ -16,6 +16,7 @@ namespace SmallWorld
             Player p1 = makePlayer(1);
             Player p2 = makePlayer(2);
             GameManager gm = makeGameManager(p1, p2, map);
+            end();
             return gm;
         }
 
@@ -24,5 +25,6 @@ namespace SmallWorld
         public abstract GameManager makeGameManager(Player p1, Player p2, GameMap map);
         public abstract void init();
         public abstract List<Unit> createUnits(int numPlayer);
+        public abstract void end();
     }
 }

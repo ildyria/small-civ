@@ -8,7 +8,7 @@ namespace SmallWorld
     public class GameMakerLoad : GameMaker, SmallWorld.IGameMakerLoad
     {
         // same name ? should be changed
-        public SaveManagerSerial SaveManager { get; private set; }
+        public SaveManager SaveManager { get; private set; }
         public GameMakerLoad()
         {
             //devrait-être dans init.
@@ -47,6 +47,10 @@ namespace SmallWorld
         {
             List<Unit> lu = SaveManager.getUnits(numPlayer);
             return lu;
+        }
+        public override void end()
+        {
+            SaveManager.end();
         }
     }
 }

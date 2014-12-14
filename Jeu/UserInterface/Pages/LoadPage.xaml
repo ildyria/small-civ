@@ -7,13 +7,12 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Background="{StaticResource background}">
         <StackPanel x:Name="loadMenu" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox x:Name="saveName"/>
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <ListView x:Name="saveList">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel>
-                                <!-- TODO -->
-                                <TextBlock Text="{Binding}"/>
                                 <TextBlock Text="{Binding}"/>
                             </WrapPanel>
                         </DataTemplate>

@@ -148,6 +148,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Saves\README.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="textures\tile_desert.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

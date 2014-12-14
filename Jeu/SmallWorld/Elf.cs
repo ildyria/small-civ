@@ -63,7 +63,7 @@ namespace SmallWorld
 
                 if (possible_move.Count != 0)
                 {
-                    randNumber = rand.Next(0, possible_move.Count - 1);
+                    randNumber = rand.Next(0, possible_move.Count);  // count because upper bound is not included
                     pos = possible_move[randNumber];
                     setPosition(pos.Item1, pos.Item2);
                     Life++; // life is gained only if you can move

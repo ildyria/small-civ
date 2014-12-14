@@ -37,6 +37,7 @@ namespace UserInterface
         public MainWindow()
         {
             InitializeComponent();
+            Data.Instance.FromGame = false;
             Switcher.pageSwitcher = this;
             Switcher.Switch(new Pages.MainMenu());
         }

@@ -109,5 +109,10 @@ namespace SmallWorld
                     break;
             } 
         }
+
+        public override void end()
+        {
+
+        }
     }
 }

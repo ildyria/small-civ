@@ -7,20 +7,20 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Background="{StaticResource background}">
         <StackPanel x:Name="loadMenu" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox x:Name="saveName"/>
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <ListView x:Name="saveList">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel>
-                                <!-- TODO -->
-                                <TextBlock Text="{Binding}"/>
                                 <TextBlock Text="{Binding}"/>
                             </WrapPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </ScrollViewer>
-            <Button Content="Charger" Click="startLoadGame_clicked"/>
+            <Button Content="Sauvegarder" IsEnabled="{Binding FromGame}" Click="saveGame_Click"/>
+            <Button Content="Charger" Click="startLoadGame_Click"/>
             <Button Content="Supprimer" Click="deleteSaveButton_Click"/>
             <Button Content="Annuler" Click="cancelButton_Click"/>
         </StackPanel>

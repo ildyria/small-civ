@@ -5,6 +5,7 @@ using System.Text;
 
 namespace SmallWorld
 {
+    [Serializable]
     public class Player : SmallWorld.IPlayer
     {
         public int Points { get; private set; }

@@ -25,6 +25,7 @@ namespace UserInterface
             }
         }
 
+        public bool FromGame { get; set; }
         private List<Unit> _unitsOnTile;
         private int _currentUnitNumber;
         private int _iSelected;

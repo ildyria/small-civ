@@ -51,5 +51,14 @@ namespace SmallWorld
         {
             throw new System.NotImplementedException();
         }
+        public override Player getPlayers()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void end()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

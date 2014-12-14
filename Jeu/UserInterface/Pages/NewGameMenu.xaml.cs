@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SmallWorld;
 
 namespace UserInterface.Pages
 {
@@ -28,59 +29,33 @@ namespace UserInterface.Pages
 
         private void startNewGame_Click(object sender, RoutedEventArgs e)
         {
-            SmallWorld.UnitType[] listTribes = new SmallWorld.UnitType[2];
-            SmallWorld.MapSize mapSize = new SmallWorld.MapSize();
+            UnitType[] listTribes = new UnitType[2];
 
-            if (tribeJ1_dwarf.IsChecked == true)
+            Dictionary<RadioButton, UnitType> tribeJ1Radio = new Dictionary<RadioButton, UnitType>()
             {
-                listTribes[0] = SmallWorld.UnitType.DWARF;
-            }
-            else if (tribeJ1_elf.IsChecked == true)
-            {
-                listTribes[0] = SmallWorld.UnitType.ELF;
-            }
-            else if (tribeJ1_orc.IsChecked == true)
-            {
-                listTribes[0] = SmallWorld.UnitType.ORC;
-            }
-            else
-            {
-                //Error ?
-            }
+               {tribeJ1_dwarf, UnitType.DWARF},
+               {tribeJ1_orc, UnitType.ORC},
+               {tribeJ1_elf, UnitType.ELF}
+            };
 
-            if (tribeJ2_dwarf.IsChecked == true)
+            Dictionary<RadioButton, UnitType> tribeJ2Radio = new Dictionary<RadioButton, UnitType>()
             {
-                listTribes[1] = SmallWorld.UnitType.DWARF;
-            }
-            else if (tribeJ2_elf.IsChecked == true)
-            {
-                listTribes[1] = SmallWorld.UnitType.ELF;
-            }
-            else if (tribeJ2_orc.IsChecked == true)
-            {
-                listTribes[1] = SmallWorld.UnitType.ORC;
-            }
-            else
-            {
-                //Error ?
-            }
+               {tribeJ2_dwarf, UnitType.DWARF},
+               {tribeJ2_orc, UnitType.ORC},
+               {tribeJ2_elf, UnitType.ELF}
+            };
 
-            if (mapSize_demo.IsChecked == true)
+            Dictionary<RadioButton, MapSize> mapSizeRadio = new Dictionary<RadioButton, MapSize>()
             {
-                mapSize = SmallWorld.MapSize.DEMO;
-            }
-            else if (mapSize_small.IsChecked == true)
-            {
-                mapSize = SmallWorld.MapSize.SMALL;
-            }
-            else if (mapSize_classic.IsChecked == true)
-            {
-                mapSize = SmallWorld.MapSize.CLASSIC;
-            }
-            else
-            {
-                //Error ?
-            }
+               {mapSize_demo, MapSize.DEMO},
+               {mapSize_small, MapSize.SMALL},
+               {mapSize_classic, MapSize.CLASSIC}
+            };
+
+            listTribes[0] = tribeJ1Radio[tribeJ1Radio.Keys.ToList().First(u => u.IsChecked == true)];
+            listTribes[1] = tribeJ2Radio[tribeJ2Radio.Keys.ToList().First(u => u.IsChecked == true)];
+            MapSize mapSize = mapSizeRadio[mapSizeRadio.Keys.ToList().First(u => u.IsChecked == true)];
+
 
             SmallWorld.GameMakerNew gmn = new SmallWorld.GameMakerNew();
             gmn.Names = new string[2] { p1Name.Text, p2Name.Text };
@@ -90,7 +65,6 @@ namespace UserInterface.Pages
             gmn.makeGame();
             //Should start game instead
             Data.Instance.GManager.getPlayer(1).play();
-            //fillGeneralInfo();
 
             Switcher.Switch(new Pages.InGame());
 

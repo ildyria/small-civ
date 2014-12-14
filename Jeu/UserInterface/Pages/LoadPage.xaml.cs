@@ -66,8 +66,6 @@ namespace UserInterface.Pages
             
         }
 
-        
-
         #region ISwitchable Members
         public void UtilizeState(object state)
         {

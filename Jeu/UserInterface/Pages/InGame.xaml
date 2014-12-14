@@ -4,11 +4,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
+             mc:Ignorable="d"
              PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown"
              PreviewMouseRightButtonDown="Window_PreviewMouseRightButtonDown"
-             KeyDown="Window_KeyDown">
+             KeyDown="Window_KeyDown" Height="319" Width="604">
     <Grid>
         <DockPanel x:Name="gameView" >
             <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center">
@@ -28,9 +27,9 @@
                     <Label Content="Points :" Grid.Column="0" Grid.Row="2"/>
 
                     <!-- <Label x:Name="tileType" Grid.Column="1" Grid.Row="0"/> -->
-                    <Label x:Name="tileType" Grid.Column="1" Grid.Row="0" />
-                    <Label x:Name="tileMoveCost" Grid.Column="1" Grid.Row="1"/>
-                    <Label x:Name="tilePoints" Grid.Column="1" Grid.Row="2" />
+                    <Label x:Name="tileType" Grid.Column="1" Grid.Row="0" Content="{Binding CurrentTileName, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label x:Name="tileMoveCost" Grid.Column="1" Grid.Row="1" Content="{Binding CurrentMoveCost, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label x:Name="tilePoints" Grid.Column="1" Grid.Row="2" Content="{Binding CurrentTilePoints, UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
                 <Grid x:Name="unitDetails">
                     <Grid.ColumnDefinitions>
@@ -47,7 +46,7 @@
                     <Label Content="Nom :" Grid.Column="0" Grid.Row="0"/>
                     <Label Content="Vie :" Grid.Column="0" Grid.Row="1"/>
                     <Label Content="Mouvement restants :" Grid.Column="0" Grid.Row="2"/>
-                    <Label Content="Tour :" Grid.Column="0" Grid.Row="3" />
+                    <Label Content="Tour :" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="5,0,10,0" />
                     <Label Content="Tour de " Grid.Column="0" Grid.Row="4"/>
 
                     <Label Grid.Column="1" Grid.Row="0" Content="{Binding CurrentUnit.Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -58,9 +57,9 @@
                 </Grid>
                 <StackPanel x:Name="gameControl">
                     <DockPanel>
-                        <Button x:Name="buttonPrecUnit" Content="Prec." Click="precUnit_clicked" IsEnabled="False" DockPanel.Dock="Left"/>
-                        <Button  x:Name="buttonNextUnit" Content="Suiv." Click="nextUnit_clicked" IsEnabled="False" DockPanel.Dock="Right"/>
-                        <Label x:Name="currentUnitListPosition"/>
+                        <Button x:Name="buttonPrecUnit" Content="Prec." Click="precUnit_clicked" IsEnabled="{Binding ButtonPrecEnabled, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Left"/>
+                        <Button  x:Name="buttonNextUnit" Content="Suiv." Click="nextUnit_clicked" IsEnabled="{Binding ButtonNextEnabled, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right"/>
+                        <Label x:Name="currentUnitListPosition" Content="{Binding NumUnitsOnTotal, UpdateSourceTrigger=PropertyChanged}"/>
                     </DockPanel>
 
                     <Button Content="Sauvegarder/Changer" Click="saveLoadButton_Click"/>
@@ -70,9 +69,11 @@
             </StackPanel>
             <StackPanel x:Name="statusBar" Orientation="Horizontal" DockPanel.Dock="Top">
                 <Label Content="Joueur 1 :"/>
-                <Label x:Name="pointsJ1" />
+                <Label Content="{Binding GManager.Players[0].Points}" />
+                <Label Content="points"/>
                 <Label Content="Joueur 2 :"/>
-                <Label x:Name="pointsJ2" />
+                <Label Content="{Binding GManager.Players[1].Points}" />
+                <Label Content="points"/>
             </StackPanel>
             <ScrollViewer x:Name="mapView" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <Grid>

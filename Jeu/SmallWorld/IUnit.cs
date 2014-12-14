@@ -23,5 +23,6 @@ namespace SmallWorld
         void setPosition(int x, int y);
         void startTurn();
         Tile whereAmI();
+        int tileMoveCost(Tile t);
     }
 }

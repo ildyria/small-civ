@@ -6,16 +6,26 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Background="{StaticResource background}">
-        <StackPanel x:Name="endGameMenu">
-            <StackPanel x:Name="recapJ1" >
+        <DockPanel>
+            <Button Content="Retour au menu principal" Click="returnToMainMenuButton_Click" DockPanel.Dock="Bottom"/>
+            <StackPanel x:Name="recapJ1" DockPanel.Dock="Left">
                 <Label Content="Joueur "/>
-                <Label x:Name="nameJ1"/>
+                <Label Content="{Binding Name}"/>
                 <Label Content="Point :"/>
-                <Label x:Name="pointJ1"/>
+                <Label Content="{Binding Points}"/>
                 <Label Content="Nombre d'unité :"/>
-                <Label x:Name="unitNbJ1"/>
-                <Button Content="Retour au menu principal" Click="returnToMainMenuButton_Click"/>
+                <Label Content="{Binding Count}"/>
             </StackPanel>
-        </StackPanel>
+            <StackPanel x:Name="recapJ2" DockPanel.Dock="Right">
+                <Label Content="Joueur "/>
+                <Label Content="{Binding Name}"/>
+                <Label Content="Point :"/>
+                <Label Content="{Binding Points}"/>
+                <Label Content="Nombre d'unité :"/>
+                <Label Content="{Binding Count}"/>
+            </StackPanel>
+        </DockPanel>
+            
+        
     </Grid>
 </UserControl>

@@ -24,7 +24,7 @@ namespace SmallWorld
             // if the opponent is dead and i'm not
             if (opponent.Life == 0 && Life != 0)
             {
-                Value++;
+                Life++;
             }
         }
     }

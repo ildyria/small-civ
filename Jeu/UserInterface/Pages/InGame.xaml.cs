@@ -232,6 +232,10 @@ namespace UserInterface.Pages
             Data.Instance.GManager.nextTurn();
             Data.Instance.updateManager();
             gameEnd();
+            System.Diagnostics.Trace.WriteLine(mapControl.Width);
+            System.Diagnostics.Trace.WriteLine(mapPanel.Width);
+            System.Diagnostics.Trace.WriteLine(mapView.Width);
+
         }
         
 

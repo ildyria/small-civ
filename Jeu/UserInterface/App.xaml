@@ -15,6 +15,10 @@
         <!-- background color of menu ... will be changed later, it's ugly as it is-->
         <SolidColorBrush x:Key="bgMenu" Color="#E4E9EB" Opacity="0.5"/>
         
+        <Style x:Key="stackStyle" TargetType="StackPanel">
+            <Setter Property="Background" Value="Ivory" />
+        </Style>
+        
         <Style x:Key="advisedTile" TargetType="Label">
             <Setter Property="Template">
                 <Setter.Value>
@@ -28,6 +32,8 @@
 
         <Style x:Key="menuStyle" TargetType="StackPanel">
             <Setter Property="Background" Value="{StaticResource bgMenu}" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
         
         <Style x:Key="mainMenuTitleStyle" TargetType="Label">
@@ -193,6 +199,10 @@
         </Style>
         <Style x:Key="defaultPlayerStyle" TargetType="Label">
             <Setter Property="Foreground" Value="Red"/>
+        </Style>
+        <Style TargetType="Separator">
+            <!-- An image would be nice-->
+            <Setter Property="Foreground" Value="Aquamarine"/>
         </Style>
     </Application.Resources>
 </Application>

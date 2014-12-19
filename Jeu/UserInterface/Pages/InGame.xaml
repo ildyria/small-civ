@@ -7,82 +7,85 @@
              mc:Ignorable="d"
              PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown"
              PreviewMouseRightButtonDown="Window_PreviewMouseRightButtonDown"
-             KeyDown="Window_KeyDown" Height="319" Width="604">
-    <Grid>
-        <DockPanel x:Name="gameView" >
-            <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center">
-                <!-- TODO -->
-                <Grid x:Name="tileDetails">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                    </Grid.RowDefinitions>
-                    <Label Content="Type :" Grid.Column="0" Grid.Row="0"/>
-                    <Label Content="Cout de déplacement :" Grid.Column="0" Grid.Row="1"/>
-                    <Label Content="Points :" Grid.Column="0" Grid.Row="2"/>
+             KeyDown="Window_KeyDown">
+    <DockPanel x:Name="gameView" >
+        <DockPanel.Resources>
+            <Style BasedOn="{StaticResource stackStyle}" TargetType="{x:Type StackPanel}" />
+        </DockPanel.Resources>
+        <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Width="175">
+            <!-- TODO -->
+            <Grid x:Name="tileDetails">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Label Content="Type :" Grid.Column="0" Grid.Row="0"/>
+                <Label Content="Cout de déplacement :" Grid.Column="0" Grid.Row="1"/>
+                <Label Content="Points :" Grid.Column="0" Grid.Row="2"/>
 
-                    <!-- <Label x:Name="tileType" Grid.Column="1" Grid.Row="0"/> -->
-                    <Label x:Name="tileType" Grid.Column="1" Grid.Row="0" Content="{Binding CurrentTileName, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Label x:Name="tileMoveCost" Grid.Column="1" Grid.Row="1" Content="{Binding CurrentMoveCost, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Label x:Name="tilePoints" Grid.Column="1" Grid.Row="2" Content="{Binding CurrentTilePoints, UpdateSourceTrigger=PropertyChanged}"/>
-                </Grid>
-                <Grid x:Name="unitDetails">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                    </Grid.RowDefinitions>
-                    <Label Content="Nom :" Grid.Column="0" Grid.Row="0"/>
-                    <Label Content="Vie :" Grid.Column="0" Grid.Row="1"/>
-                    <Label Content="Mouvement restants :" Grid.Column="0" Grid.Row="2"/>
-                    <Label Content="Tour :" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="5,0,10,0" />
-                    <Label Content="Tour de " Grid.Column="0" Grid.Row="4"/>
+                <!-- <Label x:Name="tileType" Grid.Column="1" Grid.Row="0"/> -->
+                <Label x:Name="tileType" Grid.Column="1" Grid.Row="0" Content="{Binding CurrentTileName, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label x:Name="tileMoveCost" Grid.Column="1" Grid.Row="1" Content="{Binding CurrentMoveCost, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label x:Name="tilePoints" Grid.Column="1" Grid.Row="2" Content="{Binding CurrentTilePoints, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+            <Separator />
+            <Grid x:Name="unitDetails">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Label Content="Nom :" Grid.Column="0" Grid.Row="0"/>
+                <Label Content="Vie :" Grid.Column="0" Grid.Row="1"/>
+                <Label Content="Mouvement restants :" Grid.Column="0" Grid.Row="2"/>
+                <Label Content="Tour :" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="5,0,10,0" />
+                <Label Content="Tour de " Grid.Column="0" Grid.Row="4"/>
 
-                    <Label Grid.Column="1" Grid.Row="0" Content="{Binding CurrentUnit.Name, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Label Grid.Column="1" Grid.Row="1" Content="{Binding CurrentUnit.Life, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Label Grid.Column="1" Grid.Row="2" Content="{Binding CurrentUnit.MovesLeft, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Label x:Name="turn"  Grid.Column="1" Grid.Row="3" Content="{Binding GManager.TurnCurrent, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Label x:Name="playerTurn" Grid.Column="1" Grid.Row="4" Content="{Binding GManager.PlayerTurn, UpdateSourceTrigger=PropertyChanged}"/>
-                </Grid>
-                <StackPanel x:Name="gameControl">
-                    <DockPanel>
-                        <Button x:Name="buttonPrecUnit" Content="Prec." Click="precUnit_clicked" IsEnabled="{Binding ButtonPrecEnabled, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Left"/>
-                        <Button  x:Name="buttonNextUnit" Content="Suiv." Click="nextUnit_clicked" IsEnabled="{Binding ButtonNextEnabled, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right"/>
-                        <Label x:Name="currentUnitListPosition" Content="{Binding NumUnitsOnTotal, UpdateSourceTrigger=PropertyChanged}"/>
-                    </DockPanel>
+                <Label Grid.Column="1" Grid.Row="0" Content="{Binding CurrentUnit.Name, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Grid.Column="1" Grid.Row="1" Content="{Binding CurrentUnit.Life, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Grid.Column="1" Grid.Row="2" Content="{Binding CurrentUnit.MovesLeft, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label x:Name="turn"  Grid.Column="1" Grid.Row="3" Content="{Binding GManager.TurnCurrent, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label x:Name="playerTurn" Grid.Column="1" Grid.Row="4" Content="{Binding GManager.PlayerTurn, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+            <Separator />
+            <StackPanel x:Name="gameControl">
+                <DockPanel>
+                    <Button x:Name="buttonPrecUnit" Content="Prec." Click="precUnit_clicked" IsEnabled="{Binding ButtonPrecEnabled, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Left"/>
+                    <Button  x:Name="buttonNextUnit" Content="Suiv." Click="nextUnit_clicked" IsEnabled="{Binding ButtonNextEnabled, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right"/>
+                    <Label x:Name="currentUnitListPosition" Content="{Binding NumUnitsOnTotal, UpdateSourceTrigger=PropertyChanged}"/>
+                </DockPanel>
 
-                    <Button Content="Sauvegarder/Changer" Click="saveLoadButton_Click"/>
-                    <Button Content="Find de tour" Click="endTurn_clicked"/>
-                    <Button Content="Abandonner" Click="giveUp_clicked"/>
-                </StackPanel>
+                <Button Content="Sauvegarder/Changer" Click="saveLoadButton_Click"/>
+                <Button Content="Find de tour" Click="endTurn_clicked"/>
+                <Button Content="Abandonner" Click="giveUp_clicked"/>
             </StackPanel>
-            <StackPanel x:Name="statusBar" Orientation="Horizontal" DockPanel.Dock="Top">
-                <Label Content="Joueur 1 :" Style="{Binding StyleMenuPlayer1, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Content="{Binding GManager.Players[0].Points}" Style="{Binding StyleMenuPlayer1, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Content="points" Style="{Binding StyleMenuPlayer1, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Content="Joueur 2 :" Style="{Binding StyleMenuPlayer2, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Content="{Binding GManager.Players[1].Points}" Style="{Binding StyleMenuPlayer2, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Content="points" Style="{Binding StyleMenuPlayer2, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-            <ScrollViewer x:Name="mapView" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                <Grid>
-                    <local:BoardView x:Name="mapPanel"/>
-                    <Canvas x:Name="mapControl">
-                        <ContentControl x:Name="playerCursor" Content="{StaticResource cursorHex}" Panel.ZIndex="5" Canvas.Left="{Binding XCursor, UpdateSourceTrigger=PropertyChanged}" Canvas.Top="{Binding YCursor, UpdateSourceTrigger=PropertyChanged}"/>
-                    </Canvas>
-                </Grid>
-            </ScrollViewer>
-        </DockPanel>
-    </Grid>
+        </StackPanel>
+        <StackPanel x:Name="statusBar" Orientation="Horizontal" DockPanel.Dock="Top" >
+            <Label Content="Joueur 1 :" Style="{Binding StyleMenuPlayer1, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="{Binding GManager.Players[0].Points}" Style="{Binding StyleMenuPlayer1, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="points" Style="{Binding StyleMenuPlayer1, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="Joueur 2 :" Style="{Binding StyleMenuPlayer2, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="{Binding GManager.Players[1].Points}" Style="{Binding StyleMenuPlayer2, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="points" Style="{Binding StyleMenuPlayer2, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+        <ScrollViewer x:Name="mapView" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="Black">
+            <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+                <local:BoardView x:Name="mapPanel"/>
+                <Canvas x:Name="mapControl" >
+                    <ContentControl x:Name="playerCursor" Content="{StaticResource cursorHex}" Panel.ZIndex="5" Canvas.Left="{Binding XCursor, UpdateSourceTrigger=PropertyChanged}" Canvas.Top="{Binding YCursor, UpdateSourceTrigger=PropertyChanged}"/>
+                </Canvas>
+            </Grid>
+        </ScrollViewer>
+    </DockPanel>
 </UserControl>

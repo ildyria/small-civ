@@ -12,6 +12,8 @@
         <!-- Windows calc ... Not sure if it will fit (yeah, size matter !) -->
         <Polygon x:Key="cursorHex" Points="3,0 6,1.355 6,4.645 3,6 0,4.645 0,1.355" Width="60" Height="60" Stretch="Fill" Stroke="BlueViolet" StrokeThickness="3" />
         
+        <!-- background color of menu ... will be changed later, it's ugly as it is-->
+        <SolidColorBrush x:Key="bgMenu" Color="#E4E9EB" Opacity="0.5"/>
         
         <Style x:Key="advisedTile" TargetType="Label">
             <Setter Property="Template">
@@ -24,34 +26,55 @@
         </Style>        
 
 
-        <Style x:Key="createGameMenuStyle" TargetType="StackPanel">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <SolidColorBrush Color="#E4E9EB" Opacity="0.5"/>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Margin" Value="0,20,0,0"></Setter>
-            <Setter Property="Width" Value="700" />
+        <Style x:Key="menuStyle" TargetType="StackPanel">
+            <Setter Property="Background" Value="{StaticResource bgMenu}" />
         </Style>
         
         <Style x:Key="mainMenuTitleStyle" TargetType="Label">
             <Setter Property="Height" Value="50" />
             <Setter Property="Width" Value="250" />
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="30" />
+            <!-- <Setter Property="Background" Value="Aquamarine"/> -->
+            <Setter Property="FontStyle" Value="Oblique"/>
+            <Setter Property="Foreground" Value="BlueViolet"/>
         </Style>        
         <Style x:Key="mainMenuButtonStyle" TargetType="Button">
-            <Setter Property="Height" Value="50" />
-            <Setter Property="Width" Value="250" />
+            
+            <Setter Property="Height" Value="70" />
+            <Setter Property="Width" Value="300" />
             <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="FontSize" Value="15" />
-            <!-- 
             <Setter Property="Template">
                 <Setter.Value>
-                    
-                </Setter.Value>
-            </Setter>  
-            -->
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="Disabled"/>
+                                <!--VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="mouseOverBackgroundImage" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="1"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="pressedBackgroundImage" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="1"/>
+                                    </Storyboard>
+                                </VisualState>-->
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                            <Image Name="normalBackgroundImage" Source="/UserInterface;component/ressources/sword_horiz.png" />
+                            <Image Name="mouseOverBackgroundImage" Source="/UserInterface;component/ressources/sword_horiz.png" />
+                            <Image Name="pressedBackgroundImage" Source="/UserInterface;component/ressources/sword_horiz.png" />
+                        <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-1,0,0"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+            </Setter>
         </Style>
         
         <Style x:Key="unitNumberSliderStyle" TargetType="Slider">
@@ -63,7 +86,6 @@
         </Style>
 
         <Style x:Key="createGameMenuSizeMapStyle" TargetType="StackPanel">
-            <Setter Property="Width" Value="400" />
         </Style>
         
         <Style TargetType="{x:Type RadioButton}" x:Key="radioNoDot">
@@ -162,6 +184,15 @@
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+
+
+        <Style x:Key="currentPlayerStyle" TargetType="Label">
+            <Setter Property="Foreground" Value="BlueViolet"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="defaultPlayerStyle" TargetType="Label">
+            <Setter Property="Foreground" Value="Red"/>
         </Style>
     </Application.Resources>
 </Application>

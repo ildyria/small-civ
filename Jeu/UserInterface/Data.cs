@@ -41,6 +41,15 @@ namespace UserInterface
         {
             get { return CurrentUnitNumber > 0; }
         }
+
+        public Style StyleMenuPlayer1
+        {
+            get { return (GManager.PlayerTurn == 0) ? (Style)App.Current.FindResource("currentPlayerStyle") : (Style)App.Current.FindResource("defaultPlayerStyle"); }
+        }
+        public Style StyleMenuPlayer2
+        {
+            get { return (GManager.PlayerTurn == 1) ? (Style)App.Current.FindResource("currentPlayerStyle") : (Style)App.Current.FindResource("defaultPlayerStyle"); }
+        }
         public Boolean ButtonNextEnabled
         {
             get { return (Data.Instance.CurrentUnitNumber < Data.Instance.UnitsOnTile.Count - 1 && Data.Instance.UnitsOnTile.Count != 0); }
@@ -66,10 +75,12 @@ namespace UserInterface
         private int _iSelected;
         private int _jSelected;
 
+        [DependentProperties("StyleMenuPlayer1", "StyleMenuPlayer2")]
         public GameManager GManager
         {
             get { return GameManager.Instance; }
         }
+
         public double XCursor
         {
             get { return BoardView.indexToCoord(ISelected, JSelected).Item1; }
@@ -106,7 +117,7 @@ namespace UserInterface
         public List<Unit> UnitsOnTile
         {
             get { return _unitsOnTile; }
-            set { _unitsOnTile = value; OnPropertyChanged("UnitsOnTile"); }
+            set { _unitsOnTile = value; RaiseProperty("UnitsOnTile"); }
         }
         [DependentProperties("CurrentUnit", "ButtonPrecEnabled", "ButtonNextEnabled", "NumUnitsOnTotal")]
         public int CurrentUnitNumber
@@ -131,7 +142,7 @@ namespace UserInterface
         public void updateManager()
         {
             // does not work ...
-            OnPropertyChanged("GManager");
+            RaiseProperty("GManager");
         }
 
 
@@ -152,7 +163,6 @@ namespace UserInterface
         }
         protected void RaiseProperty(string propertyName, List<string> calledProperties = null)
         {
-            System.Diagnostics.Trace.WriteLine("HELLO");
             OnPropertyChanged(propertyName);
 
             if (calledProperties == null)

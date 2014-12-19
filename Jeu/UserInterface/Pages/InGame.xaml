@@ -68,12 +68,12 @@
                 </StackPanel>
             </StackPanel>
             <StackPanel x:Name="statusBar" Orientation="Horizontal" DockPanel.Dock="Top">
-                <Label Content="Joueur 1 :"/>
-                <Label Content="{Binding GManager.Players[0].Points}" />
-                <Label Content="points"/>
-                <Label Content="Joueur 2 :"/>
-                <Label Content="{Binding GManager.Players[1].Points}" />
-                <Label Content="points"/>
+                <Label Content="Joueur 1 :" Style="{Binding StyleMenuPlayer1, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="{Binding GManager.Players[0].Points}" Style="{Binding StyleMenuPlayer1, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="points" Style="{Binding StyleMenuPlayer1, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="Joueur 2 :" Style="{Binding StyleMenuPlayer2, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="{Binding GManager.Players[1].Points}" Style="{Binding StyleMenuPlayer2, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="points" Style="{Binding StyleMenuPlayer2, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
             <ScrollViewer x:Name="mapView" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <Grid>

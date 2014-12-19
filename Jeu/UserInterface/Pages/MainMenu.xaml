@@ -7,7 +7,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Background="{StaticResource background}" >
         <!--Main menu, graphical improvement need to be done-->
-        <StackPanel x:Name="mainMenu" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <StackPanel x:Name="mainMenu" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource menuStyle}">
             <StackPanel.Resources>
                 <Style BasedOn="{StaticResource mainMenuButtonStyle}" TargetType="{x:Type Button}" />
             </StackPanel.Resources>

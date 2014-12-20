@@ -79,8 +79,8 @@ namespace SmallWorld
             }
 
         }
-        //return true if someone died
-        public virtual bool fightRound(Unit opponent) {
+        //return 1 if opponent is damaged, -1 if current unit is damaged
+        public virtual int fightRound(Unit opponent) {
             int atk = Attack * Life / 5;
             int def = opponent.Armour * opponent.Life / 5;
             double seuil = (atk - def) * 12.5 + 50;

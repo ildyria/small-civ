@@ -37,6 +37,15 @@ namespace UserInterface
                 return null;
             }
         }
+
+        public string CurrentTurn
+        {
+            get { return GManager.TurnCurrent + "/" + GManager.TurnNumber; }
+        }
+        public string CurrentPlayer
+        {
+            get { return "Joueur " + (GManager.PlayerTurn + 1); }
+        }
         public Boolean ButtonPrecEnabled
         {
             get { return CurrentUnitNumber > 0; }
@@ -75,7 +84,7 @@ namespace UserInterface
         private int _iSelected;
         private int _jSelected;
 
-        [DependentProperties("StyleMenuPlayer1", "StyleMenuPlayer2")]
+        [DependentProperties("StyleMenuPlayer1", "StyleMenuPlayer2", "CurrentTurn", "CurrentPlayer")]
         public GameManager GManager
         {
             get { return GameManager.Instance; }

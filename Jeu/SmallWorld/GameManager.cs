@@ -100,7 +100,7 @@ namespace SmallWorld
                 List<Unit> opponents = Players[(PlayerTurn + 1) % 2].unitsAt(x, y);
                 Player adv = Players[(PlayerTurn + 1) % 2];
 
-                u.move(x, y, end, opponents);
+                List<Enum> res = u.move(x, y, end, opponents);
 
                 if (u.Life == 0)
                 {

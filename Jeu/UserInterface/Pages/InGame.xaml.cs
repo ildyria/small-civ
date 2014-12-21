@@ -115,25 +115,13 @@ namespace UserInterface.Pages
             Data.Instance.CurrentUnitNumber = 0;
         }
 
-        public string PlayerTurn
-        {
-            get
-            {
-                if (Data.Instance.GManager != null)
-                {
-                    return "Joueur " + (Data.Instance.GManager.PlayerTurn + 1);
-                }
-                return "ERROR";
-            }
-        }
-
         private void Window_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (mapView.IsMouseOver)
             {
                 if (Data.Instance.UnitsOnTile.Count != 0) // checked twice, for compat
                 {
-                    System.Windows.Point p = e.GetPosition(mapView);
+                    System.Windows.Point p = e.GetPosition(mapPanel);
                     Tuple<int, int> coord = BoardView.coordToIndex(p.X, p.Y);
                     moveUnitAndCursor(coord.Item1, coord.Item2);
                 }

@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 namespace SmallWorld
 {
     interface IOrc
     {
-        void fight(Unit opponent);
-        System.Collections.Generic.Dictionary<TerrainType, Tuple<int, int>> getTerrainData();
+        List<Enum> fight(Unit opponent);
+        Dictionary<TerrainType, Tuple<int, int>> getTerrainData();
     }
 }

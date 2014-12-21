@@ -9,8 +9,8 @@
              PreviewMouseRightButtonDown="Window_PreviewMouseRightButtonDown"
              KeyDown="Window_KeyDown">
     <Grid>
-        <DockPanel x:Name="gameView" Background="Ivory">
-            <Grid DockPanel.Dock="Right">
+        <DockPanel Background="Ivory">
+            <Grid DockPanel.Dock="Right" Width="150">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*" />

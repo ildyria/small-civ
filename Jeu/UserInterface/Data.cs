@@ -44,7 +44,14 @@ namespace UserInterface
         }
         public string CurrentPlayer
         {
-            get { return "Joueur " + (GManager.PlayerTurn + 1); }
+            get
+            {
+                if (Data.Instance.GManager != null)
+                {
+                    return "Joueur " + (GManager.PlayerTurn + 1);
+                }
+                return "ERROR";
+            }
         }
         public Boolean ButtonPrecEnabled
         {

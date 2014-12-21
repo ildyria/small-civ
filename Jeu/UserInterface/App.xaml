@@ -5,6 +5,7 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <local:InvertBoolConverter x:Key="invertBoolConverter"/>
+        <local:OrConverter x:Key="orConverter" />
 
         <!--They sucks (google img), and they are not cc; we need to find cc licensed art-->
         <ImageBrush ImageSource="/UserInterface;component/ressources/smallworld_bg.jpg" x:Key="background"/>

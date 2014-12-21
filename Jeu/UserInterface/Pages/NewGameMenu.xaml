@@ -17,34 +17,89 @@
             <DockPanel/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <StackPanel.Resources>
-                <Style TargetType="{x:Type StackPanel}">
-                    <Setter Property="Margin" Value="10,5,10,5"/>
-                </Style>
-            </StackPanel.Resources>
-            <StackPanel>
+            <StackPanel Margin="10,5,10,5">
                 <TextBox x:Name="p1Name" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="Nom" VerticalAlignment="Top" Width="120"/>
                 <GroupBox Header="Peuple du joueur 1 :">
-                    <StackPanel>
-                        <RadioButton x:Name="tribeJ1_dwarf" GroupName="tribeJ1" Style="{StaticResource dwarf_icon}" IsEnabled="{Binding ElementName=tribeJ2_dwarf, Path=IsChecked, Converter={StaticResource invertBoolConverter}}" IsChecked="True"/>
-                        <RadioButton x:Name="tribeJ1_elf" GroupName="tribeJ1" Style="{StaticResource elf_icon}" IsEnabled="{Binding IsChecked, Converter={StaticResource invertBoolConverter}, ElementName=tribeJ2_elf}"/>
-                        <RadioButton x:Name="tribeJ1_orc" GroupName="tribeJ1" Style="{StaticResource orc_icon}" IsEnabled="{Binding ElementName=tribeJ2_orc, Path=IsChecked, Converter={StaticResource invertBoolConverter}}"/>
+                    <StackPanel Margin="10,5,10,5">
+                        <StackPanel x:Name="tribeJ1_dwarf_panel">
+                            <RadioButton x:Name="tribeJ1_dwarf" GroupName="tribeJ1" Style="{StaticResource dwarf_icon}" IsEnabled="{Binding ElementName=tribeJ2_dwarf, Path=IsChecked, Converter={StaticResource invertBoolConverter}}" IsChecked="True"/>
+                        </StackPanel>
+                        <StackPanel x:Name="tribeJ1_elf_panel">
+                            <RadioButton x:Name="tribeJ1_elf" GroupName="tribeJ1" Style="{StaticResource elf_icon}" IsEnabled="{Binding IsChecked, Converter={StaticResource invertBoolConverter}, ElementName=tribeJ2_elf}"/>
+                        </StackPanel>
+                        <StackPanel x:Name="tribeJ1_orc_panel">
+                                 <RadioButton x:Name="tribeJ1_orc" GroupName="tribeJ1" Style="{StaticResource orc_icon}" IsEnabled="{Binding ElementName=tribeJ2_orc, Path=IsChecked, Converter={StaticResource invertBoolConverter}}"/>
+                        </StackPanel>
                     </StackPanel>
                 </GroupBox>
                 <DockPanel/>
             </StackPanel>
-            <StackPanel >
+            <StackPanel Margin="10,5,10,5">
                 <TextBox x:Name="p2Name" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="Nom" VerticalAlignment="Top" Width="120"/>
                 <GroupBox Header="Peuple du joueur 2 :">
-                    <StackPanel>
-                        <RadioButton x:Name="tribeJ2_dwarf" GroupName="tribeJ2" Style="{StaticResource dwarf_icon}" IsEnabled="{Binding ElementName=tribeJ1_dwarf, Path=IsChecked, Converter={StaticResource invertBoolConverter}}"/>
-                        <RadioButton x:Name="tribeJ2_elf" GroupName="tribeJ2" Style="{StaticResource elf_icon}" IsEnabled="{Binding ElementName=tribeJ1_elf, Path=IsChecked, Converter={StaticResource invertBoolConverter}}"/>
-                        <RadioButton x:Name="tribeJ2_orc" GroupName="tribeJ2" Style="{StaticResource orc_icon}" IsEnabled="{Binding ElementName=tribeJ1_orc, Path=IsChecked, Converter={StaticResource invertBoolConverter}}" IsChecked="True"/>
+                    <StackPanel Margin="10,5,10,5">
+                        <StackPanel x:Name="tribeJ2_dwarf_panel">
+                            <RadioButton x:Name="tribeJ2_dwarf" GroupName="tribeJ2" Style="{StaticResource dwarf_icon}" IsEnabled="{Binding ElementName=tribeJ1_dwarf, Path=IsChecked, Converter={StaticResource invertBoolConverter}}"/>
+                        </StackPanel>
+                        <StackPanel x:Name="tribeJ2_elf_panel">
+                            <RadioButton x:Name="tribeJ2_elf" GroupName="tribeJ2" Style="{StaticResource elf_icon}" IsEnabled="{Binding ElementName=tribeJ1_elf, Path=IsChecked, Converter={StaticResource invertBoolConverter}}"/>
+                        </StackPanel>
+                        <StackPanel x:Name="tribeJ2_orc_panel">
+                            <RadioButton x:Name="tribeJ2_orc" GroupName="tribeJ2" Style="{StaticResource orc_icon}" IsEnabled="{Binding ElementName=tribeJ1_orc, Path=IsChecked, Converter={StaticResource invertBoolConverter}}" IsChecked="True"/>
+                        </StackPanel>
                     </StackPanel>
                 </GroupBox>
                 <DockPanel/>
             </StackPanel>
         </StackPanel>
+        <TextBlock TextWrapping="Wrap" Height="50">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Text" Value=""/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Value="True">
+                                    <Condition.Binding>
+                                        <MultiBinding Converter="{StaticResource orConverter}">
+                                            <Binding Path="IsMouseOver" ElementName="tribeJ1_dwarf_panel" />
+                                            <Binding Path="IsMouseOver" ElementName="tribeJ2_dwarf_panel" />
+                                        </MultiBinding>
+                                    </Condition.Binding>
+                                </Condition>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Text" Value="Les nains : ces fiers guerriers on maintes fois démontré leur maîtrise de la pioche. Il leur est aisé de se rendre d'une montagne à une autre, si le cadre est sûr." />
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Value="True">
+                                    <Condition.Binding>
+                                        <MultiBinding Converter="{StaticResource orConverter}">
+                                            <Binding Path="IsMouseOver" ElementName="tribeJ1_elf_panel" />
+                                            <Binding Path="IsMouseOver" ElementName="tribeJ2_elf_panel" />
+                                        </MultiBinding>
+                                    </Condition.Binding>
+                                </Condition>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Text" Value="Les elfes : leur agilité légendaire n'est plus à démontrer. Elle leur permet parfois d'échapper à la mort. Parfois ..." />
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Value="True">
+                                    <Condition.Binding>
+                                        <MultiBinding Converter="{StaticResource orConverter}">
+                                            <Binding Path="IsMouseOver" ElementName="tribeJ1_orc_panel" />
+                                            <Binding Path="IsMouseOver" ElementName="tribeJ2_orc_panel" />
+                                        </MultiBinding>
+                                    </Condition.Binding>
+                                </Condition>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Text" Value="Les orc : ces guerriers sans foi ni loi se repaisse des cadavres de leurs ennemis. Tout adversaire vaincu leur fait gagner 1 point de vie" />
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
         <Button x:Name="startNewGame_button" Content="Lancer la partie" Click="startNewGame_Click"/>
         <Button x:Name="cancelNew_button" Content="Annuler" Click="cancelNewButton_Click"/>
     </StackPanel>

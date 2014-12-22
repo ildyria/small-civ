@@ -6,6 +6,12 @@
              mc:Ignorable="d" 
              Background="{StaticResource background}">
     <StackPanel x:Name="createGameMenu" Style="{StaticResource menuStyle}" Width="300">
+        <StackPanel.Resources>
+            <Style BasedOn="{StaticResource intMenuButtonStyle}" TargetType="Button">
+                <Setter Property="Width" Value="150" />
+                <Setter Property="Height" Value="75"/>
+            </Style>
+        </StackPanel.Resources>
         <StackPanel Style="{StaticResource createGameMenuSizeMapStyle}">
             <GroupBox Header="Taille de la carte :" HorizontalAlignment="Center" >
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -68,7 +74,7 @@
                                     </Condition.Binding>
                                 </Condition>
                             </MultiDataTrigger.Conditions>
-                            <Setter Property="Text" Value="Les nains : ces fiers guerriers on maintes fois démontré leur maîtrise de la pioche. Il leur est aisé de se rendre d'une montagne à une autre, si le cadre est sûr." />
+                            <Setter Property="Text" Value="Les nains : ces fiers guerriers ont maintes fois démontré leur maîtrise de la pioche. Il leur est aisé de se rendre d'une montagne à une autre, si le cadre est sûr." />
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -94,13 +100,13 @@
                                     </Condition.Binding>
                                 </Condition>
                             </MultiDataTrigger.Conditions>
-                            <Setter Property="Text" Value="Les orc : ces guerriers sans foi ni loi se repaisse des cadavres de leurs ennemis. Tout adversaire vaincu leur fait gagner 1 point de vie" />
+                            <Setter Property="Text" Value="Les orc : ces guerriers sans foi ni loi se repaissent des cadavres de leurs ennemis. Tout adversaire vaincu leur fait gagner 1 point de vie" />
                         </MultiDataTrigger>
                     </Style.Triggers>
                 </Style>
             </TextBlock.Style>
         </TextBlock>
-        <Button x:Name="startNewGame_button" Content="Lancer la partie" Click="startNewGame_Click"/>
+        <Button x:Name="startNewGame_button" Content="Lancer la partie" Click="startNewGame_Click" />
         <Button x:Name="cancelNew_button" Content="Annuler" Click="cancelNewButton_Click"/>
     </StackPanel>
 </UserControl>

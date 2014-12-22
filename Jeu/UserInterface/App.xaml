@@ -18,6 +18,10 @@
         <!-- background color of menu ... will be changed later, it's ugly as it is-->
         <SolidColorBrush x:Key="bgMenu" Color="#E4E9EB" Opacity="0.5"/>
         
+        <ImageBrush ImageSource="/UserInterface;component/ressources/boxNormal.png" x:Key="boxBG"/>
+        
+        
+        
         <Style x:Key="stackStyle" TargetType="StackPanel">
             <Setter Property="Background" Value="Ivory" />
         </Style>
@@ -48,9 +52,43 @@
             <!-- <Setter Property="Background" Value="Aquamarine"/> -->
             <Setter Property="FontStyle" Value="Oblique"/>
             <Setter Property="Foreground" Value="BlueViolet"/>
-        </Style>        
+        </Style>   
+        
+        <Style x:Key="intMenuButtonStyle" TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="Disabled"/>
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="mouseOverBackgroundImage" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="1"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="pressedBackgroundImage" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="1"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Image Name="normalBackgroundImage" Source="/UserInterface;component/ressources/buttonMenuNor.png" />
+                            <Image Name="mouseOverBackgroundImage" Source="/UserInterface;component/ressources/buttonMenuHov.png" Opacity="0" />
+                            <Image Name="pressedBackgroundImage" Source="/UserInterface;component/ressources/buttonMenuDis.png" Opacity="0" />
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
         <Style x:Key="mainMenuButtonStyle" TargetType="Button">
-            
             <Setter Property="Height" Value="70" />
             <Setter Property="Width" Value="300" />
             <Setter Property="HorizontalAlignment" Value="Center" />
@@ -58,13 +96,13 @@
             <Setter Property="FontSize" Value="15" />
             <Setter Property="Template">
                 <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Grid>
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal"/>
-                                <VisualState x:Name="Disabled"/>
-                                <!--VisualState x:Name="MouseOver">
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="Disabled"/>
+                                    <!--VisualState x:Name="MouseOver">
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="mouseOverBackgroundImage" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="1"/>
                                     </Storyboard>
@@ -74,18 +112,18 @@
                                         <DoubleAnimation Storyboard.TargetName="pressedBackgroundImage" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="1"/>
                                     </Storyboard>
                                 </VisualState>-->
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
                             <Image Name="normalBackgroundImage" Source="/UserInterface;component/ressources/sword_horiz.png" />
                             <Image Name="mouseOverBackgroundImage" Source="/UserInterface;component/ressources/sword_horiz.png" />
                             <Image Name="pressedBackgroundImage" Source="/UserInterface;component/ressources/sword_horiz.png" />
-                        <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-1,0,0"/>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-1,0,0"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style x:Key="unitNumberSliderStyle" TargetType="Slider">
             <Setter Property="Maximum" Value="20"/>
             <Setter Property="Minimum" Value="1" />

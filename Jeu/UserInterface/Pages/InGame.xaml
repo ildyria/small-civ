@@ -22,27 +22,29 @@
                     <Label x:Name="turn" Content="{Binding CurrentTurn, UpdateSourceTrigger=PropertyChanged}"/>
                     <Label x:Name="playerTurn" Content="{Binding CurrentPlayer, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
-                <Grid x:Name="tileDetails" Grid.Row="1" VerticalAlignment="Top">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                    </Grid.RowDefinitions>
-                    <Label Content="Type :" Grid.Column="0" Grid.Row="0"/>
-                    <Label Content="Cout :" Grid.Column="0" Grid.Row="1"/>
-                    <Label Content="Points :" Grid.Column="0" Grid.Row="2"/>
+                <StackPanel Grid.Row="1" VerticalAlignment="Top" Background="{StaticResource boxBG}">
+                    <Grid x:Name="tileDetails" Margin="17,5,10,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        <Label Content="Type :" Grid.Column="0" Grid.Row="0"/>
+                        <Label Content="Cout :" Grid.Column="0" Grid.Row="1"/>
+                        <Label Content="Points :" Grid.Column="0" Grid.Row="2"/>
                     
-                    <!-- <Label x:Name="tileType" Grid.Column="1" Grid.Row="0"/> -->
-                    <Label x:Name="tileType" Grid.Column="1" Grid.Row="0" Content="{Binding CurrentTileName, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Label x:Name="tileMoveCost" Grid.Column="1" Grid.Row="1" Content="{Binding CurrentMoveCost, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Label x:Name="tilePoints" Grid.Column="1" Grid.Row="2" Content="{Binding CurrentTilePoints, UpdateSourceTrigger=PropertyChanged}"/>
-                </Grid>
-                <StackPanel VerticalAlignment="Center" Grid.Row="2">
-                    <Grid x:Name="unitDetails" >
+                        <!-- <Label x:Name="tileType" Grid.Column="1" Grid.Row="0"/> -->
+                        <Label x:Name="tileType" Grid.Column="1" Grid.Row="0" Content="{Binding CurrentTileName, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label x:Name="tileMoveCost" Grid.Column="1" Grid.Row="1" Content="{Binding CurrentMoveCost, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label x:Name="tilePoints" Grid.Column="1" Grid.Row="2" Content="{Binding CurrentTilePoints, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid>
+                </StackPanel>
+                <StackPanel VerticalAlignment="Center" Grid.Row="2" Background="{StaticResource boxBG}">
+                    <Grid x:Name="unitDetails" Margin="17,5,10,5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="Auto" />
@@ -68,7 +70,10 @@
                     </DockPanel>
                 </StackPanel>
             
-                <StackPanel x:Name="gameControl" Grid.Row="3" VerticalAlignment="Bottom">
+                <StackPanel x:Name="gameControl" Grid.Row="3" VerticalAlignment="Bottom" Height="150">
+                    <StackPanel.Resources>
+                        <Style TargetType="Button" BasedOn="{StaticResource intMenuButtonStyle}" />
+                    </StackPanel.Resources>
                     <Button Content="Sauvegarder/Changer" Click="saveLoadButton_Click"/>
                     <Button Content="Find de tour" Click="endTurn_clicked">
                         <Button.Triggers>
@@ -88,10 +93,10 @@
                 </StackPanel>
             </Grid>
             <StackPanel x:Name="statusBar" Orientation="Horizontal" DockPanel.Dock="Top" >
-                <Label Content="Joueur 1 :" Style="{Binding StyleMenuPlayer1, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="{Binding GManager.Players[0].Name}" Style="{Binding StyleMenuPlayer1, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="{Binding GManager.Players[0].Points}" Style="{Binding StyleMenuPlayer1, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="points" Style="{Binding StyleMenuPlayer1, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Content="Joueur 2 :" Style="{Binding StyleMenuPlayer2, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="{Binding GManager.Players[1].Name}" Style="{Binding StyleMenuPlayer2, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="{Binding GManager.Players[1].Points}" Style="{Binding StyleMenuPlayer2, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="points" Style="{Binding StyleMenuPlayer2, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>

@@ -24,16 +24,7 @@ namespace UserInterface
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
-        GameManager GManager { get; set; }
-        //private Polygon _playerCursor;
-        
-        private Data DataValues { get; set; }
-        
-        
-  
-
-        
+    {    
         public MainWindow()
         {
             InitializeComponent();
@@ -54,8 +45,7 @@ namespace UserInterface
             if (s != null)
                 s.UtilizeState(state);
             else
-                throw new ArgumentException("NextPage is not ISwitchable! "
-                  + nextPage.Name.ToString());
+                throw new ArgumentException("NextPage is not ISwitchable! " + nextPage.Name.ToString());
         }
     }
 }

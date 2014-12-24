@@ -33,10 +33,14 @@ namespace UserInterface
             gmn.setMapSize(MapSize.DEMO);
             gmn.makeGame();*/
             //GameManager.Instance.setMap(new GameMap(5, 5, new List<int> { 1, 2, 3, 0, 1, 1, 1, 1, 2, 3, 0, 1, 1, 1, 3, 3, 3, 2, 2, 2, 3, 3, 3, 2, 2 }));
+            //TILESIZE = (int) (App.Current.MainWindow.Width - 200) / 10;
         }
         
         protected override void OnRender(DrawingContext dc)
         {
+            Tuple<double, double> mapSize = indexToCoord(GameManager.Instance.Map.SizeX, GameManager.Instance.Map.SizeY + 1);
+            Width = mapSize.Item1;
+            Height = mapSize.Item2;
             double ch = 2 * TILESIZE / (Math.Sqrt(7) + 1);
             double a = (TILESIZE - ch) / 2;
             double xOffset = 0, x = 0, y = 0;

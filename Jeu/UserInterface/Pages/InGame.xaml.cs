@@ -34,16 +34,14 @@ namespace UserInterface.Pages
             InitializeComponent();
             this.DataContext = Data.Instance;
             Data.Instance.FromGame = true;
-            //Data.Instance.CurrentUnit = new Dwarf(0, 0, 88, 12, 11, 1, "SATAN", 32);
-            //_playerCursor = (Polygon)this.Resources["cursorHex"];
+
             Data.Instance.UnitsOnTile = new List<SmallWorld.Unit>();
             VisualUnitsElements = new Dictionary<SmallWorld.Unit, UIElement>();
             AdvisedElements = new List<UIElement>();
             // RENDER;
             setUnitsOnMap();
-
         }
-
+ 
         private void setUnitsOnMap()
         {
             foreach (SmallWorld.Unit u in Data.Instance.GManager.getAllUnits())
@@ -108,7 +106,6 @@ namespace UserInterface.Pages
                 Data.Instance.ISelected = i;
                 Data.Instance.JSelected = j;
                 selectedTileChanged();
-                fillTileInfo();
                 showAdvisedTiles();
             }
         }
@@ -116,34 +113,6 @@ namespace UserInterface.Pages
         {
             Data.Instance.UnitsOnTile = Data.Instance.GManager.getAllUnits().FindAll(u => u.X == Data.Instance.ISelected && u.Y == Data.Instance.JSelected);
             Data.Instance.CurrentUnitNumber = 0;
-            setEnableUnitsButtons();
-        }
-
-        public string PlayerTurn 
-        { 
-            get  {
-                if (Data.Instance.GManager != null)
-                {
-                    return "Joueur " + (Data.Instance.GManager.PlayerTurn + 1);
-                }
-                return "ERROR";
-            } 
-        }
-        //private void fillN
-        private void fillGeneralInfo()
-        {
-            pointsJ1.Content = Data.Instance.GManager.getPlayer(1).Points + " points";
-            pointsJ2.Content = Data.Instance.GManager.getPlayer(2).Points + " points";
-        }
-
-        private void fillTileInfo()
-        {
-            Tile t = Data.Instance.CurrentTile;
-            //tileType.Content = t.toStringFR();
-            Unit u = Data.Instance.CurrentPlayerUnit;
-            //that way we get the bare cost
-            tileMoveCost.Content = u.moveCost(u.X+1, u.Y, t);
-            tilePoints.Content = u.scorePoints(t);
         }
 
         private void Window_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -152,7 +121,7 @@ namespace UserInterface.Pages
             {
                 if (Data.Instance.UnitsOnTile.Count != 0) // checked twice, for compat
                 {
-                    System.Windows.Point p = e.GetPosition(mapView);
+                    System.Windows.Point p = e.GetPosition(mapPanel);
                     Tuple<int, int> coord = BoardView.coordToIndex(p.X, p.Y);
                     moveUnitAndCursor(coord.Item1, coord.Item2);
                 }
@@ -223,10 +192,6 @@ namespace UserInterface.Pages
             {
                 System.Windows.Point p = e.GetPosition(mapPanel);
                 Tuple<int, int> posRel = BoardView.coordToIndex(p.X, p.Y);
-
-                //System.Diagnostics.Trace.WriteLine(x + " " + y);
-
-                //playerCursor.Visibility = Visibility.Visible;
                 moveCursor(posRel.Item1, posRel.Item2);
             }
         }
@@ -247,16 +212,18 @@ namespace UserInterface.Pages
 
             moveCursor(uNext.X, uNext.Y);
             Data.Instance.CurrentUnitNumber = Data.Instance.UnitsOnTile.IndexOf(uNext);
-            setEnableUnitsButtons();
         }
 
         private void endTurn_clicked(object sender = null, RoutedEventArgs e = null)
         {
             //Show graphic elements 
             Data.Instance.GManager.nextTurn();
-            fillGeneralInfo();
             Data.Instance.updateManager();
             gameEnd();
+            System.Diagnostics.Trace.WriteLine(mapControl.Width);
+            System.Diagnostics.Trace.WriteLine(mapPanel.Width);
+            System.Diagnostics.Trace.WriteLine(mapView.Width);
+
         }
         
 
@@ -312,37 +279,13 @@ namespace UserInterface.Pages
             }
 
         }
-
-        private void setEnableUnitsButtons()
-        {
-            if (Data.Instance.CurrentUnitNumber == 0)
-            {
-                buttonPrecUnit.IsEnabled = false;
-            }
-            else
-            {
-                buttonPrecUnit.IsEnabled = true;
-            }
-
-            if (Data.Instance.CurrentUnitNumber == Data.Instance.UnitsOnTile.Count - 1 || Data.Instance.UnitsOnTile.Count == 0)
-            {
-                buttonNextUnit.IsEnabled = false;
-            }
-            else
-            {
-                buttonNextUnit.IsEnabled = true;
-            }
-        }
-
         private void nextUnit_clicked(object sender, RoutedEventArgs e)
         {
             Data.Instance.CurrentUnitNumber++;
-            setEnableUnitsButtons();
         }
         private void precUnit_clicked(object sender, RoutedEventArgs e)
         {
             Data.Instance.CurrentUnitNumber--;
-            setEnableUnitsButtons();
         }
 
 

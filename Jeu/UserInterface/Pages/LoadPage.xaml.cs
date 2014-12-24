@@ -30,7 +30,6 @@ namespace UserInterface.Pages
                 }
                 else
                 {
-                    System.Diagnostics.Trace.WriteLine(saveList.SelectedItem as string);
                     return saveList.SelectedItem + ".bin";
                 }
             }
@@ -40,6 +39,22 @@ namespace UserInterface.Pages
             InitializeComponent();
             this.DataContext = Data.Instance;
             saveList.ItemsSource = Directory.GetFiles(SmallWorld.SaveManager.saveFolder, "*.bin").ToList().ConvertAll(u => Path.GetFileNameWithoutExtension(u));
+        }
+        
+        private void deleteSaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (saveList.SelectedItem != null)
+            {
+                File.Delete(SmallWorld.SaveManager.saveFolder + saveList.SelectedItem + ".bin");
+                saveList.ItemsSource = Directory.GetFiles(SmallWorld.SaveManager.saveFolder, "*.bin").ToList().ConvertAll(u => Path.GetFileNameWithoutExtension(u));
+            }
+            
+        }
+
+        #region ISwitchable Members
+        public void UtilizeState(object state)
+        {
+            throw new NotImplementedException();
         }
         private void saveGame_Click(object sender, RoutedEventArgs e)
         {
@@ -55,23 +70,6 @@ namespace UserInterface.Pages
             gmn.SaveManager.FileName = "MyFile.bin";
             gmn.makeGame();
             Switcher.Switch(new Pages.InGame());
-        }
-        private void deleteSaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (saveList.SelectedItem != null)
-            {
-                File.Delete(SmallWorld.SaveManager.saveFolder + saveList.SelectedItem + ".bin");
-                saveList.ItemsSource = Directory.GetFiles(SmallWorld.SaveManager.saveFolder, "*.bin").ToList().ConvertAll(u => Path.GetFileNameWithoutExtension(u));
-            }
-            
-        }
-
-        
-
-        #region ISwitchable Members
-        public void UtilizeState(object state)
-        {
-            throw new NotImplementedException();
         }
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {

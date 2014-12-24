@@ -23,7 +23,8 @@ namespace UserInterface.Pages
         public EndGameMenu()
         {
             InitializeComponent();
-            this.DataContext = Data.Instance;
+            recapJ1.DataContext = Data.Instance.GManager.Players[0];
+            recapJ2.DataContext = Data.Instance.GManager.Players[1];
         }
 
         private void returnToMainMenuButton_Click(object sender, RoutedEventArgs e)

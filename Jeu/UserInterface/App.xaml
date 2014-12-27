@@ -248,7 +248,74 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        <Style x:Key="movement_cost_icon" TargetType="Label" BasedOn="{StaticResource menu_icon}">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Image Source="/UserInterface;component/ressources/armored_boot_icon.png" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
+        <Style x:Key="prec_unit_icon" TargetType="Button">
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="pressedBackgroundImage" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="0"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="Pressed"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Image Name="pressedBackgroundImage" Source="/UserInterface;component/ressources/arrow_icon.png" />
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="next_unit_icon" TargetType="Button">
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="pressedBackgroundImage" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="0"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="Pressed"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Image Name="pressedBackgroundImage" Source="/UserInterface;component/ressources/arrow_icon.png" RenderTransformOrigin=".5,.5">
+                                <Image.RenderTransform>
+                                    <RotateTransform Angle="180" />
+                                </Image.RenderTransform>
+                            </Image>
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
         <Style x:Key="currentPlayerStyle" TargetType="Label">
             <Setter Property="Foreground" Value="BlueViolet"/>
@@ -257,9 +324,25 @@
         <Style x:Key="defaultPlayerStyle" TargetType="Label">
             <Setter Property="Foreground" Value="Red"/>
         </Style>
+        
         <Style TargetType="Separator">
             <!-- An image would be nice-->
             <Setter Property="Foreground" Value="Aquamarine"/>
+        </Style>
+
+        <Style x:Key="VerticalSeparatorStyle" TargetType="{x:Type Separator}" BasedOn="{StaticResource {x:Type Separator}}">
+            <Setter Property="Margin" Value="6,0,6,0"/>
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <TransformGroup>
+                        <TransformGroup.Children>
+                            <TransformCollection>
+                                <RotateTransform Angle="90"/>
+                            </TransformCollection>
+                        </TransformGroup.Children>
+                    </TransformGroup>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Application.Resources>
 </Application>

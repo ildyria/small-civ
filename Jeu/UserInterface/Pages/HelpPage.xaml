@@ -6,6 +6,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="312">
     <Grid x:Name="LayoutRoot" Background="{StaticResource background}">
+        <Grid.Resources>
+            <Style BasedOn="{StaticResource intMenuButtonStyle}" TargetType="Button">
+                <Setter Property="Width" Value="150" />
+                <Setter Property="Height" Value="75"/>
+                <Setter Property="Margin" Value="0,-20,0,-10" />
+            </Style>
+        </Grid.Resources>
         <StackPanel x:Name="helpPage">
             <Label Content="Règles du jeu"/>
             <Label Content="Parfois on perd, parfois on gagne"/>

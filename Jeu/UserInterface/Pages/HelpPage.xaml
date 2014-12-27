@@ -5,20 +5,31 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="312">
-    <Grid x:Name="LayoutRoot" Background="{StaticResource background}">
-        <Grid.Resources>
+    <StackPanel x:Name="LayoutRoot" Background="{StaticResource background}">
+        <StackPanel.Resources>
             <Style BasedOn="{StaticResource intMenuButtonStyle}" TargetType="Button">
                 <Setter Property="Width" Value="150" />
                 <Setter Property="Height" Value="75"/>
                 <Setter Property="Margin" Value="0,-20,0,-10" />
             </Style>
-        </Grid.Resources>
-        <StackPanel x:Name="helpPage">
-            <Label Content="Règles du jeu"/>
-            <Label Content="Parfois on perd, parfois on gagne"/>
-            <Label Content="Tu veux des infos ? Lis la documentation utilisateurs pardi !"/>
-            <!-- Maybe implement a page system if there is a lot to say ... The text could be copy-pasted from the user documentation -->
-            <Button Content="Compris chef !" Click="returnToMainMenuButton_Click"/>
+            <Style TargetType="Label">
+                <Setter Property="Foreground" Value="AntiqueWhite"/>
+            </Style>
+        </StackPanel.Resources>
+        <StackPanel Background="{StaticResource boxBG}">
+            <StackPanel Margin="25">
+                <Label Content="Règles du jeu" HorizontalAlignment="Center"/>
+                <Label HorizontalAlignment="Center">
+                    <Label.Content>
+                        <AccessText TextWrapping="Wrap">
+                            Parfois on perd, parfois on gagne.
+                        Tu veux des infos ? Lis la documentation utilisateurs pardi !
+                        </AccessText>
+                    </Label.Content>
+                </Label>
+            </StackPanel>
         </StackPanel>
-    </Grid>
+        <!-- Maybe implement a page system if there is a lot to say ... The text could be copy-pasted from the user documentation -->
+        <Button Content="Compris chef !" Click="returnToMainMenuButton_Click"/>
+    </StackPanel>
 </UserControl>

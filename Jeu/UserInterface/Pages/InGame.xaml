@@ -9,26 +9,19 @@
              PreviewMouseRightButtonDown="Window_PreviewMouseRightButtonDown"
              KeyDown="Window_KeyDown">
     <Grid>
-        <DockPanel Background="Ivory">
-            <Grid DockPanel.Dock="Right" Width="150">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <!-- TODO -->
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+        <DockPanel Background="Gray">
+            <DockPanel.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="Foreground" Value="AntiqueWhite"/>
+                </Style>
+            </DockPanel.Resources>
+            <StackPanel DockPanel.Dock="Right" Width="150">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Background="{StaticResource boxBG}">
                     <Label x:Name="turn" Content="{Binding CurrentTurn, UpdateSourceTrigger=PropertyChanged}"/>
                     <Label x:Name="playerTurn" Content="{Binding CurrentPlayer, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1" VerticalAlignment="Top" Background="{StaticResource boxBG}">
-                    <StackPanel.Resources>
-                        <Style TargetType="Label">
-                            <Setter Property="Foreground" Value="AntiqueWhite"/>
-                        </Style>
-                    </StackPanel.Resources>
-                    <Grid x:Name="tileDetails" Margin="17,7,10,7">
+                    <Grid x:Name="tileDetails" Margin="17,30,10,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="Auto" />
@@ -47,14 +40,8 @@
                         <Label x:Name="tileMoveCost" Grid.Column="1" Grid.Row="1" Content="{Binding CurrentMoveCost, UpdateSourceTrigger=PropertyChanged}"/>
                         <Label x:Name="tilePoints" Grid.Column="1" Grid.Row="2" Content="{Binding CurrentTilePoints, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
-                </StackPanel>
-                <StackPanel VerticalAlignment="Center" Grid.Row="2" Background="{StaticResource boxBG}">
-                    <StackPanel.Resources>
-                        <Style TargetType="Label">
-                            <Setter Property="Foreground" Value="AntiqueWhite"/>
-                        </Style>
-                    </StackPanel.Resources>
-                    <Grid x:Name="unitDetails" Margin="17,7,10,5">
+                    <Separator />
+                    <Grid x:Name="unitDetails" Margin="17,0,10,5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="Auto" />
@@ -63,19 +50,24 @@
                             <RowDefinition Height="1*" />
                             <RowDefinition Height="1*" />
                             <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
                         </Grid.RowDefinitions>
                         <Label Content="Nom :" Grid.Column="0" Grid.Row="0"/>
-                        <Label Content="Vie :" Grid.Column="0" Grid.Row="1"/>
-                        <Label Content="Mouvements :" Grid.Column="0" Grid.Row="2"/>
+                        <Label Style="{StaticResource life_icon}" Grid.Column="0" Grid.Row="1"/>
+                        <Label Style="{StaticResource movement_icon}" Grid.Column="0" Grid.Row="2"/>
+                        <Label Style="{StaticResource strength_icon}" Grid.Column="0" Grid.Row="3"/>
+                        <Label Style="{StaticResource armour_icon}" Grid.Column="0" Grid.Row="4"/>
 
                         <Label Grid.Column="1" Grid.Row="0" Content="{Binding CurrentUnit.Name, UpdateSourceTrigger=PropertyChanged}"/>
                         <Label Grid.Column="1" Grid.Row="1" Content="{Binding CurrentUnit.Life, UpdateSourceTrigger=PropertyChanged}"/>
                         <Label Grid.Column="1" Grid.Row="2" Content="{Binding CurrentUnit.MovesLeft, UpdateSourceTrigger=PropertyChanged}"/>
-                
+                        <Label Grid.Column="1" Grid.Row="3" Content="{Binding CurrentUnit.Attack, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Grid.Column="1" Grid.Row="4" Content="{Binding CurrentUnit.Armour, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
-                    <DockPanel Margin="20,0,20,25">
+                    <DockPanel Margin="20,0,20,40">
                         <Button x:Name="buttonPrecUnit" Content="Prec." Click="precUnit_clicked" IsEnabled="{Binding ButtonPrecEnabled, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Left"/>
-                        <Button  x:Name="buttonNextUnit" Content="Suiv." Click="nextUnit_clicked" IsEnabled="{Binding ButtonNextEnabled, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right"/>
+                        <Button x:Name="buttonNextUnit" Content="Suiv." Click="nextUnit_clicked" IsEnabled="{Binding ButtonNextEnabled, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right"/>
                         <Label x:Name="currentUnitListPosition" Content="{Binding NumUnitsOnTotal, UpdateSourceTrigger=PropertyChanged}"/>
                     </DockPanel>
                 </StackPanel>
@@ -101,14 +93,14 @@
                     </Button>
                     <Button Content="Abandonner" Click="giveUp_clicked"/>
                 </StackPanel>
-            </Grid>
+            </StackPanel>
             <StackPanel x:Name="statusBar" Orientation="Horizontal" DockPanel.Dock="Top" >
                 <Label Content="{Binding GManager.Players[0].Name}" Style="{Binding StyleMenuPlayer1, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="{Binding GManager.Players[0].Points}" Style="{Binding StyleMenuPlayer1, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Content="points" Style="{Binding StyleMenuPlayer1, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Style="{StaticResource points_icon}"/>
                 <Label Content="{Binding GManager.Players[1].Name}" Style="{Binding StyleMenuPlayer2, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="{Binding GManager.Players[1].Points}" Style="{Binding StyleMenuPlayer2, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Content="points" Style="{Binding StyleMenuPlayer2, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Style="{StaticResource points_icon}"/>
             </StackPanel>
             <ScrollViewer x:Name="mapView" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="{StaticResource parchmentBG}">
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">

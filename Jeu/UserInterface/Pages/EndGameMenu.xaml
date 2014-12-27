@@ -7,6 +7,11 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Background="{StaticResource background}">
         <DockPanel>
+            <DockPanel.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource intMenuButtonStyle}">
+                    <Setter Property="Width" Value="150" />
+                </Style>
+            </DockPanel.Resources>
             <Button Content="Retour au menu principal" Click="returnToMainMenuButton_Click" DockPanel.Dock="Bottom"/>
             <StackPanel x:Name="recapJ1" DockPanel.Dock="Left">
                 <Label Content="Joueur "/>

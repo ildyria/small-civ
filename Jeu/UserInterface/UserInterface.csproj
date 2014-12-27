@@ -229,6 +229,17 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ressources\armour_icon.png" />
+    <Resource Include="ressources\boot_icon.png" />
+    <Resource Include="ressources\sword_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ressources\heart_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ressources\diamond_icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

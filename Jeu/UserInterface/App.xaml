@@ -88,50 +88,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
-        <Style x:Key="mainMenuButtonStyle" TargetType="Button">
-            <Setter Property="Height" Value="70" />
-            <Setter Property="Width" Value="300" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal"/>
-                                    <VisualState x:Name="Disabled"/>
-                                    <!--VisualState x:Name="MouseOver">
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="mouseOverBackgroundImage" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="1"/>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Pressed">
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="pressedBackgroundImage" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="1"/>
-                                    </Storyboard>
-                                </VisualState>-->
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <Image Name="normalBackgroundImage" Source="/UserInterface;component/ressources/sword_horiz.png" />
-                            <Image Name="mouseOverBackgroundImage" Source="/UserInterface;component/ressources/sword_horiz.png" />
-                            <Image Name="pressedBackgroundImage" Source="/UserInterface;component/ressources/sword_horiz.png" />
-                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-1,0,0"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="unitNumberSliderStyle" TargetType="Slider">
-            <Setter Property="Maximum" Value="20"/>
-            <Setter Property="Minimum" Value="1" />
-            <Setter Property="TickPlacement" Value="BottomRight" />
-            <Setter Property="TickFrequency" Value="5" />
-            <Setter Property="Margin" Value="0,0,0,20"/>
-        </Style>
 
         <Style x:Key="createGameMenuSizeMapStyle" TargetType="StackPanel">
         </Style>
@@ -206,6 +162,7 @@
             <Setter Property="Height" Value="60"/>
             <Setter Property="Width" Value="60"/>
         </Style>
+        
         <Style x:Key="orc_unit" TargetType="Label" BasedOn="{StaticResource unit_style}">
             <Setter Property="ContentTemplate">
                 <Setter.Value>
@@ -215,6 +172,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
         <Style x:Key="elf_unit" TargetType="Label" BasedOn="{StaticResource unit_style}">
             <Setter Property="ContentTemplate">
                 <Setter.Value>
@@ -224,11 +182,68 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
         <Style x:Key="dwarf_unit" TargetType="Label" BasedOn="{StaticResource unit_style}">
             <Setter Property="ContentTemplate">
                 <Setter.Value>
                     <DataTemplate>
                         <Image Source="/UserInterface;component/ressources/dwarf_unit.png"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="menu_icon" TargetType="Label">
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="HorizontalAlignment" Value="Left" />
+        </Style>
+        
+        <Style x:Key="armour_icon" TargetType="Label" BasedOn="{StaticResource menu_icon}">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Image Source="/UserInterface;component/ressources/armour_icon.png" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="strength_icon" TargetType="Label" BasedOn="{StaticResource menu_icon}">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Image Source="/UserInterface;component/ressources/sword_icon.png" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="movement_icon" TargetType="Label" BasedOn="{StaticResource menu_icon}">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Image Source="/UserInterface;component/ressources/boot_icon.png" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="life_icon" TargetType="Label" BasedOn="{StaticResource menu_icon}">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Image Source="/UserInterface;component/ressources/heart_icon.png" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="points_icon" TargetType="Label" BasedOn="{StaticResource menu_icon}">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Image Source="/UserInterface;component/ressources/diamond_icon.png" />
                     </DataTemplate>
                 </Setter.Value>
             </Setter>

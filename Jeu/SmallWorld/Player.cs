@@ -8,33 +8,51 @@ namespace SmallWorld
     [Serializable]
     public class Player : SmallWorld.IPlayer
     {
-        public int Points { get; private set; }
+        public int Points
+        {
+            get
+            {
+                Unit u = UnitList.First();
+                int total = 0;
+                foreach (int i in MovesList) 
+                {
+                    total += u.scorePoints(GameManager.Instance.Map.getTile(i));
+                }
+                return total;
+            }
+        }
         public string Tribe { get; private set; }
         public string Name { get; private set; }
         public List<Unit> UnitList { get; set; }
-
+        public List<int> MovesList { get; set; }
 
         public Player(string name, string tribe, int points)
         {
             Name = name;
             Tribe = tribe;
-            Points = points;
+            //Points = points;
+            MovesList = new List<int>();
         }
         public void scorePoints()
         {
             foreach (Unit u in UnitList) {
-                Points += u.scorePoints(GameManager.Instance.Map.getTile(u.X, u.Y));
+                //Points += u.scorePoints(GameManager.Instance.Map.getTile(u.X, u.Y));
+                MovesList.Add(u.Y * GameManager.Instance.Map.SizeX + u.X);
             }
-            
         }
 
-        public void moveUnit(Unit u, int x, int y)
+        public bool moveUnit(Unit u, int x, int y)
         {
             if (UnitList.Contains(u))
             {
-                GameManager.Instance.moveUnit(u, x, y);
+                bool moved = GameManager.Instance.moveUnit(u, x, y);
+                if (moved)
+                {
+                    MovesList.Add(y * GameManager.Instance.Map.SizeX + x);
+                }
                 bool end = GameManager.Instance.gameEnd();
             }
+            return true;
         }
 
         public void deleteUnit(Unit u)

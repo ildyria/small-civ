@@ -79,7 +79,7 @@ namespace UserInterface.Pages
         private void startLoadGame_Click(object sender, RoutedEventArgs e)
         {
             SmallWorld.GameMakerLoad gmn = new SmallWorld.GameMakerLoad();
-            gmn.SaveManager.FileName = "MyFile.bin";
+            gmn.SaveManager.FileName = SaveName;
             gmn.makeGame();
             Switcher.Switch(new Pages.InGame());
         }

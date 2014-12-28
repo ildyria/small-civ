@@ -9,7 +9,7 @@ namespace SmallWorld
         int Points { get; }
         string Tribe { get; }
         List<Unit> UnitList { get; set; }
-        void moveUnit(Unit u, int x, int y);
+        bool moveUnit(Unit u, int x, int y);
         void play();
         void scorePoints();
         List<Unit> unitsAt(int x, int y);

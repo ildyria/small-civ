@@ -26,7 +26,11 @@ namespace SmallWorld
         }
         public Tile getTile(int x, int y)
         {
-            return MapMaker.getTile( (TerrainType) TilesList[x * SizeX + y]);   
+            return this.getTile(x * SizeX + y);   
+        }
+        public Tile getTile(int z)
+        {
+            return MapMaker.getTile((TerrainType)TilesList[z]);
         }
 
         /*public List<int> getAdvisedTiles()

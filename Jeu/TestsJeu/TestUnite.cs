@@ -177,6 +177,53 @@ namespace TestsJeu
             Assert.AreEqual(Unit.IMPOSSIBLE_MOVE, dw2.moveCost(5, 5, p));
             Assert.AreEqual(Unit.IMPOSSIBLE_MOVE, dw2.moveCost(5, 5, m));
         }
+
+        [TestMethod]
+        public void OrcGainLife()
+        {
+            GameMakerNew gmn = new GameMakerNew();
+            gmn.Tribes = new UnitType[2] { UnitType.ORC, UnitType.DWARF };
+            gmn.Names = new string[2] { "J1", "J2" };
+            gmn.setMapSize(MapSize.DEMO);
+            gmn.makeGame();
+            Tile t = new Plain();
+
+            GameManager.Instance.Players[0].UnitList.ForEach(u => u.setPosition(0, 0));
+            GameManager.Instance.Players[0].play();
+
+            foreach (Unit u in GameManager.Instance.Players[1].UnitList)
+            {
+                for (int i = 0; i < 4; ++i) 
+                {
+                    u.damage();
+                }
+            }
+            GameManager.Instance.Players[1].UnitList.ForEach(u => u.setPosition(1, 0));
+            
+            foreach (Unit u in GameManager.Instance.Players[0].UnitList)
+            {
+                List<Enum> res = GameManager.Instance.moveUnit(u, 1, 0);
+                Assert.IsNotNull(res);
+                Assert.AreNotEqual(0, res.Count);
+                int lifeExpected = 5;
+                foreach (Enum e in res)
+                {
+                    Unit.CombatRes r = (Unit.CombatRes) e;
+                    if (r == Unit.CombatRes.PLAYER_UNIT_DAMAGED)
+                    {
+                        lifeExpected--;
+                    }
+                    else if (r == Unit.CombatRes.OPPONENT_UNIT_DAMAGED)
+                    {
+                        lifeExpected++;
+                    }
+                }
+                Assert.AreEqual(lifeExpected, u.Life);
+                 
+            }
+
+        }
+
         [TestMethod]
         public void SurroundedDyingElf()
         {

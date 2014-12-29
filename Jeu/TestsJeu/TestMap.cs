@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 using SmallWorld;
 
 namespace TestsJeu
@@ -24,11 +25,21 @@ namespace TestsJeu
         [TestMethod]
         public void MapStartingPositions()
         {
+            List<int> noGoList = new List<int>();
             MapAlgoritms dmap = new DemoMap();
+            List<int> map = dmap.generateMap();
+            List<Tuple<int, int>> startPos = dmap.getStartingPositions();
             //MapAlgoritms smap = new SmallMap();
             //MapAlgoritms cmap = new ClassicMap();
             //List<Tuple<int, int>> getStartingPositions()
-            Assert.Fail();
+            foreach (Tuple<int, int> pos in startPos)
+            {
+                int posint = pos.Item2 * dmap.mapSize().Item1 + pos.Item1;
+                Assert.IsTrue(posint < map.Count);
+                Assert.IsTrue(posint >= 0);
+                Assert.IsFalse(noGoList.Exists(i => i == map[pos.Item2 * dmap.mapSize().Item1 + pos.Item1]));
+            }
+            
         }
     }
 }

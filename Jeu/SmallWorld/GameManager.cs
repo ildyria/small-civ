@@ -90,7 +90,7 @@ namespace SmallWorld
         {
             return Players[PlayerTurn];
         }
-        public bool moveUnit(Unit u, int x, int y)
+        public List<Enum> moveUnit(Unit u, int x, int y)
         {
             // You can only move units during your turn
             if (getCurrentPlayer().UnitList.Contains(u))
@@ -113,9 +113,9 @@ namespace SmallWorld
                     adv.deleteUnit(op);
                 }
 
-                return res != null;
+                return res;
             }
-            return false;
+            return null;
         }
         public Player opponent()
         {

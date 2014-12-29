@@ -13,7 +13,7 @@ namespace SmallWorld
         int TurnNumber { get; }
         int TurnCurrent { get; }
         List<Unit> getAllUnits();
-        bool moveUnit(Unit u, int x, int y);
+        List<Enum> moveUnit(Unit u, int x, int y);
         void setPlayer1(Player p);
         void setPlayer2(Player p);
         Player getPlayer(int numPlayer);

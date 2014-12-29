@@ -45,7 +45,7 @@ namespace SmallWorld
         {
             if (UnitList.Contains(u))
             {
-                bool moved = GameManager.Instance.moveUnit(u, x, y);
+                bool moved = GameManager.Instance.moveUnit(u, x, y) != null;
                 if (moved)
                 {
                     MovesList.Add(y * GameManager.Instance.Map.SizeX + x);

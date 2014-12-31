@@ -1,2 +1,56 @@
-\section{R�gles du jeu}
+﻿\section{Règles du jeu}
 	\label{sec:regles}
+	\subsection{Déroulement d'une partie}
+		Le jeu se déroule au tour par tour. C'est à dire que chaque joueur va jouer à tour de rôle.
+		Chaque joueur essaie d'avoir plus de points que son adversaire au terme d'un nombre de tours décidé au début de la partie.
+	
+	\subsection{Tours de jeu}
+		Au cours d'un tour, le joueur courant déplace ses unités sur la carte autant qu'il le souhaite et le peut. Il peut éventuellement attaquer des unités adverses.
+		Le tour se termine seulement lorsqu'il termine explicitement son tour (cf interface de jeu, section \ref{sec:interfaceIG})
+		A la fin du tour, le joueur courant gagne des points en fonction du type de case occupé par ses unités et de leur tribu. 
+		Par défaut, chaque tuile rapporte un point.
+		
+	\subsection{Mouvements et attaques}
+		Une unité peut se déplacer sur les cases adjacentes à elle-même. Celà lui coute un certain nombre de points de mouvement.
+		Toute unité commence son tour avec 4 points de mouvement. Un mouvement basique coute 2 points de mouvement, sauf spécificité de la tribu.
+		L'attaque s'effectue via un déplacement.
+		En effet, si une unité se déplace sur une case où se trouve une ou plusieurs unités adverse, la procédure de combat est lancée.
+		\newline
+		L'honneur compte dans Smallworld : l'attaquant attaque toujours au défenseur le plus fort, 
+		S'en suis un combat comprenant un certain nombre de rounds; les unités ont des pv, plus il y a de rounds. Le minimum est cependant de 3 attaques de prévues contre une unité.
+		Le combat peut bien sur se terminer plus tôt si l'une des deux venait à mordre la poussière !
+	
+	\subsection{Fin du jeu}
+		Une partie dure jusqu'à ce qu'une des conditions de fin de partie soit remplie.
+		\begin{itemize}
+		  \item L'épuisement du compteur de tours.
+		  \item Tout les adversaires d'un joueur sont mort (ils ne disposent plus d'unité).
+		\end{itemize}
+		A la fin de la partie, le compte final des points est affiché. On peut ainsi savoir le vainqueur de la bataille.
+		Et malheur au vaincu !
+		
+	\subsection{Tribu}
+		Dans le jeu, chaque joueur peut controler différentes tribus; voici la liste de leur spécificités.
+		\begin{description}
+			\item[Elfe] \hfill \\
+				\textit{Leur agilité légendaire n'est plus à démontrer. Elle leur permet parfois d'échapper à la mort. Parfois ..} \\
+				\begin{itemize}
+					\item Cout de déplacement vers la forêt : 1
+					\item Cout de déplacement vers le désert : 4
+					\item 50% de chance de survivre à une attaque mortelle
+				\end{itemize}
+			\item[Orc] \hfill \\
+				\textit{Ces guerriers sans foi ni loi se repaissent des cadavres de leurs ennemis. Tout adversaire vaincu leur fait gagner 1 point de vie} \\
+				\begin{itemize}
+					\item Cout de déplacement vers la plaine : 1
+					\item Points sur une tuile forêt : 0
+					\item Tuer une unité rapporte un point de vie
+				\end{itemize}
+			\item[Nain] \hfill \\
+				\textit{Ces fiers guerriers ont maintes fois démontré leur maîtrise de la pioche. Il leur est aisé de se rendre d'une montagne à une autre, si le cadre est sûr.} \\
+				\begin{itemize}
+					\item Cout de déplacement vers la plaine : 1
+					\item Points sur une tuile plaine : 0
+					\item Peut aller de montagne en montagne comme un déplacement normal; ne peut lancer de combat de cette manière.
+				\end{itemize}
+		\end{description}

@@ -8,7 +8,10 @@
         <!--Main menu, graphical improvement need to be done-->
         <StackPanel x:Name="mainMenu" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource menuStyle}">
             <StackPanel.Resources>
-                <Style BasedOn="{StaticResource mainMenuButtonStyle}" TargetType="{x:Type Button}" />
+                <Style TargetType="Button" BasedOn="{StaticResource intMenuButtonStyle}">
+                    <Setter Property="Width" Value="200" />
+                    <Setter Property="Margin" Value="0,0,0,0" />
+                </Style>
             </StackPanel.Resources>
             <Label Content="SmallWorld !" Style="{StaticResource ResourceKey=mainMenuTitleStyle}"/>
             <Button x:Name="newGame_button" Content="Nouvelle partie" Click="newGameButton_Click"/>

@@ -48,7 +48,7 @@ namespace UserInterface
             {
                 if (Data.Instance.GManager != null)
                 {
-                    return "Joueur " + (GManager.PlayerTurn + 1);
+                    return GManager.Players[GManager.PlayerTurn].Name;
                 }
                 return "ERROR";
             }

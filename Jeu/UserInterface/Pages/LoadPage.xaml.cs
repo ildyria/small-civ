@@ -24,13 +24,18 @@ namespace UserInterface.Pages
         {
             get 
             {
-                if (saveList.SelectedItem == null)
+                if (saveList.SelectedItem != null)
+                {
+                    return saveList.SelectedItem + ".bin";
+                    
+                }
+                else if (saveName.Text != "")
                 {
                     return saveName.Text + ".bin";
                 }
                 else
                 {
-                    return saveList.SelectedItem + ".bin";
+                    return null;
                 }
             }
         }
@@ -58,16 +63,23 @@ namespace UserInterface.Pages
         }
         private void saveGame_Click(object sender, RoutedEventArgs e)
         {
-            SmallWorld.SaveManagerSerial sm = new SmallWorld.SaveManagerSerial();
-            sm.FileName = SaveName;
-            sm.save();
-            Switcher.Switch(new Pages.InGame());
-            // random after save info ?
+            if (SaveName != null)
+            {
+                SmallWorld.SaveManagerSerial sm = new SmallWorld.SaveManagerSerial();
+                sm.FileName = SaveName;
+                sm.save();
+                Switcher.Switch(new Pages.InGame());
+                // random after save info ?
+            }
+            else
+            {
+                MessageBox.Show("Veuillez séléctionner une sauvegarde ou entrer un nom valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
         private void startLoadGame_Click(object sender, RoutedEventArgs e)
         {
             SmallWorld.GameMakerLoad gmn = new SmallWorld.GameMakerLoad();
-            gmn.SaveManager.FileName = "MyFile.bin";
+            gmn.SaveManager.FileName = SaveName;
             gmn.makeGame();
             Switcher.Switch(new Pages.InGame());
         }

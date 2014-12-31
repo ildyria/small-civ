@@ -14,6 +14,12 @@ namespace SmallWorld
             //devrait-être dans init.
             SaveManager = new SaveManagerSerial();
         }
+
+        public override void init()
+        {
+            SaveManager.load();
+        }
+
         public override GameMap makeMap()
         {
             Tuple<int, int, List<int>> infos = SaveManager.getMapData();
@@ -36,11 +42,6 @@ namespace SmallWorld
             GameManager.init(p1, p2, map, state.Item1, state.Item2, state.Item3);
             GameManager.Instance.MapAlgo = new Wrapper.WrapperGenMap(map.SizeX, map.SizeY, map.TilesList);
             return GameManager.Instance;
-        }
-
-        public override void init()
-        {
-            SaveManager.load();
         }
 
         public override List<Unit> createUnits(int numPlayer)

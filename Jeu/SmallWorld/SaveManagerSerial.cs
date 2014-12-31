@@ -45,16 +45,19 @@ namespace SmallWorld
         public override void load()
         {
             _stream = new FileStream(SaveManager.saveFolder + FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+            
         }
 
         public override void save()
         {
-            _stream = new FileStream(SaveManager.saveFolder + FileName, FileMode.Create, FileAccess.Write, FileShare.None);            
+            _stream = new FileStream(SaveManager.saveFolder + FileName, FileMode.Create, FileAccess.Write, FileShare.None);
+            //_formatter.Serialize(_stream, GameManager.Instance);
             saveMap();
             savePlayer();
             //saveUnit();
             saveGameManagerState();
             _stream.Close();
+            
         }
 
 

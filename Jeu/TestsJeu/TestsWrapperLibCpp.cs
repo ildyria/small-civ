@@ -20,6 +20,7 @@ namespace TestsJeu
             //test size
             Assert.AreEqual(25, ca.Count);
         }
+        [TestMethod]
         public void WrapperGeneration_CountainAll_Only()
         {
             WrapperGenMap genmap = new WrapperGenMap(5, 5);

@@ -98,6 +98,9 @@
     <Compile Include="Pages\NewGameMenu.xaml.cs">
       <DependentUpon>NewGameMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PlayerDetails.xaml.cs">
+      <DependentUpon>PlayerDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Switcher.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -135,6 +138,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\NewGameMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PlayerDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -228,6 +235,23 @@
     <Resource Include="ressources\buttonMenuNor.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ressources\armour_icon.png" />
+    <Resource Include="ressources\boot_icon.png" />
+    <Resource Include="ressources\sword_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ressources\heart_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ressources\diamond_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ressources\armored_boot_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ressources\arrow_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

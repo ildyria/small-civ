@@ -34,12 +34,15 @@ namespace SmallWorld
             Name = name;
             Value = value;
         }
+
+        //return null if no move
         public virtual List<Enum> move(int x, int y, Tile t, IEnumerable<Unit> advList)
         {
-            List<Enum> res = new List<Enum>();
+            List<Enum> res = null;
             // Diagram says movepossible, but that way movecost is used only once
             int cost = moveCost(x, y, t);
             if (cost != IMPOSSIBLE_MOVE && cost <= MovesLeft) {
+                res = new List<Enum>();
                 MovesLeft -= cost;
                 //Search strongest unit
                 //We could make a new list with the strongest and rand on it ... is it worth it performance wise ?

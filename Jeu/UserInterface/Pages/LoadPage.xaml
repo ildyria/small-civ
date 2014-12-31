@@ -7,8 +7,13 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Background="{StaticResource background}">
         <StackPanel x:Name="loadMenu" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource intMenuButtonStyle}">
+                    <Setter Property="Width" Value="150" />
+                </Style>
+            </StackPanel.Resources>
             <TextBox x:Name="saveName"/>
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Height="250">
                 <ListView x:Name="saveList">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -19,10 +24,20 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </ScrollViewer>
-            <Button Content="Sauvegarder" IsEnabled="{Binding FromGame}" Click="saveGame_Click"/>
-            <Button Content="Charger" Click="startLoadGame_Click"/>
-            <Button Content="Supprimer" Click="deleteSaveButton_Click"/>
-            <Button Content="Annuler" Click="cancelButton_Click"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button Content="Sauvegarder" IsEnabled="{Binding FromGame}" Click="saveGame_Click"/>
+                <Button Content="Charger" Click="startLoadGame_Click" Grid.Column="1"/>
+                <Button Content="Supprimer" Click="deleteSaveButton_Click" Grid.Row="1"/>
+                <Button Content="Annuler" Click="cancelButton_Click" Grid.Row="1" Grid.Column="1"/>
+            </Grid>
         </StackPanel>
     </Grid>
 </UserControl>

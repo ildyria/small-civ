@@ -14,11 +14,13 @@ namespace SmallWorld
         IFormatter _formatter;
         Stream _stream;
         GameManager _g;
+        Player[] _players;
 
         public SaveManagerSerial()
         {
             _formatter = new BinaryFormatter();
             _g = GameManager.Instance;
+            _players = null;
         }
 
         public override Tuple<int, int, int> getGameState()
@@ -34,9 +36,13 @@ namespace SmallWorld
         {
             return (Tuple<string, string, int>)_formatter.Deserialize(_stream);
         }
-        public override Player getPlayers()
+        public override Player[] getPlayers()
         {
-            return (Player)_formatter.Deserialize(_stream);
+            if (_players == null)
+            {
+                _players = (Player[])_formatter.Deserialize(_stream);
+            }
+            return _players;
         }
         public override List<Unit> getUnits(int numPlayer)
         {
@@ -74,14 +80,13 @@ namespace SmallWorld
 
         protected override void savePlayer()
         {
-            _formatter.Serialize(_stream, _g.Players[0]);
-            _formatter.Serialize(_stream, _g.Players[1]);
+            _formatter.Serialize(_stream, _g.Players);
+           // _formatter.Serialize(_stream, _g.Players[1]);
         }
 
         protected override void saveUnit()
         {
-            _formatter.Serialize(_stream, _g.Players[0].UnitList);
-            _formatter.Serialize(_stream, _g.Players[1].UnitList);
+            // nothing to do, unit are saved with the player
         }
         public override void end()
         {

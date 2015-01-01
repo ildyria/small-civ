@@ -33,7 +33,15 @@ namespace SmallWorld
             Player p = new Player(infos.Item1, infos.Item2, infos.Item3);
             p.UnitList = createUnits(numPlayer);
             return p;*/
-            return SaveManager.getPlayers();
+            if (numPlayer > 0) 
+            {
+                return SaveManager.getPlayers()[numPlayer - 1];
+            }
+            else
+            {
+                return null;
+            }
+            
         }
 
         public override GameManager makeGameManager(Player p1, Player p2, GameMap map)

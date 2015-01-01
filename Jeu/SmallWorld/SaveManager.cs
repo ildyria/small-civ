@@ -19,7 +19,7 @@ namespace SmallWorld
         protected abstract void saveUnit();
         protected abstract void saveMap();
         public abstract List<Unit> getUnits(int numPlayer);
-        public abstract Player getPlayers();
+        public abstract Player[] getPlayers();
 
         public abstract Tuple<int, int, int>  getGameState();
         public abstract void end();

@@ -11,6 +11,6 @@ namespace SmallWorld
         void load();
         void save();
         void end();
-        Player getPlayers();
+        Player[] getPlayers();
     }
 }

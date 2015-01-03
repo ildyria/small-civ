@@ -9,9 +9,6 @@ namespace SmallWorld
     
     public abstract class SaveManager : SmallWorld.ISaveManager
     {
-        private Tuple<int, int, int> _gmstate;
-        private Tuple<int, int, List<int>> _map;
-
         public static readonly string saveFolder = Directory.GetCurrentDirectory() + "/Saves/";
         public string FileName { get; set; }
         public abstract Player[] Players { get; protected set; }

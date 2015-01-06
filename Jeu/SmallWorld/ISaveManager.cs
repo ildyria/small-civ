@@ -1,16 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 namespace SmallWorld
 {
     interface ISaveManager
     {
         string FileName { get; set; }
-        Tuple<int, int, int> getGameState();
-        Tuple<int, int, System.Collections.Generic.List<int>> getMapData();
-        Tuple<string, string, int> getPlayerData();
-        System.Collections.Generic.List<Unit> getUnits(int numPlayer);
+
+        Player[] Players { get; }
+        Tuple<int, int, int> GMState { get; }
+        Tuple<int, int, List<int>> Map { get; }
         void load();
+
         void save();
-        void end();
-        Player getPlayers();
     }
 }

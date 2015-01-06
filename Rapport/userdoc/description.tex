@@ -17,17 +17,19 @@
 			\caption{Le menu principal}
 			\label{fig:menuPrinc}
 			\centering
-			\includegraphics[width=0.5\textwidth]{gull}
+			\includegraphics[width=\textwidth]{res/main_menu}
 		\end{figure}
 	
 	\subsection{Menu nouvelle partie}
 		\label{subsec:nouvellpartie}
-		
+		Toute création de partie passe par ce menu. Les joueurs doivent dabord choisir le type de carte, qui définira leur taille, le temps de jeu et le nombre d'unités de chaque joueur.
+		Chaque joueur devra ensuite choisir un nom et un peuple. Deux joueurs ne peuvent évidement pas choisir le même peuple. Point de guerres fratricides dans Smallworld !
+		Il ne reste plus qu'a cliquer sur \textit{Lancer la partie} pour commencer les hostilités.
 		\begin{figure}[h!]
 			\caption{Le menu de création de partie}
 			\label{fig:menuCreat}
 			\centering
-			\includegraphics[width=0.5\textwidth]{gull}
+			\includegraphics[width=\textwidth]{res/new_game}
 		\end{figure}
 		
 	\subsection{Menu de gestion des sauvegardes}
@@ -47,7 +49,7 @@
 			\caption{Le menu de sauvegarde et de chargement}
 			\label{fig:menuCreat}
 			\centering
-			\includegraphics[width=0.5\textwidth]{gull}
+			\includegraphics[width=\textwidth]{res/save_menu_annot}
 		\end{figure}
 		
 	\subsection{Interface de jeu}
@@ -55,8 +57,8 @@
 		Les différentes fontionnalités de l'interface sont décrites ci dessous :
 		\begin{enumerate}
 			\item \textsc{Plateau de jeu} 
-			\item \textsc{Curseur} : Permet de sélectionner les tuiles et les unités
-			\item \textsc{Score des joueurs} : Le joueur courant est indiqué en XXXXX
+			\item \textsc{Curseur} : Permet de sélectionner les tuiles et les unités.
+			\item \textsc{Score des joueurs} : Le joueur courant est indiqué en violet.
 			\item \textsc{Etat du jeu} : Rappelle l'état des tours et le joueur courant.
 			\item \textsc{Description de la tuile courante} : Donne son type, le nombre de points qu'elle donne et le cout pour s'y déplacer.
 			\item \textsc{Description de l'unité courante} : Donne le nom, la vie actuelle, les points de mouvements restants, l'attaque et la défense de l'unité courante.
@@ -70,7 +72,7 @@
 			\caption{Interface pendant le jeu}
 			\label{fig:interfaceIG}
 			\centering
-			\includegraphics[width=0.5\textwidth]{gull}
+			\includegraphics[width=\textwidth]{res/in_game_annot}
 		\end{figure}
 		
 		Controles du jeu : 
@@ -94,10 +96,10 @@
 			\includegraphics[width=0.5\textwidth]{res/pavnum_moves}
 		\end{figure}
 		
-		Lorsque l'une des condition de fin de jeu est remplie, le jeu se termine et propose un tableau des scores qui indique le gagnant de la partie ! (cf \ref{fig:finjeu})
+		Lorsque l'une des condition de fin de jeu est remplie, le jeu se termine et propose un tableau des scores qui indique le gagnant de la partie ! (cf figure \ref{fig:finjeu})
 		\begin{figure}[h!]
 			\caption{Ecran de fin de jeu}
 			\label{fig:finjeu}
 			\centering
-			\includegraphics[width=0.5\textwidth]{gull}
+			\includegraphics[width=\textwidth]{res/end_game}
 		\end{figure}

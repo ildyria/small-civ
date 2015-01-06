@@ -22,7 +22,7 @@ namespace SmallWorld
 
         public override GameMap makeMap()
         {
-            Tuple<int, int, List<int>> infos = SaveManager.getMapData();
+            Tuple<int, int, List<int>> infos = SaveManager.Map;
             GameMap gm = new GameMap(infos.Item1, infos.Item2, infos.Item3);
             return gm;
         }
@@ -33,12 +33,20 @@ namespace SmallWorld
             Player p = new Player(infos.Item1, infos.Item2, infos.Item3);
             p.UnitList = createUnits(numPlayer);
             return p;*/
-            return SaveManager.getPlayers();
+            if (numPlayer > 0) 
+            {
+                return SaveManager.Players[numPlayer - 1];
+            }
+            else
+            {
+                return null;
+            }
+            
         }
 
         public override GameManager makeGameManager(Player p1, Player p2, GameMap map)
         {
-            Tuple<int, int, int> state = SaveManager.getGameState();
+            Tuple<int, int, int> state = SaveManager.GMState;
             GameManager.init(p1, p2, map, state.Item1, state.Item2, state.Item3);
             GameManager.Instance.MapAlgo = new Wrapper.WrapperGenMap(map.SizeX, map.SizeY, map.TilesList);
             return GameManager.Instance;
@@ -46,8 +54,9 @@ namespace SmallWorld
 
         public override List<Unit> createUnits(int numPlayer)
         {
-            List<Unit> lu = SaveManager.getUnits(numPlayer);
-            return lu;
+            /*List<Unit> lu = SaveManager.getUnits(numPlayer);
+            return lu;*/
+            throw new NotImplementedException();
         }
         public override void end()
         {

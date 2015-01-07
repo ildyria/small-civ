@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +19,6 @@ namespace SmallWorld
             end();
             return gm;
         }
-
         public abstract Player makePlayer(int numPlayer);
         public abstract GameMap makeMap();
         public abstract GameManager makeGameManager(Player p1, Player p2, GameMap map);

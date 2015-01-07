@@ -78,10 +78,13 @@ namespace UserInterface.Pages
         }
         private void startLoadGame_Click(object sender, RoutedEventArgs e)
         {
-            SmallWorld.GameMakerLoad gmn = new SmallWorld.GameMakerLoad();
-            gmn.SaveManager.FileName = SaveName;
-            gmn.makeGame();
-            Switcher.Switch(new Pages.InGame());
+            if (saveList.SelectedItem != null)
+            {
+                SmallWorld.GameMakerLoad gmn = new SmallWorld.GameMakerLoad();
+                gmn.SaveManager.FileName = SaveName;
+                gmn.makeGame();
+                Switcher.Switch(new Pages.InGame());
+            }
         }
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {

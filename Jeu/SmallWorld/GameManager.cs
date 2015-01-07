@@ -119,7 +119,7 @@ namespace SmallWorld
         }
         public Player opponent()
         {
-            return getPlayer((PlayerTurn + 1) % 2);
+            return Players[(PlayerTurn + 1) % 2];
         }
 
         public void nextTurn()

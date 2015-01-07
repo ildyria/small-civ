@@ -23,22 +23,22 @@ namespace Wrapper {
 			WrapperGenMap(){ _genMap = GenMap_new(); }
 			WrapperGenMap(int sizeX, int sizeY) { _genMap = GenMap_new(sizeX, sizeY); }
 			WrapperGenMap(int sizeX, int sizeY, List<int>^ tilelist) {
-				int* tilelistConv = (int*) malloc(sizeof(int) * tilelist->Count);
+				std::vector<int> tilelistConv = std::vector<int>();
 				for (int i = 0; i < tilelist->Count; i++)
 				{
-					tilelistConv[i] = tilelist[i];
+					tilelistConv.push_back(tilelist[i]);
 				}
 				_genMap = GenMap_new(sizeX, sizeY, tilelistConv);
 			}
 			~WrapperGenMap(){ GenMap_delete(_genMap); }
 			List<int>^ generateMap(int nbElementDiff) {
-				int* cases = GenMap_generate(_genMap, nbElementDiff);
+				std::vector<int> cases = GenMap_generate(_genMap, nbElementDiff);
 					//_genMap->generate(nbElementDiff);
 				List<int>^ lCases = gcnew List<int>();
-				for (int i = 0; i< _genMap->getX() * _genMap->getY(); i++){
-					lCases->Add(cases[i]);
+				for (std::vector<int>::iterator i = cases.begin(); i != cases.end(); i++){
+					lCases->Add((*i));
 				}
-				delete[] cases;
+				//delete[] cases;
 				return lCases;
 			}
 			// I expect to go to hell for this <3
@@ -54,7 +54,7 @@ namespace Wrapper {
 				return listPos;
 			}
 
-			List<int>^ bestMoves(int nbMovesWanted, Tuple<int, int, int>^ u, List<int>^ movesPossibles, Dictionary<int, Tuple<int, int>^>^ terrainData, List<Tuple<int, int, int>^>^ opponents) {
+			List<int>^ bestMoves(int nbMovesWanted, Tuple<int, int, int>^ u, List<int>^ movesPossibles, Dictionary<int, Tuple<int, int>^>^ terrainData, Dictionary<int, int>^ opponents) {
 				List<int>^ result = gcnew List<int>();
 				std::tuple<int, int, int> uConv(u->Item1, u->Item2, u->Item3);
 				std::list<int> movesPossiblesConv;
@@ -62,10 +62,10 @@ namespace Wrapper {
 				{
 					movesPossiblesConv.push_back(move);
 				}
-				std::list<std::tuple<int, int, int>> opponentsConv;
-				for each (Tuple<int, int, int>^ adv in opponents)
+				std::map<int, int> opponentsConv;
+				for each (KeyValuePair<int, int>^ adv in opponents)
 				{
-					opponentsConv.push_back(std::tuple<int, int, int>(adv->Item1, adv->Item2, adv->Item3));
+					opponentsConv[adv->Key] = adv->Value;
 				}
 				std::map<int, std::pair<int, int>> terrainDataConv;
 				for each (KeyValuePair<int, Tuple<int, int>^> ind in terrainData)
@@ -73,7 +73,7 @@ namespace Wrapper {
 					terrainDataConv[ind.Key] = std::make_pair<int, int>(ind.Value->Item1, ind.Value->Item2);
 				}
 
-				std::list<int> stdRes = GenMap_bestMoves(_genMap, nbMovesWanted, uConv, movesPossiblesConv, terrainDataConv, opponentsConv);
+				std::vector<int> stdRes = GenMap_bestMoves(_genMap, nbMovesWanted, uConv, movesPossiblesConv, terrainDataConv, opponentsConv);
 				for each (int pos in stdRes)
 				{
 					result->Add(pos);

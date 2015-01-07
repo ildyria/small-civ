@@ -33,7 +33,6 @@ namespace SmallWorld
             Players = (Player[])_formatter.Deserialize(_stream);
             GMState = (Tuple<int, int, int>)_formatter.Deserialize(_stream);
             _stream.Close();
-            
         }
 
         public override void save()

@@ -9,7 +9,7 @@ GenMap::GenMap(int sizeX, int sizeY) : _sizeX(sizeX), _sizeY(sizeY)
 {
 }
 
-GenMap::GenMap(int sizeX, int sizeY, int* tilelist) : _sizeX(sizeX), _sizeY(sizeY), _mapCreated(tilelist)
+GenMap::GenMap(int sizeX, int sizeY, std::vector<int> tilelist) : _sizeX(sizeX), _sizeY(sizeY), _mapCreated(tilelist)
 {
 }
 
@@ -21,9 +21,10 @@ int GenMap::getY(){
 }
 
 
-int* GenMap::generate(int nbElementDiff) {
+std::vector<int> GenMap::generate(int nbElementDiff) {
 	// should check if you can go from point a to point b
-	int* result = new int[_sizeX*_sizeY];
+	//int* result = new int[_sizeX*_sizeY];
+	std::vector<int> result = std::vector<int>();
 	int character;
 	srand(time(NULL));
 	std::vector<int> nbelem(nbElementDiff);
@@ -45,7 +46,8 @@ int* GenMap::generate(int nbElementDiff) {
 				z = (z + 1) % nbElementDiff;
 			}
 		}
-		result[i] = character;
+		result.push_back(character);
+		//result[i] = character;
 	}
 	_mapCreated = result;
 	return result;
@@ -72,7 +74,7 @@ std::pair<std::pair<int, int>, std::pair<int, int>> GenMap::placePlayer(std::lis
 	return res;
 }
 
-std::list<int> GenMap::bestMoves(int nbMovesWanted, std::tuple<int, int, int> u, std::list<int> movesPossibles, std::map<int, std::pair<int, int>> terrainData, std::list<std::tuple<int, int, int>> opponents) {
+std::vector<int> GenMap::bestMoves(int nbMovesWanted, std::tuple<int, int, int> u, std::list<int> movesPossibles, std::map<int, std::pair<int, int>> terrainData, std::map<int, int> opponents) {
 	std::map<int, int> possibilities;
 
 	for each (int move in movesPossibles)
@@ -83,20 +85,19 @@ std::list<int> GenMap::bestMoves(int nbMovesWanted, std::tuple<int, int, int> u,
 		else {
 			possibilities[move] = 1;
 		}
-		
 	}
-	
+	std::cout << "----" << std::endl;
 	//delete moves where opponent has more life than me => probability that i will die
 	//Could be enhance to delete move that are to close
 	//find low life opponent
-	for each (std::tuple<int, int, int> adv in opponents)
+	for each (std::pair<int,int> adv in opponents)
 	{
-		int pos = std::get<0>(adv) * _sizeX + std::get<1>(adv);
+		int pos = adv.first;
 		if (possibilities.find(pos) != possibilities.end()) {
-			if (std::get<2>(adv) > std::get<2>(u)) {
+			if (adv.second > std::get<2>(u)) {
 				possibilities[pos] -= DANGEROUS;
 			}
-			else if (std::get<2>(adv) == LOW_LIFE) {
+			else if (adv.second == LOW_LIFE) {
 				possibilities[pos] += BLOODSHED_POINTS;
 			}
 			else {
@@ -104,13 +105,14 @@ std::list<int> GenMap::bestMoves(int nbMovesWanted, std::tuple<int, int, int> u,
 			}
 		}
 	}
-	std::list<int> result;
-	//for (int i = 0 ; i < nbMovesWanted ; i++)
-	for (int i = 0; i < 3; i++)
+
+	std::vector<int> result;
+	for (int i = 0; i < nbMovesWanted; i++)
 	{
-		std::map<int, int>::iterator it = std::max_element(possibilities.begin(), possibilities.end());
+		std::map<int, int>::iterator it = std::max_element(possibilities.begin(), possibilities.end(), comparator);
 		if (it != possibilities.end()) {
 			result.push_back((*it).first);
+			std::cout << (*it).first << std::endl;
 			possibilities.erase(it);
 		}
 		else {
@@ -120,6 +122,7 @@ std::list<int> GenMap::bestMoves(int nbMovesWanted, std::tuple<int, int, int> u,
 	//return movesPossibles;
 	return result;
 }
+
 
 char GenMap::toCharacter(int i) {
 	return FIRST_ASCII_LETTER + i;
@@ -147,11 +150,11 @@ std::vector<std::pair<int, int>> GenMap::possibleMoves(int posX, int posY, int n
 
 GenMap* GenMap_new() { return new GenMap(); }
 GenMap* GenMap_new(int sizeX, int sizeY) { return new GenMap(sizeX, sizeY); }
-GenMap* GenMap_new(int sizeX, int sizeY, int* tilelist) { return new GenMap(sizeX, sizeY, tilelist); }
+GenMap* GenMap_new(int sizeX, int sizeY, std::vector<int> tilelist) { return new GenMap(sizeX, sizeY, tilelist); }
 void GenMap_delete(GenMap* genmap) { delete genmap; }
-int* GenMap_generate(GenMap* genmap, int nbElementDiff) { return genmap->generate(nbElementDiff); }
+std::vector<int> GenMap_generate(GenMap* genmap, int nbElementDiff) { return genmap->generate(nbElementDiff); }
 std::pair<std::pair<int, int>, std::pair<int, int>> GenMap_placePlayer(GenMap* genmap, std::list<int> unwanted) { return genmap->placePlayer(unwanted); }
-std::list<int> GenMap_bestMoves(GenMap* genmap, int nbMovesWanted, std::tuple<int, int, int> u, std::list<int> movesPossibles, std::map<int, std::pair<int, int>> terrainData, std::list<std::tuple<int, int, int>> opponents) {
+std::vector<int> GenMap_bestMoves(GenMap* genmap, int nbMovesWanted, std::tuple<int, int, int> u, std::list<int> movesPossibles, std::map<int, std::pair<int, int>> terrainData, std::map<int, int> opponents) {
 	return genmap->bestMoves(nbMovesWanted, u, movesPossibles, terrainData, opponents);
 }
 

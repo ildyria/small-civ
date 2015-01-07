@@ -244,24 +244,25 @@ namespace UserInterface.Pages
                 Wrapper.WrapperGenMap g = Data.Instance.GManager.MapAlgo;
                 SmallWorld.Unit u = Data.Instance.UnitsOnTile[Data.Instance.CurrentUnitNumber];
                 List<int> movesPossibles = new List<int>();
-                for (int x = Math.Max(u.X - 1, 0); x <= Math.Min(u.X, Data.Instance.GManager.Map.SizeX - 1); x++)
+                for (int x = Math.Max(u.X - 1, 0); x <= Math.Min(u.X + 1, Data.Instance.GManager.Map.SizeX - 1); x++)
                 {
-                    for (int y = Math.Max(u.Y - 1, 0); y <= Math.Min(u.Y + 1, Data.Instance.GManager.Map.SizeX - 1); y++)
+                    for (int y = Math.Max(u.Y - 1, 0); y <= Math.Min(u.Y + 1, Data.Instance.GManager.Map.SizeY - 1); y++)
                     {
-                        if (u.moveCost(x, y, Data.Instance.GManager.Map.getTile(x, y)) > 0)
+                        
+                        if (u.moveCost(x, y, Data.Instance.GManager.Map.getTile(x, y)) != Unit.IMPOSSIBLE_MOVE)
                         {
                             movesPossibles.Add(x * Data.Instance.GManager.Map.SizeX + y);
                         }
                     }
                 }
-
+                
                 Dictionary<int, Tuple<int, int>> terrainData = new Dictionary<int, Tuple<int, int>>();
                 foreach (KeyValuePair<SmallWorld.TerrainType, Tuple<int, int>> entry in u.getTerrainData())
                 {
                     terrainData.Add((int)entry.Key, entry.Value);
                 }
-                List<Tuple<int, int, int>> listOpponents = new List<Tuple<int, int, int>>();
-                Data.Instance.GManager.opponent().UnitList.ForEach(w => listOpponents.Add(new Tuple<int, int, int>(w.X, w.Y, w.Life)));
+                Dictionary<int, int> listOpponents = new Dictionary<int, int>();
+                Data.Instance.GManager.opponent().UnitList.ForEach(w => listOpponents[w.X * Data.Instance.GManager.Map.SizeX + w.Y] = w.Life);
                 List<int> best = g.bestMoves(3, new Tuple<int, int, int>(u.X, u.Y, u.Life), movesPossibles, terrainData, listOpponents);
                 foreach (int move in best)
                 {

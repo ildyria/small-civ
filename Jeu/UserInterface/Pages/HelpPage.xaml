@@ -27,6 +27,16 @@
                         </AccessText>
                     </Label.Content>
                 </Label>
+                <Label Content="Crédits" HorizontalAlignment="Center"/>
+                <Label HorizontalAlignment="Center">
+                    <Label.Content>
+                        <AccessText TextWrapping="Wrap">
+                            StumpyStrust - OpenGameArt.org
+                            Ails - OpenGameArt.org
+                            cdgramos - OpenGameArt.org
+                        </AccessText>
+                    </Label.Content>
+                </Label>
             </StackPanel>
         </StackPanel>
         <!-- Maybe implement a page system if there is a lot to say ... The text could be copy-pasted from the user documentation -->

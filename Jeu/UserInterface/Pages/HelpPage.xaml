@@ -30,11 +30,11 @@
                 <Label Content="Crédits" HorizontalAlignment="Center"/>
                 <Label HorizontalAlignment="Center">
                     <Label.Content>
-                        <AccessText TextWrapping="Wrap">
-                            StumpyStrust - OpenGameArt.org
-                            Ails - OpenGameArt.org
+                        <TextBlock>
+                            StumpyStrust - OpenGameArt.org <LineBreak/>
+                            Ails - OpenGameArt.org <LineBreak/>
                             cdgramos - OpenGameArt.org
-                        </AccessText>
+                        </TextBlock>
                     </Label.Content>
                 </Label>
             </StackPanel>

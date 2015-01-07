@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,7 +55,6 @@ namespace UserInterface.Pages
             listTribes[0] = tribeJ1Radio[tribeJ1Radio.Keys.ToList().First(u => u.IsChecked == true)];
             listTribes[1] = tribeJ2Radio[tribeJ2Radio.Keys.ToList().First(u => u.IsChecked == true)];
             MapSize mapSize = mapSizeRadio[mapSizeRadio.Keys.ToList().First(u => u.IsChecked == true)];
-
 
             SmallWorld.GameMakerNew gmn = new SmallWorld.GameMakerNew();
             gmn.Names = new string[2] { p1Name.Text, p2Name.Text };

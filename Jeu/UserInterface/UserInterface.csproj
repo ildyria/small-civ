@@ -237,21 +237,35 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ressources\armour_icon.png" />
-    <Resource Include="ressources\boot_icon.png" />
-    <Resource Include="ressources\sword_icon.png" />
+    <Resource Include="ressources\armour_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressources\boot_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressources\sword_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ressources\heart_icon.png" />
+    <Resource Include="ressources\heart_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ressources\diamond_icon.png" />
+    <Resource Include="ressources\diamond_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ressources\armored_boot_icon.png" />
+    <Resource Include="ressources\armored_boot_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ressources\arrow_icon.png" />
+    <Resource Include="ressources\arrow_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

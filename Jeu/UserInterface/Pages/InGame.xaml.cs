@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -78,7 +78,8 @@ namespace UserInterface.Pages
         }
         private void moveUnit(int i, int j)
         {
-            setMapSize();
+            //should not be done here
+            //setMapSize();
             if (Data.Instance.UnitsOnTile.Count != 0 && i < Data.Instance.GManager.Map.SizeX && j < Data.Instance.GManager.Map.SizeY && i >= 0 && j >= 0)
             {
                 SmallWorld.Unit currentUnit = Data.Instance.UnitsOnTile[Data.Instance.CurrentUnitNumber];
@@ -167,41 +168,32 @@ namespace UserInterface.Pages
                 int offset = u.Y % 2 == 0 ? -1 : 0;
                 switch (e.Key)
                 {
-
                     case Key.X:
-                        moveUnitAndCursor(u.X + offset, u.Y + 1);
-                        break;
-                    case Key.C:
-                        moveUnitAndCursor(u.X + offset + 1, u.Y + 1);
-                        break;
-                    case Key.S:
-                        moveUnitAndCursor(u.X - 1, u.Y);
-                        break;
-                    case Key.F:
-                        moveUnitAndCursor(u.X + 1, u.Y);
-                        break;
-                    case Key.E:
-                        moveUnitAndCursor(u.X + offset, u.Y - 1);
-                        break;
-                    case Key.R:
-                        moveUnitAndCursor(u.X + offset + 1, u.Y - 1);
-                        break;
-
                     case Key.NumPad1:
                         moveUnitAndCursor(u.X + offset, u.Y + 1);
                         break;
+
+                    case Key.C:
                     case Key.NumPad3:
                         moveUnitAndCursor(u.X + offset + 1, u.Y + 1);
                         break;
+
+                    case Key.S:
                     case Key.NumPad4:
                         moveUnitAndCursor(u.X - 1, u.Y);
                         break;
+
+                    case Key.F:
                     case Key.NumPad6:
                         moveUnitAndCursor(u.X + 1, u.Y);
                         break;
+
+                    case Key.E:
                     case Key.NumPad7:
                         moveUnitAndCursor(u.X + offset, u.Y - 1);
                         break;
+
+                    case Key.R:
                     case Key.NumPad9:
                         moveUnitAndCursor(u.X + offset + 1, u.Y - 1);
                         break;

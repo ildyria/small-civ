@@ -97,7 +97,7 @@ std::vector<int> GenMap::bestMoves(int nbMovesWanted, std::tuple<int, int, int> 
 			if (adv.second > std::get<2>(u)) {
 				possibilities[pos] -= DANGEROUS;
 			}
-			else if (adv.second == LOW_LIFE) {
+			else if (adv.second <= LOW_LIFE) {
 				possibilities[pos] += BLOODSHED_POINTS;
 			}
 			else {

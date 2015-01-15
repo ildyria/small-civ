@@ -18,8 +18,8 @@
             <StackPanel DockPanel.Dock="Right" Width="150">
                 <StackPanel Grid.Row="1" VerticalAlignment="Top" Background="{StaticResource boxBG}">
                     <!-- <Label x:Name="tileType" Grid.Column="1" Grid.Row="0"/> -->
-                    <Label x:Name="tileType" Content="{Binding CurrentTileName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
-                    <Grid x:Name="tileDetails" Margin="17,30,10,0">
+                    <Label x:Name="tileType" Content="{Binding CurrentTileName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"  Margin="0,30,0,0"/>
+                    <Grid x:Name="tileDetails" Margin="17,0,10,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="Auto" />

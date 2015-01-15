@@ -90,8 +90,8 @@ namespace UserInterface.Pages
                     List<SmallWorld.Unit> toDel = VisualUnitsElements.Keys.ToList().FindAll(u => !Data.Instance.GManager.getAllUnits().Contains(u));
                     foreach (SmallWorld.Unit u in toDel)
                     {
-                        mapControl.Children.Remove(VisualUnitsElements[currentUnit]);
-                        VisualUnitsElements.Remove(currentUnit);
+                        mapControl.Children.Remove(VisualUnitsElements[u]);
+                        VisualUnitsElements.Remove(u);
                     }
                 }
                 if (currentUnit.Life == 0)
